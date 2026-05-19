@@ -3,6 +3,7 @@ import { DietaryIcon } from './DietaryIcon'
 
 type MenuItemProps = {
   item: MenuItemData
+    
 }
 
 export const MenuItem = ({ item }: MenuItemProps) => (
@@ -13,7 +14,7 @@ export const MenuItem = ({ item }: MenuItemProps) => (
     {item.dietaryLabels.length > 0 && (
       <div className="flex gap-[8px] items-center h-[30px]">
         {item.dietaryLabels.map((label) => (
-          <DietaryIcon key={label} dietaryLabel={label} size="sm" mode="light" />
+          <DietaryIcon key={label} dietaryLabel={label} mode="light" />
         ))}
       </div>
     )}

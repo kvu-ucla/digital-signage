@@ -1,4 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useRef } from 'react'
 import { LOCATIONS } from '../config/locations'
 import { fetchXml, fetchCsv } from '../lib/fetchMenu'
 import { parseXml } from '../lib/parseXML'
@@ -20,14 +21,21 @@ type UseMenuResult = {
 export const useMenu = ({ location, menuType }: UseMenuOptions): UseMenuResult => {
   const config = LOCATIONS[location]
   const normalizedMenuType = menuType?.toLowerCase().trim()
+  const queryClient = useQueryClient()
+  const previousXmlRef = useRef<string | null>(null)
+  const queryKey = ['menu-xml', location, normalizedMenuType]
 
   const xmlQuery = useQuery({
-    queryKey: ['menu-xml', location, normalizedMenuType],
+    queryKey,
     queryFn: async () => {
       const xmlText = await fetchXml(config.xmlUrl)
+      if (xmlText === previousXmlRef.current) {
+        return queryClient.getQueryData<MenuData>(queryKey)!
+      }
+      previousXmlRef.current = xmlText
       return parseXml({ xmlText, menuTypeFilter: normalizedMenuType })
     },
-    refetchInterval: 5 * 60_000,
+    refetchInterval: 4 * 60_000,
     retry: 2,
   })
 

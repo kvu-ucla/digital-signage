@@ -1,5 +1,5 @@
 import type { MenuData } from '../lib/types'
-import { MenuItem } from '../menu/MenuItem'
+import {MenuItemList} from "../menu/MenuItemList";
 
 type EntranceScreenProps = {
   data: MenuData
@@ -7,13 +7,15 @@ type EntranceScreenProps = {
 }
 
 // TODO: Implement full 4-column entrance screen.
-// - sheetData drives column categories and display order — it is a structural dependency.
-//   If sheetData is null, render an error state — column structure cannot be determined without it.
-// - Each column header and its item category come from sheetData keys/values.
-// - XML items (data.stations[stationKey].items) populate each column based on their station/category.
-// - Render item name and DietaryIcon only — descriptions are NOT rendered on this screen.
-// - Static display — no rotation, no featuredIndex.
-// - Uses both data and sheetData.
+// - MenuData has access to all of a location's stations, MenuData.stations["Station Name"] will pull the list of menu
+//    items associated with it
+// - Menu data is pulled based on locations.ts, with location, station, menu, and screen types specified as query params i.e,
+//    ?location=bruinplate&screen={horizontal|vertical|entrance}&station=simply+grilled&menu={breakfast|lunch|dinner}
+// - Implement header, body, and footer components based on figma
+// - build out HorizontalScreen.css with specifics for arranging header, body, footer components
+// - correlate station XML with Google Sheet data and region
+// - render each column's menu items based on the above
+//
 export const EntranceScreen = ({ data, sheetData }: EntranceScreenProps) => {
   if (!sheetData) {
     return (
@@ -28,9 +30,9 @@ export const EntranceScreen = ({ data, sheetData }: EntranceScreenProps) => {
       {Object.entries(data.stations).map(([stationName, items]) => (
         <div key={stationName} className="screen-entrance__column">
           <h2 className="screen-entrance__column-header">{stationName}</h2>
-          {items.map((item) => (
-            <MenuItem key={item.recipeNumber} item={item} />
-          ))}
+            <MenuItemList
+                items={items}
+            ></MenuItemList>
         </div>
       ))}
     </div>

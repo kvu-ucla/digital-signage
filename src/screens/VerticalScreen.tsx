@@ -1,5 +1,5 @@
 import type { MenuData } from '../lib/types'
-import { MenuItem } from '../menu/MenuItem'
+import { MenuItemList } from '../menu/MenuItemList'
 
 type VerticalScreenProps = {
   data: MenuData
@@ -7,8 +7,8 @@ type VerticalScreenProps = {
 }
 
 // TODO: Implement full vertical screen with dynamic pagination.
-// Menu data is pulled based on locations.ts, with location, station, menu, and screen types specified as query params i.e,
-// ?location=bruinplate&screen={horizontal|vertical|entrance}&station=simply+grilled&menu={breakfast|lunch|dinner}
+// - Menu data is pulled based on locations.ts, with location, station, menu, and screen types specified as query params i.e,
+//      - ?location=bruinplate&screen={horizontal|vertical|entrance}&station=simply+grilled&menu={breakfast|lunch|dinner}
 // - Implement header, body, and footer components based on figma
 // - build out HorizontalScreen.css with specifics for arranging header, body, footer components
 // - Implement pagination algorithm to get the size of rendered items and split them accordingly
@@ -25,9 +25,9 @@ export const VerticalScreen = ({ data, station }: VerticalScreenProps) => {
   return (
     <div className="screen screen-vertical">
       <div className="screen-vertical__page">
-        {items.map((item) => (
-          <MenuItem key={item.recipeNumber} item={item} />
-        ))}
+          <MenuItemList 
+              items={items}
+          ></MenuItemList>
       </div>
     </div>
   )

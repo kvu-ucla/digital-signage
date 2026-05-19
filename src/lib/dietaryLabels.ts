@@ -1,0 +1,18 @@
+export const DIETARY_LABELS = [
+  { key: 'Vegetarian',            label: 'Vegetarian' },
+  { key: 'Vegan',                 label: 'Vegan' },
+  { key: 'Peanut',                label: 'Peanuts' },
+  { key: 'Tree-Nuts',             label: 'Tree Nuts' },
+  { key: 'Wheat',                 label: 'Wheat' },
+  { key: 'Gluten',                label: 'Gluten' },
+  { key: 'Soy',                   label: 'Soy' },
+  { key: 'Sesame',                label: 'Sesame Seeds' },
+  { key: 'Dairy',                 label: 'Dairy' },
+  { key: 'Eggs',                  label: 'Eggs' },
+  { key: 'Crustacean-Shellfish',  label: 'Shellfish' },
+  { key: 'Fish',                  label: 'Fish' },
+  { key: 'Alcohol',               label: 'Alcohol' },
+  { key: 'Halal',                 label: 'Halal' },
+  { key: 'Low-Carbon-Footprint',  label: 'Low-Carbon Foodprint' },
+  { key: 'High-Carbon-Footprint', label: 'High-Carbon Foodprint' },
+] as const satisfies ReadonlyArray<{ key: string; label: string }>

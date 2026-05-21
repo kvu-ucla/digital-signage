@@ -125,7 +125,6 @@ export const HorizontalScreen = ({ data, station }: HorizontalScreenProps) => {
           </span>
         </button>
       )}
-
     </div>
   )
 }

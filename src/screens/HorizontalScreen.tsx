@@ -28,7 +28,7 @@ export const HorizontalScreen = ({ data, station }: HorizontalScreenProps) => {
   const [visibleCount, setVisibleCount] = useState<number | null>(null)
   const [mockEnabled, setMockEnabled] = useState(true)
   const listContainerRef = useRef<HTMLDivElement>(null)
-  const isDev = import.meta.env.DEV
+  const isDev = import.meta.env.DEV || import.meta.env.VITE_SHOW_MOCKS === 'true'
 
   useEffect(() => {
     setFeaturedIndex(0)

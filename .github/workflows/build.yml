@@ -100,6 +100,8 @@ jobs:
       - name: Build affected applications
         run: |
           npm run build -- --mode ${{ env.configuration }}
+        env:
+          VITE_SHOW_MOCKS: ${{ env.configuration == 'development' && 'true' || 'false' }}
 
       - name: Deploy the application(${{ matrix.package }})
         uses: MrYuion/git-publish-subdir-action@develop

@@ -101,6 +101,7 @@
   align-items: center;
   gap: 10px;
   align-self: stretch;
+  padding: 36px;
 }
 
 /* ── Footer ── */
@@ -113,11 +114,11 @@
 
 .screen-horizontal__footer-inner {
   border-top: 1px solid #005289;
-  padding: 14px 0;
+  padding: 10px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 8.5px;
 }
 
 .screen-horizontal__footer-description {

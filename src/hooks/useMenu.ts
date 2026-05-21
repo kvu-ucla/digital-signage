@@ -39,7 +39,7 @@ export const useMenu = ({ location, menuType }: UseMenuOptions): UseMenuResult =
       previousXmlRef.current = xmlText
       return parseXml({ xmlText, menuTypeFilter: normalizedMenuType })
     },
-    refetchInterval: 4 * 60_000,
+    refetchInterval: 10 * 60_000,
     retry: 2,
   })
 

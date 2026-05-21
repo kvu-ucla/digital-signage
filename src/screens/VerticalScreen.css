@@ -1,0 +1,65 @@
+.screen-vertical {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  width: 100vw;
+  height: 100vh;
+  background: #f8f4e8;
+  overflow: hidden;
+}
+
+/* ── Header ── */
+
+.screen-vertical__header {
+  display: flex;
+  align-items: stretch;
+  background: #005289;
+  border-bottom: 9px solid #cc9f44;
+  flex-shrink: 0;
+  height: 300px;
+}
+
+.screen-vertical__header-logo {
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  padding: 55px 45px;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.screen-vertical__header-logo img {
+  width: 190px;
+  height: 190px;
+  object-fit: contain;
+}
+
+.screen-vertical__header-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 90px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: normal;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.screen-vertical__header-certificate {
+  width: 180px;
+  flex-shrink: 0;
+  display: flex;
+  padding: 36px 0;
+  align-items: left;
+  justify-content: left;
+}
+
+.screen-vertical__header-certificate-placeholder {
+  width: 145px;
+  height: 70px;
+  background: #778837;
+}

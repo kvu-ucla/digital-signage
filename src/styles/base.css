@@ -61,7 +61,7 @@ body {
   position: relative;
 }
 
-/* Vertical screen layout */
+/* Vertical screen layout
 .screen-vertical {
   display: flex;
   flex-direction: column;
@@ -73,7 +73,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-}
+} */
 
 /* Entrance screen layout */
 .screen-entrance {

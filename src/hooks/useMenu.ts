@@ -25,6 +25,10 @@ export const useMenu = ({ location, menuType }: UseMenuOptions): UseMenuResult =
   const previousXmlRef = useRef<string | null>(null)
   const queryKey = ['menu-xml', location, normalizedMenuType]
 
+  if (!config) {
+  throw new Error('Config is required');
+  }
+
   const xmlQuery = useQuery({
     queryKey,
     queryFn: async () => {

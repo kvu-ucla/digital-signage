@@ -1,5 +1,6 @@
 import type { MenuData } from '../lib/types'
 import { MenuItemList } from '../menu/MenuItemList'
+import './VerticalScreen.css'
 
 type VerticalScreenProps = {
   data: MenuData
@@ -20,10 +21,23 @@ type VerticalScreenProps = {
 
 export const VerticalScreen = ({ data, station }: VerticalScreenProps) => {
   const stationKey = station.toLowerCase().trim().replace(/\s+/g, ' ')
+  const stationTitle = stationKey.replace(/\b\w/g, c => c.toUpperCase())
+
   const items = data.stations[stationKey] ?? []
 
   return (
-    <div className="screen screen-vertical">
+    <div className="screen-vertical">
+
+      <header className="screen-vertical__header">
+        <div className="screen-vertical__header-logo">
+          <img src="./images/bruin-plate-logo.svg" alt="Bruin Plate" />
+        </div>
+        <h1 className="screen-vertical__header-title">{stationTitle}</h1>
+        <div className="screen-vertical__header-certificate">
+          <div className="screen-vertical__header-certificate-placeholder" />
+        </div>
+      </header>
+
       <div className="screen-vertical__page">
           <MenuItemList 
               items={items}

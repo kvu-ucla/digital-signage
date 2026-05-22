@@ -1,16 +1,62 @@
-export const parseCsv = (csvText: string): Record<string, string> => {
-  const lines = csvText.trim().split('\n')
-  if (lines.length < 2) {
-    return {}
+// function parseCSV(text: string): SheetData {
+//   const rows = text.split(/\r?\n/).filter((row) => row.trim() !== "");
+//   return rows.slice(1).map((row) => row.split(",").map((cell) => cell.trim()));
+// }
+
+export const parseCsv = (csvText: string): Record<string, string>[] => {
+  const lines = csvText.trim().split("\n");
+  if (lines.length < 2) return [];
+
+  const headers = parseLine(lines[0]);
+
+  const rows: Record<string, string>[] = [];
+  for (let i = 1; i < lines.length; i++) {
+    const line = lines[i];
+    if (line === undefined) continue;
+    const values = parseLine(line);
+    const row: Record<string, string> = {};
+    for (let j = 0; j < headers.length; j++) {
+      const header = headers[j];
+      if (header === undefined) continue;
+      row[header] = values[j] ?? "";
+    }
+    rows.push(row);
   }
 
-  const [headerLine, valueLine] = lines
-  if (!headerLine || !valueLine) return {}
-  const headers = headerLine.split(',').map((h) => h.trim())
-  const values  = valueLine.split(',').map((v) => v.trim())
+  return rows;
+};
 
-  return headers.reduce<Record<string, string>>((acc, header, index) => {
-    acc[header] = values[index] ?? ''
-    return acc
-  }, {})
-}
+const parseLine = (line: string): string[] => {
+  const fields: string[] = [];
+  let current = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+
+    if (inQuotes) {
+      if (char === '"') {
+        if (i + 1 < line.length && line[i + 1] === '"') {
+          current += '"';
+          i++;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        current += char;
+      }
+    } else {
+      if (char === '"') {
+        inQuotes = true;
+      } else if (char === ",") {
+        fields.push(current.trim());
+        current = "";
+      } else {
+        current += char;
+      }
+    }
+  }
+
+  fields.push(current.trim());
+  return fields;
+};

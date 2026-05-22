@@ -4,8 +4,10 @@ export const parseCsv = (csvText: string): Record<string, string> => {
     return {}
   }
 
-  const headers = lines[0]!.split(',').map((h) => h.trim())
-  const values  = lines[1]!.split(',').map((v) => v.trim())
+  const [headerLine, valueLine] = lines
+  if (!headerLine || !valueLine) return {}
+  const headers = headerLine.split(',').map((h) => h.trim())
+  const values  = valueLine.split(',').map((v) => v.trim())
 
   return headers.reduce<Record<string, string>>((acc, header, index) => {
     acc[header] = values[index] ?? ''

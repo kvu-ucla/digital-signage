@@ -122,6 +122,16 @@ export const App = () => {
   const station = params.get('station')
   const menuType = params.get('menu')
 
+  const backgroundUrl = params.get('bg') ?? undefined
+
+  if (backgroundUrl) {
+    document.documentElement.classList.add('is-takeover')
+    document.documentElement.style.setProperty('--bg-image', `url(${backgroundUrl})`)
+  } else {
+    document.documentElement.classList.remove('is-takeover')
+    document.documentElement.style.removeProperty('--bg-image')
+  }
+
   const config = LOCATIONS[location]
 
   if (!config) {

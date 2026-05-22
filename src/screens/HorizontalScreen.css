@@ -143,7 +143,6 @@ html.is-takeover .screen-horizontal .screen-horizontal__graphic img {
 }
 
 .screen-horizontal__footer-inner {
-  border-top: 1px solid #005289;
   padding: 10px 0;
   display: flex;
   flex-direction: column;
@@ -161,9 +160,6 @@ html:not(.is-takeover) .screen-horizontal .screen-horizontal__footer-inner {
   align-items: baseline;
   font-size: 21px;
   white-space: nowrap;
-}
-
-html:not(.is-takeover) .screen-horizontal .screen-horizontal__footer-description {
   color: #005289;
 }
 
@@ -201,12 +197,9 @@ html:not(.is-takeover) .screen-horizontal .screen-horizontal__footer-description
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 18px;
+  color: #4d4d4f;
   text-transform: uppercase;
   white-space: nowrap;
-}
-
-html:not(.is-takeover) .screen-horizontal .screen-horizontal__footer-icon-label {
-  color: #4d4d4f;
 }
 
 /* ── Side ── */

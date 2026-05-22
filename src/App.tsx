@@ -122,7 +122,10 @@ export const App = () => {
   const station = params.get('station')
   const menuType = params.get('menu')
 
-  const backgroundUrl = params.get('bg') ?? undefined
+  const bgParam = params.get('bg')
+  const backgroundUrl = bgParam
+    ? bgParam.startsWith('http') ? bgParam : `${import.meta.env.BASE_URL}backgrounds/${bgParam}`
+    : undefined
 
   if (backgroundUrl) {
     document.documentElement.classList.add('is-takeover')

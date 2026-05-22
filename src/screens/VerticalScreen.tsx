@@ -1,4 +1,5 @@
 import type { MenuData } from '../lib/types'
+import { DietaryLegend } from '../menu/DietaryLegend'
 import { MenuItemList } from '../menu/MenuItemList'
 import './VerticalScreen.css'
 
@@ -24,6 +25,7 @@ export const VerticalScreen = ({ data, station }: VerticalScreenProps) => {
   const stationTitle = stationKey.replace(/\b\w/g, c => c.toUpperCase())
 
   const items = data.stations[stationKey] ?? []
+  const stationImageSrc = `./images/${stationKey.replace(/\s+/g, '-')}.jpg`
 
   return (
     <div className="screen-vertical">
@@ -38,10 +40,25 @@ export const VerticalScreen = ({ data, station }: VerticalScreenProps) => {
         </div>
       </header>
 
-      <div className="screen-vertical__page">
-          <MenuItemList 
-              items={items}
-          ></MenuItemList>
+      <div className="screen-vertical__body">
+        
+        <div className="screen-vertical__graphic">
+          <img src={stationImageSrc} alt={station} />
+        </div>
+
+        <div className="screen-vertical__main">
+
+          <div className="screen-vertical__main-hero">
+            <MenuItemList items={items}></MenuItemList>
+            {/* Placeholder for pagination logic */}
+          </div>
+
+          <div className="screen-vertical__footer">
+            <DietaryLegend />
+          </div>
+          
+        </div>
+
       </div>
     </div>
   )

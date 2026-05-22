@@ -7,7 +7,7 @@ export const parseCsv = (csvText: string): Record<string, string>[] => {
   const lines = csvText.trim().split("\n");
   if (lines.length < 2) return [];
 
-  const headers = parseLine(lines[0]);
+  const headers = parseLine(lines[0] ?? "");
 
   const rows: Record<string, string>[] = [];
   for (let i = 1; i < lines.length; i++) {

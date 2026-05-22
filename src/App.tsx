@@ -107,7 +107,7 @@ const ScreenLoader = ({ location, screenType, station, menuType }: ScreenLoaderP
   }
 
   if (screenType === 'entrance') {
-    return <EntranceScreen data={data} sheetData={sheetData} />
+    return <EntranceScreen data={data} sheetData={sheetData} sheetError={error} />
   }
   if (screenType === 'horizontal') {
     return <HorizontalScreen data={data} station={station ?? ''} />

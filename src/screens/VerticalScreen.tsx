@@ -1,5 +1,7 @@
 import type { MenuData } from '../lib/types'
+import { DietaryLegend } from '../menu/DietaryLegend'
 import { MenuItemList } from '../menu/MenuItemList'
+import './VerticalScreen.css'
 
 type VerticalScreenProps = {
   data: MenuData
@@ -20,14 +22,43 @@ type VerticalScreenProps = {
 
 export const VerticalScreen = ({ data, station }: VerticalScreenProps) => {
   const stationKey = station.toLowerCase().trim().replace(/\s+/g, ' ')
+  const stationTitle = stationKey.replace(/\b\w/g, c => c.toUpperCase())
+
   const items = data.stations[stationKey] ?? []
+  const stationImageSrc = `./images/${stationKey.replace(/\s+/g, '-')}.jpg`
 
   return (
-    <div className="screen screen-vertical">
-      <div className="screen-vertical__page">
-          <MenuItemList 
-              items={items}
-          ></MenuItemList>
+    <div className="screen-vertical">
+
+      <header className="screen-vertical__header">
+        <div className="screen-vertical__header-logo">
+          <img src="./images/bruin-plate-logo.svg" alt="Bruin Plate" />
+        </div>
+        <h1 className="screen-vertical__header-title">{stationTitle}</h1>
+        <div className="screen-vertical__header-certificate">
+          <div className="screen-vertical__header-certificate-placeholder" />
+        </div>
+      </header>
+
+      <div className="screen-vertical__body">
+        
+        <div className="screen-vertical__graphic">
+          <img src={stationImageSrc} alt={station} />
+        </div>
+
+        <div className="screen-vertical__main">
+
+          <div className="screen-vertical__main-hero">
+            <MenuItemList items={items}></MenuItemList>
+            {/* Placeholder for pagination logic */}
+          </div>
+
+          <div className="screen-vertical__footer">
+            <DietaryLegend />
+          </div>
+          
+        </div>
+
       </div>
     </div>
   )

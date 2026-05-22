@@ -1,0 +1,123 @@
+.screen-vertical {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  width: 100vw;
+  height: 100vh;
+  background: #f8f4e8;
+  overflow: hidden;
+}
+
+/* ── Header ── */
+
+.screen-vertical__header {
+  display: flex;
+  align-items: stretch;
+  background: #005289;
+  border-bottom: 9px solid #cc9f44;
+  flex-shrink: 0;
+  height: 300px;
+}
+
+.screen-vertical__header-logo {
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  padding: 55px 45px;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.screen-vertical__header-logo img {
+  width: 190px;
+  height: 190px;
+  object-fit: contain;
+}
+
+.screen-vertical__header-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 90px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: normal;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.screen-vertical__header-certificate {
+  width: 180px;
+  flex-shrink: 0;
+  display: flex;
+  padding: 36px 0;
+  align-items: left;
+  justify-content: left;
+}
+
+.screen-vertical__header-certificate-placeholder {
+  width: 145px;
+  height: 70px;
+  background: #778837;
+}
+
+/* ── Body ── */
+
+.screen-vertical__body {
+  display: flex;
+  overflow: hidden;
+}
+
+/* ── Graphic ── */
+
+.screen-vertical__graphic {
+  width: 300px;
+  flex-shrink: 0;
+  background: #c87b28;
+  overflow: hidden;
+}
+
+.screen-vertical__graphic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Main ── */
+
+.screen-vertical__main {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.screen-vertical__main-hero {
+  flex: 1 0 0;
+  flex-direction: column;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  padding: 300px 36px;
+}
+
+/* ── Footer ── */
+
+.screen-vertical__footer {
+  width: 100%;
+  padding: 0 36px;
+  flex-shrink: 0;
+}
+
+.screen-vertical__footer-inner {
+  border-top: 1px solid #005289;
+  padding: 14px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}

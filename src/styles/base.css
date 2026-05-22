@@ -29,12 +29,14 @@
   --color-divider: rgba(255, 255, 255, 0.1);
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 html,
@@ -61,7 +63,7 @@ body {
   position: relative;
 }
 
-/* Vertical screen layout */
+/* Vertical screen layout
 .screen-vertical {
   display: flex;
   flex-direction: column;
@@ -73,7 +75,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-}
+} */
 
 /* Entrance screen layout */
 .screen-entrance {

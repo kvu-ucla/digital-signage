@@ -88,18 +88,20 @@
 /* ── Main ── */
 
 .screen-horizontal__main {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 36px;
   overflow: hidden;
 }
 
 .screen-horizontal__main-hero {
-  flex: 1;
+  flex: 1 0 0;
   display: flex;
-  align-items: center;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  padding: 36px;
 }
 
 /* ── Footer ── */
@@ -112,11 +114,11 @@
 
 .screen-horizontal__footer-inner {
   border-top: 1px solid #005289;
-  padding: 14px 0;
+  padding: 10px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 8.5px;
 }
 
 .screen-horizontal__footer-description {
@@ -164,7 +166,6 @@
   font-size: 18px;
   color: #4d4d4f;
   text-transform: uppercase;
-  line-height: 1;
   white-space: nowrap;
 }
 
@@ -182,7 +183,7 @@
 
 .screen-horizontal__side-inner {
   flex: 1;
-  border-left: 4px dashed #005289;
+  border-left: 4px dotted #005289;
   display: flex;
   flex-direction: column;
   gap: 40px;

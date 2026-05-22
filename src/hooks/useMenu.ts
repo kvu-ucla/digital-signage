@@ -34,7 +34,8 @@ export const useMenu = ({ location, menuType }: UseMenuOptions): UseMenuResult =
     queryFn: async () => {
       const xmlText = await fetchXml(config.xmlUrl)
       if (xmlText === previousXmlRef.current) {
-        return queryClient.getQueryData<MenuData>(queryKey)!
+        const cached = queryClient.getQueryData<MenuData>(queryKey)
+        if (cached) return cached
       }
       previousXmlRef.current = xmlText
       return parseXml({ xmlText, menuTypeFilter: normalizedMenuType })

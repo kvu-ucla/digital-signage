@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import type { MenuData, MenuItemData } from '../lib/types'
 import { FeaturedItem } from '../menu/FeaturedItem'
 import { MenuItemList } from '../menu/MenuItemList'
@@ -21,12 +21,12 @@ type HorizontalScreenProps = {
 export const HorizontalScreen = ({ data, station }: HorizontalScreenProps) => {
   const stationKey = station.toLowerCase().trim().replace(/\s+/g, ' ')
   const stationTitle = stationKey.replace(/\b\w/g, c => c.toUpperCase())
-  const items = data.stations[stationKey] ?? []
+  const items = useMemo(() => data.stations[stationKey] ?? [], [data, stationKey])
   const stationImageSrc = `./images/${stationKey.replace(/\s+/g, '-')}.jpg`
 
   const [featuredIndex, setFeaturedIndex] = useState(0)
   const [visibleCount, setVisibleCount] = useState<number | null>(null)
-  const [mockEnabled, setMockEnabled] = useState(true)
+  const [isMockEnabled, setIsMockEnabled] = useState(true)
   const listContainerRef = useRef<HTMLDivElement>(null)
   const isDev = import.meta.env.DEV || import.meta.env.VITE_SHOW_MOCKS === 'true'
 
@@ -39,7 +39,7 @@ export const HorizontalScreen = ({ data, station }: HorizontalScreenProps) => {
     const interval = setInterval(() => {
       setFeaturedIndex(prev => (prev + 1) % items.length)
     }, 15_000)
-    return () => clearInterval(interval)
+    return () => { clearInterval(interval); }
   }, [items.length])
 
   const measure = useCallback(() => {
@@ -64,17 +64,17 @@ export const HorizontalScreen = ({ data, station }: HorizontalScreenProps) => {
     if (!container) return
     const ro = new ResizeObserver(measure)
     ro.observe(container)
-    return () => ro.disconnect()
+    return () => { ro.disconnect(); }
   }, [measure])
 
-  const useMock = isDev && mockEnabled
-  const featuredItem = useMock ? MOCK_ITEM : items[featuredIndex]
+  const isMockActive = isDev && isMockEnabled
+  const featuredItem = isMockActive ? MOCK_ITEM : items[featuredIndex]
   const rotatedItems = [
     ...items.slice(featuredIndex + 1),
     ...items.slice(0, featuredIndex),
   ]
   const listItems = rotatedItems.slice(0, visibleCount ?? rotatedItems.length)
-  const displayListItems = useMock && listItems.length > 0
+  const displayListItems = isMockActive && listItems.length > 0
     ? [MOCK_ITEM, ...listItems.slice(1)]
     : listItems
 
@@ -83,7 +83,7 @@ export const HorizontalScreen = ({ data, station }: HorizontalScreenProps) => {
 
       <header className="screen-horizontal__header">
         <div className="screen-horizontal__header-logo">
-          <img src="./images/bruin-plate-logo.svg" alt="Bruin Plate" />
+          <img src="./icons/bruinplate-logo-sm.svg" alt="Bruin Plate" />
         </div>
         <h1 className="screen-horizontal__header-title">{stationTitle}</h1>
         <div className="screen-horizontal__header-certificate">
@@ -116,12 +116,12 @@ export const HorizontalScreen = ({ data, station }: HorizontalScreenProps) => {
 
       {isDev && (
         <button
-          onClick={() => setMockEnabled(prev => !prev)}
+          onClick={() => { setIsMockEnabled(prev => !prev); }}
           className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-1 p-4 rounded-xl bg-black/80 text-white border border-white/10 shadow-lg cursor-pointer backdrop-blur-sm"
         >
           <span className="text-[10px] font-mono uppercase tracking-widest text-white/50">dev</span>
           <span className="text-base font-mono font-semibold tracking-wide">
-            mock {mockEnabled ? 'on' : 'off'}
+            mock {isMockEnabled ? 'on' : 'off'}
           </span>
         </button>
       )}

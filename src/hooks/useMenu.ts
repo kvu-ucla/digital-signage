@@ -28,23 +28,26 @@ export const useMenu = ({
   const xmlQuery = useQuery({
     queryKey: ["menu-xml", location, normalizedMenuType],
     queryFn: async () => {
+      if (!config) throw new Error(`No config found for location: ${location}`);
       const xmlText = await fetchXml(config.xmlUrl);
       return parseXml({ xmlText, menuTypeFilter: normalizedMenuType });
     },
     refetchInterval: 10 * 60_000,
     retry: 2,
+    enabled: !!config,
   });
 
   const sheetQuery = useQuery({
     queryKey: ["menu-sheet", location],
     queryFn: async () => {
+      if (!config) throw new Error(`No config found for location: ${location}`);
       if (!config.gid)
         throw new Error(`No gid configured for location: ${location}`);
       const csvText = await fetchCsv(config.gid);
       const parsed = parseCsv(csvText);
       return parsed;
     },
-    enabled: !!config.gid,
+    enabled: !!config && !!config.gid,
     retry: 1,
   });
 

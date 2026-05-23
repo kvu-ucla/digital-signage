@@ -6,6 +6,7 @@
 export const parseCsv = (csvText: string): Array<Record<string, string>> => {
   const lines = csvText.trim().split("\n");
   if (lines.length < 2) return [];
+  if (lines[0] === undefined) return [];
 
   const headers = parseLine(lines[0] ?? "");
 
@@ -29,25 +30,25 @@ export const parseCsv = (csvText: string): Array<Record<string, string>> => {
 const parseLine = (line: string): Array<string> => {
   const fields: Array<string> = [];
   let current = "";
-  let inQuotes = false;
+  let isInQuotes = false;
 
   for (let i = 0; i < line.length; i++) {
-    const char = line[i];
+    const char = line[i] as string;
 
-    if (inQuotes) {
+    if (isInQuotes) {
       if (char === '"') {
         if (i + 1 < line.length && line[i + 1] === '"') {
           current += '"';
           i++;
         } else {
-          inQuotes = false;
+          isInQuotes = false;
         }
       } else {
         current += char;
       }
     } else {
       if (char === '"') {
-        inQuotes = true;
+        isInQuotes = true;
       } else if (char === ",") {
         fields.push(current.trim());
         current = "";

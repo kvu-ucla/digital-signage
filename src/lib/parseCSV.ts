@@ -3,13 +3,13 @@
 //   return rows.slice(1).map((row) => row.split(",").map((cell) => cell.trim()));
 // }
 
-export const parseCsv = (csvText: string): Record<string, string>[] => {
+export const parseCsv = (csvText: string): Array<Record<string, string>> => {
   const lines = csvText.trim().split("\n");
   if (lines.length < 2) return [];
 
   const headers = parseLine(lines[0] ?? "");
 
-  const rows: Record<string, string>[] = [];
+  const rows: Array<Record<string, string>> = [];
   for (let i = 1; i < lines.length; i++) {
     const line = lines[i];
     if (line === undefined) continue;
@@ -26,8 +26,8 @@ export const parseCsv = (csvText: string): Record<string, string>[] => {
   return rows;
 };
 
-const parseLine = (line: string): string[] => {
-  const fields: string[] = [];
+const parseLine = (line: string): Array<string> => {
+  const fields: Array<string> = [];
   let current = "";
   let inQuotes = false;
 

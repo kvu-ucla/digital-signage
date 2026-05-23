@@ -23,6 +23,11 @@ export const useMenu = ({
   menuType,
 }: UseMenuOptions): UseMenuResult => {
   const config = LOCATIONS[location];
+
+  if (!config) {
+    throw new Error(`Invalid location: ${location}`);
+  }
+  
   const normalizedMenuType = menuType?.toLowerCase().trim();
 
   const xmlQuery = useQuery({

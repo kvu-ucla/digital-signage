@@ -8,7 +8,7 @@ export const parseCsv = (csvText: string): Array<Record<string, string>> => {
   if (lines.length < 2) return [];
   if (lines[0] === undefined) return [];
 
-  const headers = parseLine(lines[0]);
+  const headers = parseLine(lines[0] ?? "");
 
   const rows: Array<Record<string, string>> = [];
   for (let i = 1; i < lines.length; i++) {

@@ -42,7 +42,6 @@ export const useMenu = ({
         throw new Error(`No gid configured for location: ${location}`);
       const csvText = await fetchCsv(config.gid);
       const parsed = parseCsv(csvText);
-      console.log(`[useMenu] sheetData for ${location}:`, parsed);
       return parsed;
     },
     enabled: !!config.gid,

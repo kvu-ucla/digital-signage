@@ -1,64 +1,28 @@
-import type { MenuData } from "../lib/types";
+import type { MergedMenuData } from "../lib/mergeData";
 import { MenuItemList } from "../menu/MenuItemList";
 import "./EntranceScreen.css";
 import { CyclingColumn } from "./CyclingColumns";
 
 type EntranceScreenProps = {
-  data: MenuData;
-  sheetData: Array<Record<string, string>> | null;
-  sheetError: unknown;
+  data: MergedMenuData;
 };
 
-export const EntranceScreen = ({
-  data,
-  sheetData,
-  sheetError,
-}: EntranceScreenProps) => {
-  if (!sheetData) {
-    const errorMessage: string =
-      sheetError instanceof Error
-        ? sheetError.message
-        : typeof sheetError === "string"
-        ? sheetError
-        : "An unknown error occurred";
+export const EntranceScreen = ({ data }: EntranceScreenProps) => {
+  if (data.stationsWithRegions.length === 0) {
     return (
       <div className="screen">
-        <p>Sheet data failed to load.</p>
-        {sheetError ? (
-          <p style={{ fontSize: "0.8rem", opacity: 0.7 }}>{errorMessage}</p>
-        ) : null}
+        <p>No station region data available.</p>
       </div>
     );
   }
 
-    const stationRegions = new Map<string, { regionPosition: number; regionOrder: number } >();
+  const regionMap = new Map<number, Array<{ name: string; items: typeof data.stationsWithRegions[number]["items"]; order: number }>>();
 
-  for (const row of sheetData) {
-    const stationName = row["Menu_Meal_Option"]?.toLowerCase().trim();
-    if (!stationName) continue;
-    const regionPositionRaw = row["Region Position"]?.trim().toLowerCase();
-
-    if (!regionPositionRaw || regionPositionRaw === "none") continue;
-    stationRegions.set(stationName, {
-      regionPosition: parseInt(regionPositionRaw, 10) || 1,
-      regionOrder: parseInt(row["Region Order"] ?? "0", 10) || 0,
-    });
-  }
-
-  type RegionStation = {
-    name: string;
-    items: (typeof data.stations)[string];
-    order: number;
-  };
-  const regionMap = new Map<number, Array<RegionStation>>();
-
-  for (const [stationName, items] of Object.entries(data.stations)) {
-    const region = stationRegions.get(stationName.toLowerCase().trim());
-    if (!region) continue;
-    const position = region.regionPosition;
-    const order = region.regionOrder;
+  for (const station of data.stationsWithRegions) {
+    const position = station.regionPosition;
+    const order = station.regionOrder;
     if (!regionMap.has(position)) regionMap.set(position, []);
-    regionMap.get(position)?.push({ name: stationName, items, order });
+    regionMap.get(position)?.push({ name: station.name, items: station.items, order });
   }
 
   for (const [, stations] of regionMap) {

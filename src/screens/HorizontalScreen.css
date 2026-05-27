@@ -8,10 +8,6 @@
   overflow: hidden;
 }
 
-html:not(.is-takeover) .screen-horizontal {
-  background-color: #f8f4e8;
-}
-
 /* ── Header ── */
 
 .screen-horizontal__header {
@@ -21,11 +17,6 @@ html:not(.is-takeover) .screen-horizontal {
   height: 250px;
 }
 
-html:not(.is-takeover) .screen-horizontal .screen-horizontal__header {
-  background: #005289;
-  border-bottom: 9px solid #cc9f44;
-}
-
 .screen-horizontal__header-logo {
   width: 400px;
   flex-shrink: 0;
@@ -33,10 +24,6 @@ html:not(.is-takeover) .screen-horizontal .screen-horizontal__header {
   align-items: center;
   justify-content: flex-end;
   overflow: hidden;
-}
-
-html.is-takeover .screen-horizontal .screen-horizontal__header-logo {
-  visibility: hidden;
 }
 
 .screen-horizontal__header-logo img {
@@ -58,9 +45,6 @@ html.is-takeover .screen-horizontal .screen-horizontal__header-logo {
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
-}
-
-.screen-horizontal__header-title {
   color: #ffffff;
 }
 
@@ -72,17 +56,9 @@ html.is-takeover .screen-horizontal .screen-horizontal__header-logo {
   justify-content: center;
 }
 
-html.is-takeover .screen-horizontal .screen-horizontal__header-certificate {
-  visibility: hidden;
-}
-
 .screen-horizontal__header-certificate-placeholder {
   width: 310px;
   height: 150px;
-}
-
-html:not(.is-takeover) .screen-horizontal .screen-horizontal__header-certificate-placeholder {
-  background: #778837;
 }
 
 /* ── Body ── */
@@ -100,19 +76,10 @@ html:not(.is-takeover) .screen-horizontal .screen-horizontal__header-certificate
   overflow: hidden;
 }
 
-html:not(.is-takeover) .screen-horizontal .screen-horizontal__graphic {
-  background: #c87b28;
-}
-
-
 .screen-horizontal__graphic img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-html.is-takeover .screen-horizontal .screen-horizontal__graphic img {
-  display: none;
 }
 
 /* ── Main ── */
@@ -143,15 +110,12 @@ html.is-takeover .screen-horizontal .screen-horizontal__graphic img {
 }
 
 .screen-horizontal__footer-inner {
-  padding: 10px 0;
+  border-top: 1px solid transparent;
+  padding: 14px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8.5px;
-}
-
-html:not(.is-takeover) .screen-horizontal .screen-horizontal__footer-inner {
-  border-top: 1px solid #005289;
 }
 
 .screen-horizontal__footer-description {
@@ -213,10 +177,6 @@ html:not(.is-takeover) .screen-horizontal .screen-horizontal__footer-inner {
   overflow: hidden;
 }
 
-html:not(.is-takeover) .screen-horizontal .screen-horizontal__side {
-  background: #f8f4e8;
-}
-
 .screen-horizontal__side-inner {
   flex: 1;
   display: flex;
@@ -224,8 +184,4 @@ html:not(.is-takeover) .screen-horizontal .screen-horizontal__side {
   gap: 40px;
   padding: 55px 36px 55px 64px;
   overflow: hidden;
-}
-
-html:not(.is-takeover) .screen-horizontal .screen-horizontal__side-inner {
-  border-left: 4px dotted #005289;
 }

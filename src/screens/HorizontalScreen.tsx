@@ -60,12 +60,16 @@ export const HorizontalScreen = ({ data, station }: HorizontalScreenProps) => {
   }, [featuredIndex, items, measure])
 
   useEffect(() => {
+    if (visibleCount === null) measure()
+  }, [visibleCount, measure])
+
+  useEffect(() => {
     const container = listContainerRef.current
     if (!container) return
-    const ro = new ResizeObserver(measure)
+    const ro = new ResizeObserver(() => { setVisibleCount(null); })
     ro.observe(container)
     return () => { ro.disconnect(); }
-  }, [measure])
+  }, [])
 
   const isMockActive = isDev && isMockEnabled
   const featuredItem = isMockActive ? MOCK_ITEM : items[featuredIndex]

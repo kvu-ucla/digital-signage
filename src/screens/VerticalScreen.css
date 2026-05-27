@@ -3,7 +3,6 @@
   grid-template-rows: auto 1fr;
   width: 100vw;
   height: 100vh;
-  background: #f8f4e8;
   overflow: hidden;
 }
 
@@ -12,8 +11,6 @@
 .screen-vertical__header {
   display: flex;
   align-items: stretch;
-  background: #005289;
-  border-bottom: 9px solid #cc9f44;
   flex-shrink: 0;
   height: 300px;
 }
@@ -61,5 +58,4 @@
 .screen-vertical__header-certificate-placeholder {
   width: 145px;
   height: 70px;
-  background: #778837;
 }

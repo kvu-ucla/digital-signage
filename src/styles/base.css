@@ -49,9 +49,6 @@ body,
 
 body {
   background-color: var(--color-bg);
-  background-image: var(--bg-image, none);
-  background-size: cover;
-  background-position: center;
   color: var(--color-text-primary);
   font-family: var(--font-display);
   -webkit-font-smoothing: antialiased;

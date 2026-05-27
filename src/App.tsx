@@ -122,18 +122,12 @@ export const App = () => {
   const station = params.get('station')
   const menuType = params.get('menu')
 
-  const bgParam = params.get('bg')
-  const backgroundUrl = bgParam
-    ? bgParam.startsWith('http') ? bgParam : `${import.meta.env.BASE_URL}backgrounds/${bgParam}`
-    : undefined
+  const overlayId = params.get('overlay-id')
+  const overlayUrl = overlayId
+    ? `${window.location.origin}/signage/#/signage/${overlayId}`
+    : null
 
-  if (backgroundUrl) {
-    document.documentElement.classList.add('is-takeover')
-    document.documentElement.style.setProperty('--bg-image', `url(${backgroundUrl})`)
-  } else {
-    document.documentElement.classList.remove('is-takeover')
-    document.documentElement.style.removeProperty('--bg-image')
-  }
+  document.documentElement.classList.toggle('is-takeover', !!overlayId)
 
   const config = LOCATIONS[location]
 
@@ -172,15 +166,24 @@ export const App = () => {
   if (config.stylesheet) loadStylesheet(config.stylesheet)
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ErrorBoundary>
-        <ScreenLoader
-          location={location}
-          screenType={screen}
-          station={station}
-          menuType={menuType}
+    <>
+      {overlayUrl && (
+        <iframe
+          src={overlayUrl}
+          className="overlay-iframe"
+          title="background overlay"
         />
-      </ErrorBoundary>
-    </QueryClientProvider>
+      )}
+      <QueryClientProvider client={queryClient}>
+        <ErrorBoundary>
+          <ScreenLoader
+            location={location}
+            screenType={screen}
+            station={station}
+            menuType={menuType}
+          />
+        </ErrorBoundary>
+      </QueryClientProvider>
+    </>
   )
 }

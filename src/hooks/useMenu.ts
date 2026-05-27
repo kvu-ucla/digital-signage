@@ -3,7 +3,8 @@ import { LOCATIONS } from "../config/locations";
 import { fetchXml, fetchCsv } from "../lib/fetchMenu";
 import { parseXml } from "../lib/parseXML";
 import { parseCsv } from "../lib/parseCSV";
-import type { MenuData } from "../lib/types";
+import { mergeData } from "../lib/mergeData";
+import type { MergedMenuData } from "../lib/mergeData";
 
 type UseMenuOptions = {
   location: string;
@@ -11,11 +12,9 @@ type UseMenuOptions = {
 };
 
 type UseMenuResult = {
-  data: MenuData | null;
-  sheetData: Array<Record<string, string>> | null;
+  data: MergedMenuData | null;
   isLoading: boolean;
   error: unknown;
-  sheetError: unknown;
 };
 
 export const useMenu = ({
@@ -33,34 +32,37 @@ export const useMenu = ({
   const xmlQuery = useQuery({
     queryKey: ["menu-xml", location, normalizedMenuType],
     queryFn: async () => {
-      if (!config) throw new Error(`No config found for location: ${location}`);
       const xmlText = await fetchXml(config.xmlUrl);
       return parseXml({ xmlText, menuTypeFilter: normalizedMenuType });
     },
     refetchInterval: 5 * 60_000,
     retry: 2,
-    enabled: !!config,
+    enabled: true,
   });
 
   const sheetQuery = useQuery({
     queryKey: ["menu-sheet", location],
     queryFn: async () => {
-      if (!config) throw new Error(`No config found for location: ${location}`);
       if (!config.gid)
         throw new Error(`No gid configured for location: ${location}`);
       const csvText = await fetchCsv(config.gid);
       const parsed = parseCsv(csvText);
       return parsed;
     },
-    enabled: !!config && !!config.gid,
+    enabled: !!config.gid,
     retry: 1,
   });
 
+  const mergedData: MergedMenuData | null =
+    xmlQuery.data && sheetQuery.data
+      ? mergeData(xmlQuery.data, sheetQuery.data)
+      : xmlQuery.data
+        ? mergeData(xmlQuery.data, null)
+        : null;
+
   return {
-    data: xmlQuery.data ?? null,
-    sheetData: sheetQuery.data ?? null,
+    data: mergedData,
     isLoading: xmlQuery.isLoading,
     error: xmlQuery.error,
-    sheetError: sheetQuery.error,
   };
 };

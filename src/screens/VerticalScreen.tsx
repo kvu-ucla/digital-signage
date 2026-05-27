@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import type { MenuData } from '../lib/types'
+import type { MergedMenuData } from '../lib/mergeData'
 import { DietaryLegend } from '../menu/DietaryLegend'
 import { VerticalMenuItemList } from '../menu/MenuItemList'
 import './VerticalScreen.css'
 
 type VerticalScreenProps = {
-  data: MenuData
+  data: MergedMenuData
   station: string
 }
 

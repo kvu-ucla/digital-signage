@@ -1,6 +1,6 @@
 import { useRef, useEffect, useCallback, useState } from "react";
 
-const CYCLE_INTERVAL_MS = 5_000;
+const CYCLE_INTERVAL_MS = 15_000;
 
 type CyclingColumnProps = {
   children: Array<React.ReactNode>;

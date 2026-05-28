@@ -1,15 +1,4 @@
-import type { MenuData, MenuItemData } from './types'
-
-export type StationWithRegion = {
-  name: string
-  items: ReadonlyArray<MenuItemData>
-  regionPosition: number
-  regionOrder: number
-}
-
-export type MergedMenuData = MenuData & {
-  stationsWithRegions: ReadonlyArray<StationWithRegion>
-}
+import type { MenuData, StationWithRegion, MergedMenuData } from './types'
 
 export const mergeData = (
   menuData: MenuData,

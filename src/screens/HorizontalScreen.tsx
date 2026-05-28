@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import type { MenuItemData } from '../lib/types'
-import type { MergedMenuData } from '../lib/mergeData'
+import type { MergedMenuData } from '../lib/types'
 import { FeaturedItem } from '../menu/FeaturedItem'
 import { MenuItemList } from '../menu/MenuItemList'
 import { DietaryLegend } from '../menu/DietaryLegend'

@@ -1,4 +1,4 @@
-import type { MergedMenuData } from "../lib/mergeData";
+import type { MergedMenuData } from "../lib/types";
 import { MenuItemList } from "../menu/MenuItemList";
 import { DietaryLegend } from "../menu/DietaryLegend";
 import { LEGEND_CONFIG } from "../config/bplate";
@@ -104,7 +104,7 @@ export const EntranceScreen = ({ data }: EntranceScreenProps) => {
                 [&_h3]:font-KlinicSlab
                 [&_h3]:color-[#3c3c3c]"
                 >
-                  <CyclingColumn viewportHeight={400}>{itemNodes}</CyclingColumn> {/* will probably have to modify this to be responsive later*/}
+                  <CyclingColumn viewportHeight={630}>{itemNodes}</CyclingColumn> {/* will probably have to modify this to be responsive later*/}
                 </div>
               );
             })}

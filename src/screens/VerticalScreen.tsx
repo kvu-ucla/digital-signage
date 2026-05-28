@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import type { MergedMenuData } from '../lib/mergeData'
+import type { MergedMenuData } from '../lib/types'
 import { DietaryLegend } from '../menu/DietaryLegend'
 import { VerticalMenuItemList } from '../menu/MenuItemList'
 import './VerticalScreen.css'

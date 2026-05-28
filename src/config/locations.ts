@@ -13,4 +13,8 @@ export const LOCATIONS: Record<string, LocationConfig> = {
     gid: 'REPLACE_WITH_YOUR_GOOGLE_SHEET_GID',
     stylesheet: 'example-location.css',
   },
+  'covelepicuria': { // for pagination testing with many items
+    displayName: 'Epicuria at Covel',
+    xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/CovelEpicuria'
+  }
 }

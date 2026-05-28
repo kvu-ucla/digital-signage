@@ -33,3 +33,14 @@ export type LocationConfig = {
   gid?: string
   stylesheet?: string
 }
+
+export type StationWithRegion = {
+  name: string
+  items: ReadonlyArray<MenuItemData>
+  regionPosition: number
+  regionOrder: number
+}
+
+export type MergedMenuData = MenuData & {
+  stationsWithRegions: ReadonlyArray<StationWithRegion>
+}

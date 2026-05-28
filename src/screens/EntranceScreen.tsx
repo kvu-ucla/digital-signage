@@ -91,18 +91,24 @@ export const EntranceScreen = ({ data }: EntranceScreenProps) => {
           <section
             key={position}
           >
-            {stations.map(({ name, items }) => (
-              <div key={name} className="w-full 
-              [&_h3]:pt-[20px]
-              [&_h3]:text-[40px]
-              [&_h3]:font-KlinicSlab
-              [&_h3]:color-[#3c3c3c]"
-              >
-                <MenuItemList items={items} size="30px" gap="10px" />
-              </div>
-            ))}
-          
-          </section>
+            {stations.map(({ name, items }) => {
+
+              const itemNodes = items.map((item) => (
+                  <MenuItemList key={item.recipeNumber} items={[item]} size="30px" gap="10px" />
+                ));
+
+              return (
+                <div key={name} className="w-full 
+                [&_h3]:pt-[20px]
+                [&_h3]:text-[40px]
+                [&_h3]:font-KlinicSlab
+                [&_h3]:color-[#3c3c3c]"
+                >
+                  <CyclingColumn viewportHeight={400}>{itemNodes}</CyclingColumn> {/* will probably have to modify this to be responsive later*/}
+                </div>
+              );
+            })}
+            </section>
         ))}
       </main>
 

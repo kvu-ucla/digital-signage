@@ -1,5 +1,17 @@
 export type ScreenType = 'horizontal' | 'vertical' | 'entrance'
 
+export type LegendConfig = {
+  color: string;
+  mode: "light" | "dark";
+  font: string;
+  fontSize: string;
+  gap: string;
+  gapItems: string;
+  rowGap: string;
+  imgSize: string;
+  className?: string;
+}
+
 export type MenuItemData = {
   recipeNumber: string
   name: string

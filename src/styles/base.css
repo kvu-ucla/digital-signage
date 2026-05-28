@@ -19,6 +19,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Klinic Slab';
+  src: url('/fonts/KlinicSlab-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
 /* CSS custom property defaults — overridden by location theme stylesheets */
 :root {
   --font-display: sans-serif;

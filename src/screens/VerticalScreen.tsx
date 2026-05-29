@@ -38,19 +38,9 @@ export const VerticalScreen = ({ data, station }: VerticalScreenProps) => {
     const container = listContainerRef.current
     if (!container) return
 
-    console.log({
-      heroBottom: listContainerRef.current?.getBoundingClientRect().bottom,
-      viewportHeight: window.innerHeight,
-    })
-
     requestAnimationFrame(() => {
       const paddingBottom = parseFloat(getComputedStyle(container).paddingBottom)
       const containerBottom = container.getBoundingClientRect().bottom - paddingBottom
-      console.log({ containerBottom, paddingBottom })
-      console.log(Array.from(container.children).map(c => ({
-        name: c.textContent?.slice(0, 20),
-        bottom: c.getBoundingClientRect().bottom
-      })))
 
       let count = 0
       for (const child of Array.from(container.children)) {

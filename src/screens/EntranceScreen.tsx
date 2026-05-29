@@ -104,7 +104,7 @@ export const EntranceScreen = ({ data }: EntranceScreenProps) => {
                 [&_h3]:font-KlinicSlab
                 [&_h3]:color-[#3c3c3c]"
                 >
-                  <CyclingColumn viewportHeight={400}>{itemNodes}</CyclingColumn> {/* will probably have to modify this to be responsive later*/}
+                  <CyclingColumn viewportHeight={606}>{itemNodes}</CyclingColumn> {/* will probably have to modify this to be responsive later*/}
                 </div>
               );
             })}

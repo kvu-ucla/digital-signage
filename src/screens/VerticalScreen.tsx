@@ -32,7 +32,7 @@ export const VerticalScreen = ({ data, station }: VerticalScreenProps) => {
   const [visibleCount, setVisibleCount] = useState<number | null>(null)
   const [pageOffset, setPageOffset] = useState(0)
   
-  const rotationInterval = 5_000
+  const rotationInterval = 15_000
 
   const measure = useCallback(() => {
     const container = listContainerRef.current

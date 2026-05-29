@@ -1,4 +1,4 @@
-import type { MergedMenuData } from '../lib/mergeData'
+import type { MergedMenuData } from '../lib/types'
 import { DietaryLegend } from '../menu/DietaryLegend'
 import { MenuItemList } from '../menu/MenuItemList'
 import './VerticalScreen.css'

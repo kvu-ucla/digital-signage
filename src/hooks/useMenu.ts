@@ -4,7 +4,7 @@ import { fetchXml, fetchCsv } from "../lib/fetchMenu";
 import { parseXml } from "../lib/parseXML";
 import { parseCsv } from "../lib/parseCSV";
 import { mergeData } from "../lib/mergeData";
-import type { MergedMenuData } from "../lib/mergeData";
+import type { MergedMenuData } from "../lib/types";
 
 type UseMenuOptions = {
   location: string;

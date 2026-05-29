@@ -4,30 +4,24 @@ type DietaryIconMode = 'light' | 'dark'
 
 type DietaryIconProps = {
   dietaryLabel: string
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: string;
   mode?: DietaryIconMode
 }
 
-const SIZE_CLASSES: Record<'sm' | 'md' | 'lg' | 'xl', string> = {
-  sm: 'w-6 h-6',
-  md: 'w-[30px] h-[30px]',
-  lg: 'w-10 h-10',
-  xl: 'w-12 h-12',
-}
-
-
-export const DietaryIcon = ({ dietaryLabel, size = 'md', mode = 'light' }: DietaryIconProps) => {
+export const DietaryIcon = ({ dietaryLabel, size = '25px', mode = 'light' }: DietaryIconProps) => {
   if (!DIETARY_LABELS.some(({ key }) => key === dietaryLabel)) return null
 
   const slug = dietaryLabel.toLowerCase()
-  const dimension = SIZE_CLASSES[size]
 
   return (
     <img
       src={`./icons/dietary/${mode}/${slug}.svg`}
       alt={dietaryLabel}
       title={dietaryLabel}
-      className={`${dimension} object-contain flex-shrink-0`}
+      style={{
+        width: size,
+        height: size,
+      }}
     />
   )
 }

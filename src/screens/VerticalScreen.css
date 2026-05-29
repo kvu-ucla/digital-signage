@@ -69,6 +69,7 @@
 .screen-vertical__body {
   display: flex;
   overflow: hidden;
+  min-height: 0;
 }
 
 /* ── Graphic ── */
@@ -92,17 +93,21 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-height: 0;
+  flex: 1 1 0;
 }
 
 .screen-vertical__main-hero {
-  flex: 1 0 0;
+  display: flex;
+  flex: 1 1 0;
   flex-direction: column;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: top;
   align-items: center;
-  gap: 10px;
+  gap: 120px 10px;
   align-self: stretch;
-  padding: 300px 36px;
+  padding: 200px 36px;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* ── Footer ── */

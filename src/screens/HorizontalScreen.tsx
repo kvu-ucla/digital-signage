@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import type { MenuData, MenuItemData } from '../lib/types'
+import type { MenuItemData } from '../lib/types'
+import type { MergedMenuData } from '../lib/types'
 import { FeaturedItem } from '../menu/FeaturedItem'
 import { MenuItemList } from '../menu/MenuItemList'
 import { DietaryLegend } from '../menu/DietaryLegend'
@@ -14,7 +15,7 @@ const MOCK_ITEM: MenuItemData = {
 }
 
 type HorizontalScreenProps = {
-  data: MenuData
+  data: MergedMenuData
   station: string
 }
 

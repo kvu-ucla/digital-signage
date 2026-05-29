@@ -5,7 +5,7 @@ import { VerticalMenuItemList } from '../menu/MenuItemList'
 import './VerticalScreen.css'
 
 type VerticalScreenProps = {
-  data: MenuData
+  data: MergedMenuData
   station: string
 }
 

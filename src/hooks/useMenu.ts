@@ -3,7 +3,8 @@ import { LOCATIONS } from "../config/locations";
 import { fetchXml, fetchCsv } from "../lib/fetchMenu";
 import { parseXml } from "../lib/parseXML";
 import { parseCsv } from "../lib/parseCSV";
-import type { MenuData } from "../lib/types";
+import { mergeData } from "../lib/mergeData";
+import type { MergedMenuData } from "../lib/types";
 
 type UseMenuOptions = {
   location: string;
@@ -11,11 +12,9 @@ type UseMenuOptions = {
 };
 
 type UseMenuResult = {
-  data: MenuData | null;
-  sheetData: Array<Record<string, string>> | null;
+  data: MergedMenuData | null;
   isLoading: boolean;
   error: unknown;
-  sheetError: unknown;
 };
 
 export const useMenu = ({
@@ -38,6 +37,7 @@ export const useMenu = ({
     },
     refetchInterval: 10 * 60_000,
     retry: 2,
+    enabled: true,
   });
 
   const sheetQuery = useQuery({
@@ -53,11 +53,16 @@ export const useMenu = ({
     retry: 1,
   });
 
+  const mergedData: MergedMenuData | null =
+    xmlQuery.data && sheetQuery.data
+      ? mergeData(xmlQuery.data, sheetQuery.data)
+      : xmlQuery.data
+        ? mergeData(xmlQuery.data, null)
+        : null;
+
   return {
-    data: xmlQuery.data ?? null,
-    sheetData: sheetQuery.data ?? null,
+    data: mergedData,
     isLoading: xmlQuery.isLoading,
     error: xmlQuery.error,
-    sheetError: sheetQuery.error,
   };
 };

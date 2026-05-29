@@ -3,18 +3,23 @@ import { DietaryIcon, VerticalDietaryIcon } from './DietaryIcon'
 
 type MenuItemProps = {
   item: MenuItemData
-    
+  size?: string
+  gap?: string
 }
 
-export const MenuItem = ({ item }: MenuItemProps) => (
-  <div className="flex flex-col gap-[14px]">
-    <h3 className="text-[40px] text-[#3c3c3c] font-bold italic leading-none m-0 [font-family:var(--font-display)]">
+export const MenuItem = ({ item, size="25px", gap="5px" }: MenuItemProps) => (
+  <div className="flex w-full flex-col items-center gap-[5px] text-center">
+    <h3 className="m-0 max-w-[420px] text-center text-[28px] font-bold leading-[1.08] [font-family:var(--font-display)]">
       {item.name}
     </h3>
+
     {item.dietaryLabels.length > 0 && (
-      <div className="flex gap-[8px] items-center h-[30px]">
+      <div className={`flex flex-wrap items-center justify-center gap-[${gap}] leading-none`}
+        style={{
+          columnGap: gap,
+        }}>
         {item.dietaryLabels.map((label) => (
-          <DietaryIcon key={label} dietaryLabel={label} mode="light" />
+          <DietaryIcon key={label} dietaryLabel={label} mode="light" size={size}/>
         ))}
       </div>
     )}

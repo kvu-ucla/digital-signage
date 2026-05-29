@@ -69,7 +69,7 @@ type ScreenLoaderProps = {
 }
 
 const ScreenLoader = ({ location, screenType, station, menuType }: ScreenLoaderProps) => {
-  const { data, sheetData, isLoading, error } = useMenu({
+  const { data, isLoading, error } = useMenu({
     location,
     menuType: menuType ?? undefined,
   })
@@ -107,7 +107,7 @@ const ScreenLoader = ({ location, screenType, station, menuType }: ScreenLoaderP
   }
 
   if (screenType === 'entrance') {
-    return <EntranceScreen data={data} sheetData={sheetData} sheetError={error} />
+    return <EntranceScreen data={data} />
   }
   if (screenType === 'horizontal') {
     return <HorizontalScreen data={data} station={station ?? ''} />

@@ -7,6 +7,12 @@ export const LOCATIONS: Record<string, LocationConfig> = {
     xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/BruinPlate',
     stylesheet: 'example-location.css',
   },
+  'cafe1919': {
+    displayName: 'Cafe 1919',
+    gid: '677512158',
+    xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/Cafe1919',
+    stylesheet: 'example-location.css',
+  },
   'example-entrance': {
     displayName: 'Example Entrance',
     xmlUrl: 'https://REPLACE_WITH_YOUR_JAMIX_XML_URL',

@@ -1,5 +1,17 @@
 export type ScreenType = 'horizontal' | 'vertical' | 'entrance'
 
+export type LegendConfig = {
+  color: string;
+  mode: "light" | "dark";
+  font: string;
+  fontSize: string;
+  gap: string;
+  gapItems: string;
+  rowGap: string;
+  imgSize: string;
+  className?: string;
+}
+
 export type MenuItemData = {
   recipeNumber: string
   name: string
@@ -20,4 +32,15 @@ export type LocationConfig = {
   xmlUrl: string
   gid?: string
   stylesheet?: string
+}
+
+export type StationWithRegion = {
+  name: string
+  items: ReadonlyArray<MenuItemData>
+  regionPosition: number
+  regionOrder: number
+}
+
+export type MergedMenuData = MenuData & {
+  stationsWithRegions: ReadonlyArray<StationWithRegion>
 }

@@ -32,6 +32,12 @@ export type LocationConfig = {
   xmlUrl: string
   gid?: string
   stylesheet?: string
+  screens?: Record<string, {
+    menus?: ReadonlyArray<string>
+    type: ScreenType
+    requiresStation: boolean
+    stations?: ReadonlyArray<string>
+  }>
 }
 
 export type StationWithRegion = {
@@ -44,3 +50,8 @@ export type StationWithRegion = {
 export type MergedMenuData = MenuData & {
   stationsWithRegions: ReadonlyArray<StationWithRegion>
 }
+
+export type SheetRow = string[];
+export type SheetData = SheetRow[];
+export type StationItems = Record<string, MenuItemData[]>;
+export type StationConfig = Record<string, string[]>;

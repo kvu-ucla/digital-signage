@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import type { MenuData } from '../lib/types'
-import { DietaryLegend } from '../menu/DietaryLegend'
-import { VerticalMenuItemList } from '../menu/MenuItemList'
+import type { MenuData, MergedMenuData } from '../../lib/types'
+import { DietaryLegend } from '../../menu/DietaryLegend'
+import { MenuItemList } from '../../menu/MenuItemList'
 import './VerticalScreen.css'
 
 type VerticalScreenProps = {
@@ -112,11 +112,11 @@ export const VerticalScreen = ({ data, station }: VerticalScreenProps) => {
         <div className="screen-vertical__main">
 
           <div className="screen-vertical__main-hero" ref={listContainerRef}>
-            <VerticalMenuItemList items={currentItems}></VerticalMenuItemList>
+            <MenuItemList items={currentItems} />
           </div>
 
           <div className="screen-vertical__footer">
-            <DietaryLegend />
+            {/* <DietaryLegend /> */}
           </div>
           
         </div>

@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import type { MenuItemData } from '../lib/types'
-import type { MergedMenuData } from '../lib/types'
-import { FeaturedItem } from '../menu/FeaturedItem'
-import { MenuItemList } from '../menu/MenuItemList'
-import { DietaryLegend } from '../menu/DietaryLegend'
+import type { MenuItemData } from '../../lib/types'
+import type { MergedMenuData } from '../../lib/types'
+import { FeaturedItem } from '../../menu/FeaturedItem'
+import { MenuItemList } from '../../menu/MenuItemList'
+import { DietaryLegend } from '../../menu/DietaryLegend'
 import './HorizontalScreen.css'
 
 const MOCK_ITEM: MenuItemData = {
@@ -103,7 +103,7 @@ export const HorizontalScreen = ({ data, station }: HorizontalScreenProps) => {
             {featuredItem && <FeaturedItem item={featuredItem} />}
           </div>
           <div className="screen-horizontal__footer">
-            <DietaryLegend />
+            {/* <DietaryLegend /> */}
           </div>
         </div>
 

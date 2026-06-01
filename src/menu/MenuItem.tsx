@@ -24,4 +24,4 @@ export const MenuItem = ({ item, size="25px", gap="5px" }: MenuItemProps) => (
       </div>
     )}
   </div>
-);
+)

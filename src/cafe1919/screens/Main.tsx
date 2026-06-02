@@ -1,15 +1,6 @@
-import type { MergedMenuData } from "../../lib/types";
-import { Cafe1919Template } from "../../templates/cafe1919/Cafe1919MainTemplate";
+import type { ScreenProps } from "../../lib/resolveScreen";
+import { Cafe1919Template } from "../template";
 
-type Cafe1919ScreenProps = {
-  data: MergedMenuData;
-};
-
-export const MainScreen = ({ data }: Cafe1919ScreenProps) => {
-    console.log("Rendering Cafe1919 Main Screen with data:", data);
-    return (
-        <Cafe1919Template 
-            data={data}
-        />
-    );
-};
+export default function MainScreen({ data }: ScreenProps) {
+  return <Cafe1919Template data={data} />;
+}

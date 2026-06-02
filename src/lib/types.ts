@@ -10,6 +10,7 @@ export type LegendConfig = {
   rowGap: string;
   imgSize: string;
   className?: string;
+  description?: string;
 }
 
 export type MenuItemData = {
@@ -51,7 +52,7 @@ export type MergedMenuData = MenuData & {
   stationsWithRegions: ReadonlyArray<StationWithRegion>
 }
 
-export type SheetRow = string[];
-export type SheetData = SheetRow[];
-export type StationItems = Record<string, MenuItemData[]>;
-export type StationConfig = Record<string, string[]>;
+export type SheetRow = Array<string>;
+export type SheetData = Array<SheetRow>;
+export type StationItems = Record<string, Array<MenuItemData>>;
+export type StationConfig = Record<string, Array<string>>;

@@ -21,6 +21,8 @@ export const DietaryIcon = ({ dietaryLabel, size = '25px', mode = 'light' }: Die
       style={{
         width: size,
         height: size,
+        objectFit: 'contain',
+        flexShrink: 0,
       }}
     />
   )

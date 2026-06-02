@@ -1,24 +1,14 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import type {LegendConfig, MenuItemData} from '../../lib/types'
-import type { MergedMenuData } from '../../lib/types'
-import { FeaturedItem } from '../../menu/FeaturedItem'
-import { MenuItemList } from '../../menu/MenuItemList'
-import { DietaryLegend } from '../../menu/DietaryLegend'
+import type { MergedMenuData, LegendConfig } from '../lib/types'
+import { FeaturedItem } from '../menu/FeaturedItem'
+import { MenuItemList } from '../menu/MenuItemList'
+import { DietaryLegend } from '../menu/DietaryLegend'
 import './HorizontalScreen.css'
-
-const MOCK_ITEM: MenuItemData = {
-  recipeNumber: 'mock-001',
-  name: "A Really Really Long Menu Item (Sometimes There's Random Extra Info)",
-  description: 'Items are subject to change based on availability without prior notice. Sometimes the descriptions get super super duper lengthy and really detailed',
-  price: null,
-  dietaryLabels: ['Gluten', 'Wheat', 'Dairy', 'Eggs', 'Soy', 'Fish', 'Crustacean-Shellfish', 'Peanut', 'Tree-Nuts', 'Sesame', 'Alcohol'],
-}
 
 type HorizontalScreenProps = {
   data: MergedMenuData
   station: string
   legendConfig: LegendConfig
-  
 }
 
 export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScreenProps) => {
@@ -29,9 +19,7 @@ export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScre
 
   const [featuredIndex, setFeaturedIndex] = useState(0)
   const [visibleCount, setVisibleCount] = useState<number | null>(null)
-  const [isMockEnabled, setIsMockEnabled] = useState(true)
   const listContainerRef = useRef<HTMLDivElement>(null)
-  const isDev = import.meta.env.DEV || import.meta.env.VITE_SHOW_MOCKS === 'true'
 
   useEffect(() => {
     setFeaturedIndex(0)
@@ -74,16 +62,12 @@ export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScre
     return () => { ro.disconnect(); }
   }, [])
 
-  const isMockActive = isDev && isMockEnabled
-  const featuredItem = isMockActive ? MOCK_ITEM : items[featuredIndex]
+  const featuredItem = items[featuredIndex]
   const rotatedItems = [
     ...items.slice(featuredIndex + 1),
     ...items.slice(0, featuredIndex),
   ]
-  const listItems = rotatedItems.slice(0, visibleCount ?? rotatedItems.length)
-  const displayListItems = isMockActive && listItems.length > 0
-    ? [MOCK_ITEM, ...listItems.slice(1)]
-    : listItems
+  const displayListItems = rotatedItems.slice(0, visibleCount ?? rotatedItems.length)
 
   return (
     <div className="screen-horizontal">
@@ -109,29 +93,20 @@ export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScre
             {featuredItem && <FeaturedItem item={featuredItem} />}
           </div>
           <div className="screen-horizontal__footer">
-             <DietaryLegend config={legendConfig}/> 
+            <div className="screen-horizontal__footer-inner">
+              <DietaryLegend config={legendConfig} />
+            </div>
           </div>
         </div>
 
         <div className="screen-horizontal__side">
           <div className="screen-horizontal__side-inner" ref={listContainerRef}>
-            <MenuItemList items={displayListItems} />
+            <MenuItemList items={displayListItems} size="30px" gap="8px" />
           </div>
         </div>
 
       </div>
 
-      {isDev && (
-        <button
-          onClick={() => { setIsMockEnabled(prev => !prev); }}
-          className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-1 p-4 rounded-xl bg-black/80 text-white border border-white/10 shadow-lg cursor-pointer backdrop-blur-sm"
-        >
-          <span className="text-[10px] font-mono uppercase tracking-widest text-white/50">dev</span>
-          <span className="text-base font-mono font-semibold tracking-wide">
-            mock {isMockEnabled ? 'on' : 'off'}
-          </span>
-        </button>
-      )}
     </div>
   )
 }

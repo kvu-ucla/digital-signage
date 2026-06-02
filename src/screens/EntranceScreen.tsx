@@ -1,28 +1,24 @@
-import type { MergedMenuData, LegendConfig } from "../../lib/types";
-import { MenuItemList } from "../../menu/MenuItemList";
-import { DietaryLegend } from "../../menu/DietaryLegend";
-import { CyclingColumn } from "../helpers/CyclingColumns";
+import type { MergedMenuData, LegendConfig } from "../lib/types";
+import { MenuItemList } from "../menu/MenuItemList";
+import { DietaryLegend } from "../menu/DietaryLegend";
+import { CyclingColumn } from "../components/CyclingColumns";
 
 export type EntranceScreenProps = {
   data: MergedMenuData;
-  font?: string;
   header?: React.ReactNode;
-  bgColor?: string;
-  primaryColor?: string;
-  secondaryColor?: string;
-  dottedLine?: string;
-  legend_config: LegendConfig;
+  legendConfig: LegendConfig;
+  rootClassName?: string;
+  barClassName?: string;
+  dividerClassName?: string;
 };
 
-export const EntranceScreenTemplate = ({ 
-  data, 
-  font, 
-  header, 
-  bgColor, 
-  primaryColor, 
-  secondaryColor, 
-  dottedLine, 
-  legend_config 
+export const EntranceScreen = ({
+  data,
+  header,
+  legendConfig,
+  rootClassName = '',
+  barClassName = '',
+  dividerClassName,
 }: EntranceScreenProps) => {
   console.log("Merged Menu Data:", data);
   if (data.stationsWithRegions.length === 0) {
@@ -49,10 +45,10 @@ export const EntranceScreenTemplate = ({
   const sortedRegions = [...regionMap.entries()].sort(([a], [b]) => a - b);
 
   return (
-    <div className={`relative flex h-[1080px] w-[1920px] flex-col overflow-hidden bg-[${bgColor}] font-${font}`}>
+    <div className={`relative flex h-[1080px] w-[1920px] flex-col overflow-hidden ${rootClassName}`}>
       {header}
       <div
-        className={`grid h-[100px] w-full border-b-[10px] border-[${secondaryColor}] bg-[${primaryColor}]`}
+        className={`grid h-[100px] w-full border-b-[10px] ${barClassName}`}
         style={{
           gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))`,
         }}
@@ -63,8 +59,8 @@ export const EntranceScreenTemplate = ({
             className={[
               "relative box-border flex h-full items-center justify-center px-[24px]",
               index !== sortedRegions.length - 1
-                ? `after:absolute after:right-0 after:top-0 after:h-[706px] after:border-r-[4px] after:border-dotted after:border-[${dottedLine}] after:content-['']`
-              : "",
+                ? `after:absolute after:right-0 after:top-0 after:h-[706px] after:border-r-[4px] after:border-dotted after:content-[''] ${dividerClassName ?? ''}`
+                : "",
             ].join(" ")}
           >
             <h2 className="pt-3 text-center text-[50px] font-extrabold capitalize leading-none text-white">
@@ -83,15 +79,16 @@ export const EntranceScreenTemplate = ({
         {sortedRegions.map(([position, stations]) => (
           <section
             key={position}
+            className="p-[36px]"
           >
             {stations.map(({ name, items }) => {
 
               const itemNodes = items.map((item) => (
-                  <MenuItemList key={item.recipeNumber} items={[item]} size="30px" gap="10px" />
+                  <MenuItemList key={item.recipeNumber} items={[item]} size="30px" gap="10px" className="items-center text-center" />
                 ));
 
               return (
-                <div key={name} className="w-full 
+                <div key={name} className="w-full
                 [&_h3]:pt-[20px]
                 [&_h3]:text-[40px]
                 [&_h3]:font-KlinicSlab
@@ -108,7 +105,7 @@ export const EntranceScreenTemplate = ({
       <div className="absolute bottom-[20px] left-0 right-0 shrink-0">
         <div className="ml-auto mr-auto h-[3px] w-[95%]  bg-[#005989]" />
         <div className="mt-5 ml-auto mr-auto flex w-[85%] items-center justify-center">
-          <DietaryLegend config={legend_config} />
+          <DietaryLegend config={legendConfig} />
         </div>
       </div>
     </div>

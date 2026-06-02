@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import type { MenuData, MergedMenuData } from '../../lib/types'
-import { DietaryLegend } from '../../menu/DietaryLegend'
-import { MenuItemList } from '../../menu/MenuItemList'
+import type { MergedMenuData, LegendConfig } from '../lib/types'
+import { MenuItemList } from '../menu/MenuItemList'
+import { DietaryLegend } from '../menu/DietaryLegend'
 import './VerticalScreen.css'
 
 type VerticalScreenProps = {
   data: MergedMenuData
   station: string
+  legendConfig: LegendConfig
 }
 
 // TODO: Implement full vertical screen with dynamic pagination.
@@ -21,7 +22,7 @@ type VerticalScreenProps = {
 //   based on the pagination  have separate discrete paginated objects to render 
 // - Cycle through paginated sets on a 15-second interval
 
-export const VerticalScreen = ({ data, station }: VerticalScreenProps) => {
+export const VerticalScreen = ({ data, station, legendConfig }: VerticalScreenProps) => {
   const stationKey = station.toLowerCase().trim().replace(/\s+/g, ' ')
   const stationTitle = stationKey.replace(/\b\w/g, c => c.toUpperCase())
 
@@ -87,8 +88,8 @@ export const VerticalScreen = ({ data, station }: VerticalScreenProps) => {
   }, [items, pageOffset])
 
   const currentItems = visibleCount === null
-  ? rotatedItems
-  : rotatedItems.slice(0, visibleCount)
+    ? rotatedItems
+    : rotatedItems.slice(0, visibleCount)
 
   return (
     <div className="screen-vertical">
@@ -112,11 +113,13 @@ export const VerticalScreen = ({ data, station }: VerticalScreenProps) => {
         <div className="screen-vertical__main">
 
           <div className="screen-vertical__main-hero" ref={listContainerRef}>
-            <MenuItemList items={currentItems} />
+            <MenuItemList items={currentItems} size="30px" gap="8px" />
           </div>
 
           <div className="screen-vertical__footer">
-            {/* <DietaryLegend /> */}
+            <div className="screen-vertical__footer-inner">
+              <DietaryLegend config={legendConfig} />
+            </div>
           </div>
           
         </div>

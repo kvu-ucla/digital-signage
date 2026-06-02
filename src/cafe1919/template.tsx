@@ -1,14 +1,19 @@
-import type { MergedMenuData } from "../../lib/types";
-import { MenuItemList } from "../../menu/MenuItemList";
-import { DietaryLegend } from "../../menu/DietaryLegend";
-import { LEGEND_CONFIG } from "../../config/cafe1919";
+import type { MergedMenuData } from "../lib/types";
+import type { Cafe1919DisplayId } from "./helpers/cafe1919";
+import { fillConfig } from "./helpers/cafe1919";
+import { MenuItemList } from "../menu/MenuItemList";
+import { DietaryLegend } from "../menu/DietaryLegend";
+import { LEGEND_CONFIG } from "./config";
 
 type Cafe1919TemplateProps = {
   data: MergedMenuData;
+  displayId?: Cafe1919DisplayId;
 };
 
-export function Cafe1919Template({ data }: Cafe1919TemplateProps) {
-  if (data.stationsWithRegions.length === 0) {
+export function Cafe1919Template({ data, displayId = "Mains" }: Cafe1919TemplateProps) {
+  const stationsWithRegions = fillConfig(displayId, data);
+
+  if (stationsWithRegions.length === 0) {
     return (
       <div className="screen">
         <p>No station region data available.</p>
@@ -20,12 +25,12 @@ export function Cafe1919Template({ data }: Cafe1919TemplateProps) {
     number,
     Array<{
       name: string;
-      items: typeof data.stationsWithRegions[number]["items"];
+      items: typeof stationsWithRegions[number]["items"];
       order: number;
     }>
   >();
 
-  for (const station of data.stationsWithRegions) {
+  for (const station of stationsWithRegions) {
     const position = station.regionPosition;
     const order = station.regionOrder;
 
@@ -173,7 +178,7 @@ type RegionStation = {
 };
 
 type MenuColumnProps = {
-  stations: RegionStation[];
+  stations: Array<RegionStation>;
 };
 
 function MenuColumn({ stations }: MenuColumnProps) {

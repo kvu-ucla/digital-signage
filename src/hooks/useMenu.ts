@@ -35,7 +35,7 @@ export const useMenu = ({
       const xmlText = await fetchXml(config.xmlUrl);
       return parseXml({ xmlText, menuTypeFilter: normalizedMenuType });
     },
-    refetchInterval: 10 * 60_000,
+    refetchInterval: 5 * 60_000,
     retry: 2,
     enabled: true,
   });

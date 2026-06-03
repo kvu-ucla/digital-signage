@@ -13,7 +13,7 @@ export const FeaturedItem = ({ item }: FeaturedItemProps) => (
     {item.dietaryLabels.length > 0 && (
       <div className="flex gap-[8px] items-center h-[40px]">
         {item.dietaryLabels.map((label) => (
-          <DietaryIcon key={label} dietaryLabel={label} size="lg" mode="light" />
+          <DietaryIcon key={label} dietaryLabel={label} size="40px" mode="light" />
         ))}
       </div>
     )}

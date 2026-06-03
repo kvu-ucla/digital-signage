@@ -1,9 +1,10 @@
+/* ── Root ── */
+
 .screen-horizontal {
   display: grid;
   grid-template-rows: auto 1fr;
   width: 100vw;
   height: 100vh;
-  background: #f8f4e8;
   overflow: hidden;
 }
 
@@ -12,8 +13,6 @@
 .screen-horizontal__header {
   display: flex;
   align-items: stretch;
-  background: #005289;
-  border-bottom: 9px solid #cc9f44;
   flex-shrink: 0;
   height: 250px;
 }
@@ -38,7 +37,6 @@
   display: flex;
   align-items: center;
   padding: 0 40px;
-  color: #ffffff;
   font-family: var(--font-display);
   font-size: 126px;
   font-weight: 700;
@@ -47,6 +45,7 @@
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
+  color: #ffffff;
 }
 
 .screen-horizontal__header-certificate {
@@ -60,7 +59,6 @@
 .screen-horizontal__header-certificate-placeholder {
   width: 310px;
   height: 150px;
-  background: #778837;
 }
 
 /* ── Body ── */
@@ -75,7 +73,6 @@
 .screen-horizontal__graphic {
   width: 400px;
   flex-shrink: 0;
-  background: #c87b28;
   overflow: hidden;
 }
 
@@ -113,8 +110,8 @@
 }
 
 .screen-horizontal__footer-inner {
-  border-top: 1px solid #005289;
-  padding: 10px 0;
+  border-top: 1px solid transparent;
+  padding: 14px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,9 +122,9 @@
   display: flex;
   gap: 4px;
   align-items: baseline;
-  color: #005289;
   font-size: 21px;
   white-space: nowrap;
+  color: #005289;
 }
 
 .screen-horizontal__footer-description span {
@@ -174,7 +171,6 @@
 .screen-horizontal__side {
   width: 570px;
   flex-shrink: 0;
-  background: #f8f4e8;
   display: flex;
   flex-direction: column;
   padding: 36px 0;
@@ -183,7 +179,6 @@
 
 .screen-horizontal__side-inner {
   flex: 1;
-  border-left: 4px dotted #005289;
   display: flex;
   flex-direction: column;
   gap: 40px;

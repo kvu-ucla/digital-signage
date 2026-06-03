@@ -1,4 +1,4 @@
-import type { LegendConfig } from "../lib/types";
+import type { LegendConfig, MenuItemConfig } from "../lib/types";
 
 export const LEGEND_CONFIG: LegendConfig = {
     color: "#4d4d4f",
@@ -21,4 +21,11 @@ export const HORIZONTAL_LEGEND_CONFIG: LegendConfig = {
     rowGap: "10px",
     imgSize: "24px",
     description: "Please refer to dining.ucla.edu/menu for allergen and nutritional information.",
+}
+
+export const MENU_ITEM_CONFIG: MenuItemConfig = {
+    gap: "10px",
+    divClassName: "flex w-full flex-col items-center gap-[5px] text-center",
+    itemClassName: "m-0 max-w-[420px] text-center text-[28px] font-bold leading-[1.08] [font-family:var(--font-display)]",
+    dietaryClassName: "flex flex-wrap items-center justify-center gap-[10px] leading-none",
 }

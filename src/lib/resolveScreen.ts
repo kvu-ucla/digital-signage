@@ -26,6 +26,9 @@ const toPascalCase = (value: string): string =>
     .join('')
 
 const getCandidates = (location: string, screenType: string, station: string | null): Array<string> => {
+  if (location === "cafe1919") {
+    return [`../${location}/screens/cafe1919.tsx`]
+  }
   const screenName = toPascalCase(screenType)
 
   if (!station) return [`../${location}/screens/${screenName}.tsx`]

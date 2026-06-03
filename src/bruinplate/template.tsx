@@ -1,3 +1,3 @@
-export { HorizontalScreen } from '../screens/HorizontalScreen'
-export { VerticalScreen } from '../screens/VerticalScreen'
-export { EntranceScreen } from '../screens/EntranceScreen'
+export { HorizontalScreen } from '../screenTemplates/HorizontalScreen'
+export { VerticalScreen } from '../screenTemplates/VerticalScreen'
+export { EntranceScreen } from '../screenTemplates/EntranceScreen'

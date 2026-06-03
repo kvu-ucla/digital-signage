@@ -1,6 +1,6 @@
 import type { ScreenProps } from "../../lib/resolveScreen";
 import { EntranceScreen } from "../template";
-import { LEGEND_CONFIG } from "../config";
+import { LEGEND_CONFIG, MENU_ITEM_CONFIG} from "../config";
 
 const header = (
   <header className="flex h-[250px] w-full shrink-0 items-center bg-[#005289] px-[80px] text-white">
@@ -30,12 +30,14 @@ const header = (
 export default function Entrance({ data }: ScreenProps) {
   return (
     <EntranceScreen
-      data={data}
+       data={data}
+      font="KlinicSlab-Bold"
       header={header}
+      bgColor="#f8f4e8"
+      primaryColor="#5d94bb"
+      secondaryColor="#d69b2d"
       legendConfig={LEGEND_CONFIG}
-      rootClassName="bg-[#f8f4e8]"
-      barClassName="bg-[#5d94bb] border-[#d69b2d]"
-      dividerClassName="after:border-[#005289]"
+      menuItemConfig={MENU_ITEM_CONFIG}
     />
   );
 }

@@ -1,6 +1,6 @@
 import type { MenuItemData, MergedMenuData } from './types'
 
-export const isMockMode = (): boolean =>
+export const isMockMode = () =>
   new URLSearchParams(window.location.search).get('mock') === 'true'
 
 export const MOCK_ITEM: MenuItemData = {
@@ -11,7 +11,7 @@ export const MOCK_ITEM: MenuItemData = {
   dietaryLabels: ['Gluten', 'Wheat', 'Dairy', 'Eggs', 'Soy', 'Fish', 'Crustacean-Shellfish', 'Peanut', 'Tree-Nuts', 'Sesame', 'Alcohol'],
 }
 
-const mockItems = (): Array<MenuItemData> =>
+const mockItems = () =>
   Array.from({ length: 10 }, (_, i) => ({
     ...MOCK_ITEM,
     recipeNumber: `mock-${i.toString().padStart(3, '0')}`,

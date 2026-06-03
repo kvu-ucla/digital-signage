@@ -12,7 +12,11 @@ export const MOCK_ITEM: MenuItemData = {
 }
 
 const mockItems = () =>
-  Array.from({ length: 10 }, (_, i) => ({ ...MOCK_ITEM, recipeNumber: `mock-${i.toString().padStart(3, '0')}` }))
+  Array.from({ length: 10 }, (_, i) => ({
+    ...MOCK_ITEM,
+    recipeNumber: `mock-${i.toString().padStart(3, '0')}`,
+    description: `Mock item ${i.toString().padStart(3, '0')} short description`,
+  }))
 
 export function applyMockData(data: MergedMenuData): MergedMenuData {
   return {

@@ -162,6 +162,13 @@ export const App = () => {
   const station = normalizeParam(params.get("station"));
   const menuType = normalizeParam(params.get("menu"));
 
+  const overlayId = params.get("overlay-id");
+  const overlayUrl = overlayId
+    ? `${window.location.origin}/signage/#/signage/${overlayId}`
+    : null;
+
+  document.documentElement.classList.toggle("is-takeover", !!overlayId);
+
   const config = LOCATIONS[location];
 
   useEffect(() => {
@@ -182,15 +189,24 @@ export const App = () => {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ErrorBoundary>
-        <ScreenLoader
-          location={location}
-          screenType={screen}
-          station={station}
-          menuType={menuType}
+    <>
+      {overlayUrl && (
+        <iframe
+          src={overlayUrl}
+          className="overlay-iframe"
+          title="background overlay"
         />
-      </ErrorBoundary>
-    </QueryClientProvider>
+      )}
+      <QueryClientProvider client={queryClient}>
+        <ErrorBoundary>
+          <ScreenLoader
+            location={location}
+            screenType={screen}
+            station={station}
+            menuType={menuType}
+          />
+        </ErrorBoundary>
+      </QueryClientProvider>
+    </>
   );
 };

@@ -4,15 +4,8 @@ export const LOCATIONS: Record<string, LocationConfig> = {
   'bruinplate': {
     displayName: 'Bruin Plate',
     gid: '932045808',
-    xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/BruinPlate',
+    xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/CovelEpicuria',
     stylesheet: 'example-location.css',
-    screens: {
-      entrance: {
-        menus: ["breakfast", "lunch", "dinner"],
-        type: "entrance",
-        requiresStation: false,
-      },
-    },
   },
   'cafe1919': {
     displayName: 'Cafe 1919',

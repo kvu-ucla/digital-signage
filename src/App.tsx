@@ -1,9 +1,10 @@
-import { Component, useEffect, type ComponentType, type ReactNode } from "react";
+import { Component, useEffect, useState, type ComponentType, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LOCATIONS } from "./config/locations";
 import { useMenu } from "./hooks/useMenu";
 import { resolveScreen, getScreenCandidates, type ScreenProps } from "./lib/resolveScreen";
 import { isMockMode, applyMockData } from "./lib/mockMode";
+import { SkeletonScreen } from "./components/SkeletonScreen";
 
 const queryClient = new QueryClient();
 
@@ -169,6 +170,8 @@ export const App = () => {
 
   document.documentElement.classList.toggle("is-takeover", !!overlayId);
 
+  const [isOverlayReady, setOverlayReady] = useState(!overlayUrl);
+
   const config = LOCATIONS[location];
 
   useEffect(() => {
@@ -195,16 +198,23 @@ export const App = () => {
           src={overlayUrl}
           className="overlay-iframe"
           title="background overlay"
+          onLoad={() => { setOverlayReady(true) }}
         />
       )}
       <QueryClientProvider client={queryClient}>
         <ErrorBoundary>
-          <ScreenLoader
-            location={location}
-            screenType={screen}
-            station={station}
-            menuType={menuType}
-          />
+          {isOverlayReady ? (
+            <div className="skeleton-fade-in">
+              <ScreenLoader
+                location={location}
+                screenType={screen}
+                station={station}
+                menuType={menuType}
+              />
+            </div>
+          ) : (
+            <SkeletonScreen screenType={screen} />
+          )}
         </ErrorBoundary>
       </QueryClientProvider>
     </>

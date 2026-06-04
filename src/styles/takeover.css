@@ -1,0 +1,28 @@
+.overlay-iframe,
+.overlay-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.overlay-iframe {
+  border: none;
+}
+
+.overlay-bg {
+  object-fit: cover;
+}
+
+html.is-takeover body {
+  background-color: transparent;
+}
+
+html.is-takeover .screen-horizontal,
+html.is-takeover .screen-vertical,
+html.is-takeover .screen-entrance {
+  position: relative;
+  z-index: 1;
+}

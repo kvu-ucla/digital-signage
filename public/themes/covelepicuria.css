@@ -1,0 +1,146 @@
+:root {
+  --font-display: 'Klinic Slab', Georgia, serif;
+
+  --ce-primary:    #005289;
+  --ce-header:     #152E50;
+  --ce-accent:     #cc9f44;
+  --ce-bg:         #f8f4e8;
+  --ce-green:      #778837;
+  --ce-orange:     #c87b28;
+  --ce-bar:        #5d94bb;
+  --ce-gold:       #d69b2d;
+  --ce-teal:       #005989;
+}
+
+/* KariPro for all screen title/header elements */
+
+.screen-entrance__bar-title,
+.screen-horizontal__header-title,
+.screen-vertical__header-title {
+  font-family: 'Kari Pro', serif;
+  font-weight: 400;
+}
+
+.screen-horizontal__header-title,
+.screen-vertical__header-title {
+  text-transform: uppercase;
+}
+
+/* ── Horizontal screen ── */
+
+html:not(.is-takeover) .screen-horizontal {
+  background-color: var(--ce-bg);
+}
+
+.screen-horizontal__header {
+  display: flex;
+  padding: 36px 100px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+html:not(.is-takeover) .screen-horizontal__header {
+  background: var(--ce-header);
+}
+
+.screen-horizontal__header-logo,
+.screen-horizontal__header-certificate {
+  display: none;
+}
+
+.screen-horizontal__header-title {
+  color: white;
+  background: var(--ce-header);
+  padding: 36px 100px;
+  font-size: 90px;
+}
+
+html:not(.is-takeover) .screen-horizontal__graphic {
+  background: var(--ce-orange);
+}
+
+html:not(.is-takeover) .screen-horizontal__footer-inner {
+  border-top: 1px solid var(--ce-primary);
+}
+
+html:not(.is-takeover) .screen-horizontal__side {
+  background: var(--ce-bg);
+}
+
+html:not(.is-takeover) .screen-horizontal__side-inner {
+  border-left: 4px dotted var(--ce-primary);
+}
+
+html.is-takeover .screen-horizontal__graphic img {
+  display: none;
+}
+
+/* ── Vertical screen ── */
+
+html:not(.is-takeover) .screen-vertical {
+  background-color: var(--ce-bg);
+}
+
+.screen-vertical__header {
+  display: flex;
+  padding: 36px 100px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+html:not(.is-takeover) .screen-vertical__header {
+  background: var(--ce-header);
+}
+
+.screen-vertical__header-logo,
+.screen-vertical__header-certificate {
+  display: none;
+}
+
+.screen-vertical__header-title {
+  color: white;
+}
+
+html:not(.is-takeover) .screen-vertical__graphic {
+  background: var(--ce-orange);
+}
+
+html:not(.is-takeover) .screen-vertical__footer-inner {
+  border-top: 1px solid var(--ce-primary);
+}
+
+/* ── Entrance screen ── */
+
+html:not(.is-takeover) .screen-entrance {
+  background-color: var(--ce-bg);
+}
+
+html:not(.is-takeover) .screen-entrance__bar {
+  background-color: var(--ce-bar);
+  border-bottom-color: var(--ce-gold);
+}
+
+.screen-entrance__bar-title {
+  color: white;
+}
+
+html:not(.is-takeover) .screen-entrance__bar-cell--divider::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 706px;
+  border-right: 4px dotted var(--ce-primary);
+}
+
+html:not(.is-takeover) .screen-entrance__footer-rule {
+  background-color: var(--ce-teal);
+}
+
+html.is-takeover .screen-entrance > header {
+  visibility: hidden;
+}

@@ -6,18 +6,18 @@ const header = (
   <header className="flex h-[250px] w-full shrink-0 items-center bg-[#005289] px-[80px] text-white">
     <div className="flex h-full w-[230px] shrink-0 items-center justify-center">
       <img
-        src="./images/bruin-plate-logo.svg"
-        alt="Bruin Plate"
+        src="./images/epicuria-logo.svg"
+        alt="Epicuria at Covel"
         className="h-[200px] w-[200px] object-contain"
       />
     </div>
 
     <div className="flex flex-1 flex-col pl-10 justify-center pt-6">
-      <p className="pl-35 text-[50px] font-light uppercase leading-none tracking-[0.35em] font-KlinicSlab-light">
+      <p className="pl-35 text-[50px] font-light uppercase leading-none tracking-[0.35em]">
         Welcome To
       </p>
       <h1 className="text-[150px] font-extrabold leading-none tracking-wide">
-        Bruin Plate
+        Epicuria
       </h1>
     </div>
 
@@ -29,13 +29,6 @@ const header = (
 
 export default function Entrance({ data }: ScreenProps) {
   return (
-    <EntranceScreen
-      data={data}
-      header={header}
-      legendConfig={LEGEND_CONFIG}
-      rootClassName="bg-[#f8f4e8]"
-      barClassName="bg-[#5d94bb] border-[#d69b2d]"
-      dividerClassName="after:border-[#005289]"
-    />
+    <EntranceScreen data={data} header={header} legendConfig={LEGEND_CONFIG} />
   );
 }

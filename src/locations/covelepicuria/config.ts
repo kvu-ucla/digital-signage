@@ -3,7 +3,7 @@ import type { LegendConfig } from "@/lib/types";
 export const LEGEND_CONFIG: LegendConfig = {
     color: "#4d4d4f",
     mode: "light",
-    font: "Klinic Slab",
+    font: "Karbon",
     fontSize: "21px",
     gap: "6px",
     gapItems: "15px",
@@ -14,7 +14,7 @@ export const LEGEND_CONFIG: LegendConfig = {
 export const HORIZONTAL_LEGEND_CONFIG: LegendConfig = {
     color: "#4d4d4f",
     mode: "light",
-    font: "Klinic Slab",
+    font: "Karbon",
     fontSize: "18px",
     gap: "4px",
     gapItems: "10px",
@@ -26,7 +26,7 @@ export const HORIZONTAL_LEGEND_CONFIG: LegendConfig = {
 export const VERTICAL_LEGEND_CONFIG: LegendConfig = {
     color: "#4d4d4f",
     mode: "light",
-    font: "Klinic Slab",
+    font: "Karbon",
     fontSize: "16px",
     gap: "4px",
     gapItems: "10px",

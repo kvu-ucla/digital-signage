@@ -1,26 +1,18 @@
+import type { ReactNode } from "react";
 import type { MergedMenuData, LegendConfig } from "@/lib/types";
 import { MenuItemList } from "@/menu/MenuItemList";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import { CyclingColumn } from "@/components/CyclingColumns";
+import "./EntranceScreen.css";
 
 export type EntranceScreenProps = {
   data: MergedMenuData;
-  header?: React.ReactNode;
   legendConfig: LegendConfig;
-  rootClassName?: string;
-  barClassName?: string;
-  dividerClassName?: string;
+  header?: ReactNode;
 };
 
-export const EntranceScreen = ({
-  data,
-  header,
-  legendConfig,
-  rootClassName = '',
-  barClassName = '',
-  dividerClassName,
-}: EntranceScreenProps) => {
-  console.log("Merged Menu Data:", data);
+export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenProps) => {
+
   if (data.stationsWithRegions.length === 0) {
     return (
       <div className="screen">
@@ -45,25 +37,19 @@ export const EntranceScreen = ({
   const sortedRegions = [...regionMap.entries()].sort(([a], [b]) => a - b);
 
   return (
-    <div className={`relative flex h-[1080px] w-[1920px] flex-col overflow-hidden ${rootClassName}`}>
+    <div className="screen-entrance">
       {header}
+
       <div
-        className={`grid h-[100px] w-full border-b-[10px] ${barClassName}`}
-        style={{
-          gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))`,
-        }}
+        className="screen-entrance__bar"
+        style={{ gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))` }}
       >
         {sortedRegions.map(([position, stations], index) => (
           <div
             key={position}
-            className={[
-              "relative box-border flex h-full items-center justify-center px-[24px]",
-              index !== sortedRegions.length - 1
-                ? `after:absolute after:right-0 after:top-0 after:h-[706px] after:border-r-[4px] after:border-dotted after:content-[''] ${dividerClassName ?? ''}`
-                : "",
-            ].join(" ")}
+            className={`screen-entrance__bar-cell${index !== sortedRegions.length - 1 ? " screen-entrance__bar-cell--divider" : ""}`}
           >
-            <h2 className="pt-3 text-center text-[50px] font-extrabold capitalize leading-none text-white">
+            <h2 className="screen-entrance__bar-title">
               {stations.map(({ name }) => name).join(" / ")}
             </h2>
           </div>
@@ -71,40 +57,28 @@ export const EntranceScreen = ({
       </div>
 
       <main
-        className="grid w-full h-[606px] shrink-0"
-        style={{
-          gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))`,
-        }}
+        className="screen-entrance__main"
+        style={{ gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))` }}
       >
         {sortedRegions.map(([position, stations]) => (
-          <section
-            key={position}
-            className="p-[36px]"
-          >
+          <section key={position} className="screen-entrance__region">
             {stations.map(({ name, items }) => {
-
               const itemNodes = items.map((item) => (
-                  <MenuItemList key={item.recipeNumber} items={[item]} iconSize="30px" gap="10px" className="items-center text-center" />
-                ));
-
+                <MenuItemList key={item.recipeNumber} items={[item]} iconSize="30px" gap="10px" className="items-center text-center" />
+              ));
               return (
-                <div key={name} className="w-full
-                [&_h3]:pt-[20px]
-                [&_h3]:text-[40px]
-                [&_h3]:font-KlinicSlab
-                [&_h3]:color-[#3c3c3c]"
-                >
-                  <CyclingColumn viewportHeight={606}>{itemNodes}</CyclingColumn>
+                <div key={name} className="screen-entrance__items">
+                  <CyclingColumn>{itemNodes}</CyclingColumn>
                 </div>
               );
             })}
-            </section>
+          </section>
         ))}
       </main>
 
-      <div className="absolute bottom-[20px] left-0 right-0 shrink-0">
-        <div className="ml-auto mr-auto h-[3px] w-[95%]  bg-[#005989]" />
-        <div className="mt-5 ml-auto mr-auto flex w-[85%] items-center justify-center">
+      <div className="screen-entrance__footer">
+        <div className="screen-entrance__footer-rule" />
+        <div className="screen-entrance__footer-legend">
           <DietaryLegend config={legendConfig} />
         </div>
       </div>

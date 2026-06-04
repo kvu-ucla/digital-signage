@@ -1,81 +1,28 @@
-/* ── Overlay iframe ── */
-
-.overlay-iframe {
+.overlay-iframe,
+.overlay-bg {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
-  border: none;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
+}
+
+.overlay-iframe {
+  border: none;
+}
+
+.overlay-bg {
+  object-fit: cover;
 }
 
 html.is-takeover body {
   background-color: transparent;
 }
 
-/* ── Horizontal screen ── */
-
-html:not(.is-takeover) .screen-horizontal {
-  background-color: #f8f4e8;
-}
-
-html:not(.is-takeover) .screen-horizontal__header {
-  background: #005289;
-  border-bottom: 9px solid #cc9f44;
-}
-
-html:not(.is-takeover) .screen-horizontal__header-certificate-placeholder {
-  background: #778837;
-}
-
-html:not(.is-takeover) .screen-horizontal__graphic {
-  background: #c87b28;
-}
-
-html:not(.is-takeover) .screen-horizontal__footer-inner {
-  border-top-color: #005289;
-}
-
-html:not(.is-takeover) .screen-horizontal__side {
-  background: #f8f4e8;
-}
-
-html:not(.is-takeover) .screen-horizontal__side-inner {
-  border-left: 4px dotted #005289;
-}
-
-html.is-takeover .screen-horizontal__header-logo {
-  visibility: hidden;
-}
-
-html.is-takeover .screen-horizontal__header-certificate {
-  visibility: hidden;
-}
-
-html.is-takeover .screen-horizontal__graphic img {
-  display: none;
-}
-
-/* ── Vertical screen ── */
-
-html:not(.is-takeover) .screen-vertical {
-  background-color: #f8f4e8;
-}
-
-html:not(.is-takeover) .screen-vertical__header {
-  background: #005289;
-  border-bottom: 9px solid #cc9f44;
-}
-
-html:not(.is-takeover) .screen-vertical__header-certificate-placeholder {
-  background: #778837;
-}
-
-html.is-takeover .screen-vertical__header-logo {
-  visibility: hidden;
-}
-
-html.is-takeover .screen-vertical__header-certificate {
-  visibility: hidden;
+html.is-takeover .screen-horizontal,
+html.is-takeover .screen-vertical,
+html.is-takeover .screen-entrance {
+  position: relative;
+  z-index: 1;
 }

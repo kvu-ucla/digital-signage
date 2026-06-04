@@ -29,13 +29,6 @@ const header = (
 
 export default function Entrance({ data }: ScreenProps) {
   return (
-    <EntranceScreen
-      data={data}
-      header={header}
-      legendConfig={LEGEND_CONFIG}
-      rootClassName="bg-[#f8f4e8]"
-      barClassName="bg-[#5d94bb] border-[#d69b2d]"
-      dividerClassName="after:border-[#005289]"
-    />
+    <EntranceScreen data={data} header={header} legendConfig={LEGEND_CONFIG} />
   );
 }

@@ -166,6 +166,10 @@ export const App = () => {
   const overlayUrl = overlayId
     ? `${window.location.origin}/signage/#/signage/${overlayId}`
     : null;
+  const bgParam = params.get("bg");
+  const bgUrl = bgParam
+    ? `${import.meta.env.BASE_URL}${bgParam.replace(/^\//, '')}`
+    : null;
 
   const config = LOCATIONS[location];
 
@@ -174,8 +178,8 @@ export const App = () => {
   }, [config?.stylesheet]);
 
   useEffect(() => {
-    document.documentElement.classList.toggle("is-takeover", !!overlayId);
-  }, [overlayId]);
+    document.documentElement.classList.toggle("is-takeover", !!(overlayId || bgUrl));
+  }, [overlayId, bgUrl]);
 
   if (!config) {
     return (
@@ -198,6 +202,9 @@ export const App = () => {
           className="overlay-iframe"
           title="background overlay"
         />
+      )}
+      {bgUrl && (
+        <img src={bgUrl} className="overlay-bg" alt="" />
       )}
       <QueryClientProvider client={queryClient}>
         <ErrorBoundary>

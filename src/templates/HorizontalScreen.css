@@ -45,7 +45,6 @@
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
-  color: #ffffff;
 }
 
 .screen-horizontal__header-certificate {
@@ -110,60 +109,11 @@
 }
 
 .screen-horizontal__footer-inner {
-  border-top: 1px solid transparent;
   padding: 14px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8.5px;
-}
-
-.screen-horizontal__footer-description {
-  display: flex;
-  gap: 4px;
-  align-items: baseline;
-  font-size: 21px;
-  white-space: nowrap;
-  color: #005289;
-}
-
-.screen-horizontal__footer-description span {
-  font-family: var(--font-display);
-  font-weight: 400;
-}
-
-.screen-horizontal__footer-description strong {
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: 0.42px;
-}
-
-.screen-horizontal__footer-icons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-
-.screen-horizontal__footer-icon-entry {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  height: 24px;
-}
-
-.screen-horizontal__footer-icon-entry img {
-  height: 100%;
-  aspect-ratio: 1;
-}
-
-.screen-horizontal__footer-icon-label {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 18px;
-  color: #4d4d4f;
-  text-transform: uppercase;
-  white-space: nowrap;
 }
 
 /* ── Side ── */

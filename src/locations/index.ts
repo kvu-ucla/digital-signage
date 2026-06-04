@@ -5,7 +5,7 @@ export const LOCATIONS: Record<string, LocationConfig> = {
     displayName: 'Bruin Plate',
     gid: '932045808',
     xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/BruinPlate',
-    stylesheet: 'example-location.css',
+    stylesheet: 'bruinplate.css',
   },
   'cafe1919': {
     displayName: 'Cafe 1919',
@@ -32,8 +32,9 @@ export const LOCATIONS: Record<string, LocationConfig> = {
     gid: 'REPLACE_WITH_YOUR_GOOGLE_SHEET_GID',
     stylesheet: 'example-location.css',
   },
-  'covelepicuria': { // for pagination testing with many items
+  'covelepicuria': {
     displayName: 'Epicuria at Covel',
     xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/CovelEpicuria',
+    stylesheet: 'covelepicuria.css',
   }
 }

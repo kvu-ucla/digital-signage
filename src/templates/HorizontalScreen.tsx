@@ -69,9 +69,7 @@ export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScre
     <div className="screen-horizontal">
 
       <header className="screen-horizontal__header">
-        <div className="screen-horizontal__header-logo">
-          <img src="./icons/bruinplate-logo-sm.svg" alt="Bruin Plate" />
-        </div>
+        <div className="screen-horizontal__header-logo" />
         <h1 className="screen-horizontal__header-title">{stationTitle}</h1>
         <div className="screen-horizontal__header-certificate">
           <div className="screen-horizontal__header-certificate-placeholder" />

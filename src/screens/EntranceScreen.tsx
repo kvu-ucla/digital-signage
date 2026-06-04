@@ -84,7 +84,7 @@ export const EntranceScreen = ({
             {stations.map(({ name, items }) => {
 
               const itemNodes = items.map((item) => (
-                  <MenuItemList key={item.recipeNumber} items={[item]} size="30px" gap="10px" className="items-center text-center" />
+                  <MenuItemList key={item.recipeNumber} items={[item]} iconSize="30px" gap="10px" className="items-center text-center" />
                 ));
 
               return (

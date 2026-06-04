@@ -113,7 +113,7 @@ export const VerticalScreen = ({ data, station, legendConfig }: VerticalScreenPr
         <div className="screen-vertical__main">
 
           <div className="screen-vertical__main-hero" ref={listContainerRef}>
-            <MenuItemList items={currentItems} size="42px" gap="8px" nameSize="75px" descriptionSize="36px" className="items-center text-center" />
+            <MenuItemList items={currentItems} iconSize="42px" gap="8px" nameSize="75px" descriptionSize="36px" className="items-center text-center" />
           </div>
 
           <div className="screen-vertical__footer">

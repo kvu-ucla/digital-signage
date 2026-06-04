@@ -206,7 +206,7 @@ function MenuColumn({ stations }: MenuColumnProps) {
             "
           >
             {items.length ? (
-              <MenuItemList items={items} size="20px" gap="10px" />
+              <MenuItemList items={items} iconSize="20px" gap="10px" />
             ) : (
               <p className="text-[22px] uppercase text-(--hall-color-2)">
                 No items available

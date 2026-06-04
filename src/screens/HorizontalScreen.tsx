@@ -101,7 +101,7 @@ export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScre
 
         <div className="screen-horizontal__side">
           <div className="screen-horizontal__side-inner" ref={listContainerRef}>
-            <MenuItemList items={displayListItems} size="30px" gap="8px" />
+            <MenuItemList items={displayListItems} iconSize="30px" gap="8px" />
           </div>
         </div>
 

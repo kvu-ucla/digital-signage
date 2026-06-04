@@ -35,6 +35,7 @@ export const LOCATIONS: Record<string, LocationConfig> = {
   'covelepicuria': {
     displayName: 'Epicuria at Covel',
     xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/CovelEpicuria',
+    gid: '1777114522',
     stylesheet: 'covelepicuria.css',
   }
 }

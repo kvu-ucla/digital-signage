@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import type { MergedMenuData, LegendConfig } from '../lib/types'
-import { FeaturedItem } from '../menu/FeaturedItem'
-import { MenuItemList } from '../menu/MenuItemList'
-import { DietaryLegend } from '../menu/DietaryLegend'
+import type { MergedMenuData, LegendConfig } from '@/lib/types'
+import { FeaturedItem } from '@/menu/FeaturedItem'
+import { MenuItemList } from '@/menu/MenuItemList'
+import { DietaryLegend } from '@/menu/DietaryLegend'
 import './HorizontalScreen.css'
 
 type HorizontalScreenProps = {
@@ -51,16 +51,12 @@ export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScre
   }, [featuredIndex, items, measure])
 
   useEffect(() => {
-    if (visibleCount === null) measure()
-  }, [visibleCount, measure])
-
-  useEffect(() => {
     const container = listContainerRef.current
     if (!container) return
-    const ro = new ResizeObserver(() => { setVisibleCount(null); })
+    const ro = new ResizeObserver(measure)
     ro.observe(container)
     return () => { ro.disconnect(); }
-  }, [])
+  }, [measure])
 
   const featuredItem = items[featuredIndex]
   const rotatedItems = [

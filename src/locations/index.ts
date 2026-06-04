@@ -1,4 +1,4 @@
-import type { LocationConfig } from '../lib/types'
+import type { LocationConfig } from '@/lib/types'
 
 export const LOCATIONS: Record<string, LocationConfig> = {
   'bruinplate': {

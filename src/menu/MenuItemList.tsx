@@ -1,4 +1,4 @@
-import type { MenuItemData } from '../lib/types'
+import type { MenuItemData } from '@/lib/types'
 import { MenuItem } from './MenuItem'
 
 type MenuItemListProps = {

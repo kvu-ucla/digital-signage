@@ -4,7 +4,7 @@ import type {
   StationConfig,
   StationWithRegion,
   MergedMenuData,
-} from "../../lib/types";
+} from "@/lib/types";
 
 export type Cafe1919DisplayId = "Mains" | "Sides" | "Late Night" | "Specials";
 

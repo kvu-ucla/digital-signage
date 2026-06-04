@@ -14,7 +14,7 @@ type ScreenModule = {
   [key: string]: unknown
 }
 
-const screenModules = import.meta.glob<ScreenModule>('../*/screens/*.tsx', {
+const screenModules = import.meta.glob<ScreenModule>('../locations/*/screens/*.tsx', {
   eager: true,
 })
 
@@ -28,12 +28,12 @@ const toPascalCase = (value: string): string =>
 const getCandidates = (location: string, screenType: string, station: string | null): Array<string> => {
   const screenName = toPascalCase(screenType)
 
-  if (!station) return [`../${location}/screens/${screenName}.tsx`]
+  if (!station) return [`../locations/${location}/screens/${screenName}.tsx`]
 
   const stationName = toPascalCase(station)
   return [
-    `../${location}/screens/${stationName}.tsx`,
-    `../${location}/screens/${screenName}.tsx`,
+    `../locations/${location}/screens/${stationName}.tsx`,
+    `../locations/${location}/screens/${screenName}.tsx`,
   ]
 }
 

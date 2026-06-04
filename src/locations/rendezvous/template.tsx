@@ -1,6 +1,6 @@
-import type { MenuItemData, MergedMenuData } from "../lib/types";
-import { DietaryIcon } from "../menu/DietaryIcon";
-import { DietaryLegend } from "../menu/DietaryLegend";
+import type { MenuItemData, MergedMenuData } from "@/lib/types";
+import { DietaryIcon } from "@/menu/DietaryIcon";
+import { DietaryLegend } from "@/menu/DietaryLegend";
 import { LEGEND_CONFIG } from "./config";
 
 type RendezvousTemplateProps = {

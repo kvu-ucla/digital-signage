@@ -1,4 +1,4 @@
-import type { ScreenProps } from "../../lib/resolveScreen";
+import type { ScreenProps } from "@/lib/resolveScreen";
 import { VerticalScreen } from "../template";
 import { VERTICAL_LEGEND_CONFIG } from "../config";
 

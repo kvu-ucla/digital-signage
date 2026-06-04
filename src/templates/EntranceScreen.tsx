@@ -1,7 +1,7 @@
-import type { MergedMenuData, LegendConfig } from "../lib/types";
-import { MenuItemList } from "../menu/MenuItemList";
-import { DietaryLegend } from "../menu/DietaryLegend";
-import { CyclingColumn } from "../components/CyclingColumns";
+import type { MergedMenuData, LegendConfig } from "@/lib/types";
+import { MenuItemList } from "@/menu/MenuItemList";
+import { DietaryLegend } from "@/menu/DietaryLegend";
+import { CyclingColumn } from "@/components/CyclingColumns";
 
 export type EntranceScreenProps = {
   data: MergedMenuData;

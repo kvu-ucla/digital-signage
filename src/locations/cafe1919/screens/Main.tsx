@@ -1,4 +1,4 @@
-import type { ScreenProps } from "../../lib/resolveScreen";
+import type { ScreenProps } from "@/lib/resolveScreen";
 import { Cafe1919Template } from "../template";
 
 export default function MainScreen({ data }: ScreenProps) {

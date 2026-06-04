@@ -1,4 +1,4 @@
-import type { ScreenProps } from "../../lib/resolveScreen";
+import type { ScreenProps } from "@/lib/resolveScreen";
 import { EntranceScreen } from "../template";
 import { LEGEND_CONFIG } from "../config";
 

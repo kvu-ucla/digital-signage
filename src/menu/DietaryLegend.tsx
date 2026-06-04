@@ -1,6 +1,6 @@
-import { DIETARY_LABELS } from '../lib/dietaryLabels'
+import { DIETARY_LABELS } from '@/lib/dietaryLabels'
 import { DietaryIcon } from './DietaryIcon'
-import type { LegendConfig } from '../lib/types'
+import type { LegendConfig } from '@/lib/types'
 
 type DietaryLegendProps = {
   config: LegendConfig;

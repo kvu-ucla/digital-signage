@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
-import type { MergedMenuData, LegendConfig } from '../lib/types'
-import { MenuItemList } from '../menu/MenuItemList'
-import { DietaryLegend } from '../menu/DietaryLegend'
+import type { MergedMenuData, LegendConfig } from '@/lib/types'
+import { MenuItemList } from '@/menu/MenuItemList'
+import { DietaryLegend } from '@/menu/DietaryLegend'
 import './VerticalScreen.css'
 
 type VerticalScreenProps = {
@@ -48,15 +48,13 @@ export const VerticalScreen = ({ data, station, legendConfig }: VerticalScreenPr
         if (child.getBoundingClientRect().bottom <= containerBottom) count++
         else break
       }
-      setVisibleCount(prev => {
-        if (prev !== count) setPageOffset(0)
-        return count
-      })
+      setVisibleCount(count)
     })
 
   }, [])
 
   useEffect(() => {
+    setPageOffset(0)
     measure()
   }, [items, measure])
 
@@ -67,10 +65,6 @@ export const VerticalScreen = ({ data, station, legendConfig }: VerticalScreenPr
     ro.observe(container)
     return () => { ro.disconnect(); }
   }, [measure])
-
-  useEffect(() => {
-    setPageOffset(0)
-  }, [items])
 
   useEffect(() => {
     if (items.length === 0 || visibleCount === null || visibleCount >= items.length) return

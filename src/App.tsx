@@ -1,9 +1,9 @@
 import { Component, useEffect, type ComponentType, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { LOCATIONS } from "./config/locations";
-import { useMenu } from "./hooks/useMenu";
-import { resolveScreen, getScreenCandidates, type ScreenProps } from "./lib/resolveScreen";
-import { isMockMode, applyMockData } from "./lib/mockMode";
+import { LOCATIONS } from "@/locations";
+import { useMenu } from "@/hooks/useMenu";
+import { resolveScreen, getScreenCandidates, type ScreenProps } from "@/lib/resolveScreen";
+import { isMockMode, applyMockData } from "@/lib/mockMode";
 
 const queryClient = new QueryClient();
 
@@ -167,13 +167,15 @@ export const App = () => {
     ? `${window.location.origin}/signage/#/signage/${overlayId}`
     : null;
 
-  document.documentElement.classList.toggle("is-takeover", !!overlayId);
-
   const config = LOCATIONS[location];
 
   useEffect(() => {
     loadStylesheet(config?.stylesheet);
   }, [config?.stylesheet]);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("is-takeover", !!overlayId);
+  }, [overlayId]);
 
   if (!config) {
     return (

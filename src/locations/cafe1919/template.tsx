@@ -1,8 +1,8 @@
-import type { MergedMenuData } from "../lib/types";
+import type { MergedMenuData } from "@/lib/types";
 import type { Cafe1919DisplayId } from "./helpers/cafe1919";
 import { fillConfig } from "./helpers/cafe1919";
-import { MenuItemList } from "../menu/MenuItemList";
-import { DietaryLegend } from "../menu/DietaryLegend";
+import { MenuItemList } from "@/menu/MenuItemList";
+import { DietaryLegend } from "@/menu/DietaryLegend";
 import { LEGEND_CONFIG } from "./config";
 
 type Cafe1919TemplateProps = {

@@ -1,4 +1,4 @@
-import { DIETARY_LABELS } from '../lib/dietaryLabels'
+import { DIETARY_LABELS } from '@/lib/dietaryLabels'
 
 type DietaryIconMode = 'light' | 'dark'
 

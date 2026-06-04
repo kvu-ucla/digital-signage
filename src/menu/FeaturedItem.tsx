@@ -1,4 +1,4 @@
-import type { MenuItemData } from '../lib/types'
+import type { MenuItemData } from '@/lib/types'
 import { DietaryIcon } from './DietaryIcon'
 
 type FeaturedItemProps = {

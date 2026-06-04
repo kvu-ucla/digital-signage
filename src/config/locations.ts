@@ -12,6 +12,19 @@ export const LOCATIONS: Record<string, LocationConfig> = {
     gid: '677512158',
     xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/Cafe1919',
     stylesheet: 'example-location.css',
+    screens: {
+      Mains: {
+        menus: ["breakfast", "lunch", "dinner"],
+        type: "horizontal",
+        requiresStation: true,
+        stations: [
+          "PIZZETTE",
+          "PANINI",
+          "SOFT BAKED PRETZEL",
+          "SC PRETZEL SAUCE"
+        ],
+      },
+    },
   },
   'example-entrance': {
     displayName: 'Example Entrance',
@@ -21,6 +34,6 @@ export const LOCATIONS: Record<string, LocationConfig> = {
   },
   'covelepicuria': { // for pagination testing with many items
     displayName: 'Epicuria at Covel',
-    xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/CovelEpicuria'
+    xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/CovelEpicuria',
   }
 }

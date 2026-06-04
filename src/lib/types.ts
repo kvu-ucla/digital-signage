@@ -10,6 +10,7 @@ export type LegendConfig = {
   rowGap: string;
   imgSize: string;
   className?: string;
+  description?: string;
 }
 
 export type MenuItemData = {
@@ -32,6 +33,12 @@ export type LocationConfig = {
   xmlUrl: string
   gid?: string
   stylesheet?: string
+  screens?: Record<string, {
+    menus?: ReadonlyArray<string>
+    type: ScreenType
+    requiresStation: boolean
+    stations?: ReadonlyArray<string>
+  }>
 }
 
 export type StationWithRegion = {
@@ -44,3 +51,8 @@ export type StationWithRegion = {
 export type MergedMenuData = MenuData & {
   stationsWithRegions: ReadonlyArray<StationWithRegion>
 }
+
+export type SheetRow = Array<string>;
+export type SheetData = Array<SheetRow>;
+export type StationItems = Record<string, Array<MenuItemData>>;
+export type StationConfig = Record<string, Array<string>>;

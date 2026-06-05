@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { MergedMenuData, LegendConfig } from "@/lib/types";
+import type { MergedMenuData, LegendConfig, StationWithRegion } from "@/lib/types";
 import { MenuItemList } from "@/menu/MenuItemList";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import { CyclingColumn } from "@/components/CyclingColumns";
@@ -21,20 +21,7 @@ export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenPro
     );
   }
 
-  const regionMap = new Map<number, Array<{ name: string; items: typeof data.stationsWithRegions[number]["items"]; order: number }>>();
-
-  for (const station of data.stationsWithRegions) {
-    const position = station.regionPosition;
-    const order = station.regionOrder;
-    if (!regionMap.has(position)) regionMap.set(position, []);
-    regionMap.get(position)?.push({ name: station.name, items: station.items, order });
-  }
-
-  for (const [, stations] of regionMap) {
-    stations.sort((a, b) => a.order - b.order);
-  }
-
-  const sortedRegions = [...regionMap.entries()].sort(([a], [b]) => a - b);
+  const sortedRegions = groupByRegion(data.stationsWithRegions);
 
   return (
     <div className="screen-entrance">
@@ -85,3 +72,24 @@ export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenPro
     </div>
   );
 };
+
+type RegionStation = {
+  name: string;
+  items: StationWithRegion['items'];
+  order: number;
+};
+
+function groupByRegion(stations: MergedMenuData['stationsWithRegions']): Array<[number, Array<RegionStation>]> {
+  const map = new Map<number, Array<RegionStation>>();
+
+  for (const { regionPosition, regionOrder, name, items } of stations) {
+    if (!map.has(regionPosition)) map.set(regionPosition, []);
+    map.get(regionPosition)?.push({ name, items, order: regionOrder });
+  }
+
+  for (const group of map.values()) {
+    group.sort((a, b) => a.order - b.order);
+  }
+
+  return [...map.entries()].sort(([a], [b]) => a - b);
+}

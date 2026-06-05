@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import type { MergedMenuData, LegendConfig } from '@/lib/types'
 import { FeaturedItem } from '@/menu/FeaturedItem'
 import { MenuItemList } from '@/menu/MenuItemList'
 import { DietaryLegend } from '@/menu/DietaryLegend'
+import { useVisibleCount } from '@/hooks/useVisibleCount'
 import './HorizontalScreen.css'
 
 type HorizontalScreenProps = {
@@ -15,11 +16,9 @@ export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScre
   const stationKey = station.toLowerCase().trim().replace(/\s+/g, ' ')
   const stationTitle = stationKey.replace(/\b\w/g, c => c.toUpperCase())
   const items = useMemo(() => data.stations[stationKey] ?? [], [data, stationKey])
-  const stationImageSrc = `./images/${stationKey.replace(/\s+/g, '-')}.jpg`
 
   const [featuredIndex, setFeaturedIndex] = useState(0)
-  const [visibleCount, setVisibleCount] = useState<number | null>(null)
-  const listContainerRef = useRef<HTMLDivElement>(null)
+  const { containerRef: listContainerRef, visibleCount, measure } = useVisibleCount()
 
   useEffect(() => {
     setFeaturedIndex(0)
@@ -33,30 +32,9 @@ export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScre
     return () => { clearInterval(interval); }
   }, [items.length])
 
-  const measure = useCallback(() => {
-    const container = listContainerRef.current
-    if (!container) return
-    const paddingBottom = parseFloat(getComputedStyle(container).paddingBottom)
-    const containerBottom = container.getBoundingClientRect().bottom - paddingBottom
-    let count = 0
-    for (const child of Array.from(container.children)) {
-      if (child.getBoundingClientRect().bottom <= containerBottom) count++
-      else break
-    }
-    setVisibleCount(count)
-  }, [])
-
   useEffect(() => {
     measure()
   }, [featuredIndex, items, measure])
-
-  useEffect(() => {
-    const container = listContainerRef.current
-    if (!container) return
-    const ro = new ResizeObserver(measure)
-    ro.observe(container)
-    return () => { ro.disconnect(); }
-  }, [measure])
 
   const featuredItem = items[featuredIndex]
   const rotatedItems = [
@@ -79,7 +57,7 @@ export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScre
       <div className="screen-horizontal__body">
 
         <div className="screen-horizontal__graphic">
-          <img src={stationImageSrc} alt={station} />
+          {/*<img src={stationImageSrc} alt={station} />*/}
         </div>
 
         <div className="screen-horizontal__main">

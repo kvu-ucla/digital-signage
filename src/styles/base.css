@@ -29,14 +29,14 @@
 @font-face {
   font-family: 'Karbon';
   src: url('/fonts/Karbon-Regular.otf') format('opentype');
-  font-weight: 400;
+  font-weight: 400; /* This is 600 in the Figma design, but here is 400 for consistency with Klinic Slab */
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Karbon';
-  src: url('/fonts/Karbon-Bold.otf') format('opentype');
-  font-weight: 700;
+  src: url('/fonts/Karbon-Medium.otf') format('opentype');
+  font-weight: 700; 
   font-style: normal;
 }
 

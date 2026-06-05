@@ -2,6 +2,11 @@ export type ScreenType = 'horizontal' | 'vertical' | 'entrance'
 
 /**
  * Configuration for dietary legend.
+ * @prop.labelColor - color for dietary label text
+ * @prop.mode - "light" or "dark" mode for dietary icons
+ * @prop.font - font family for dietary label text
+ * @prop.itemFontSize - font size for dietary label text
+ * @prop.itemFontWeight - font weight (bolding/regular/thin) for dietary label text
  * @prop.gap - gap between icon and label in each legend item
  * @prop.gapItems - horizontal gap between legend items ("column gap")
  * @prop.rowGap - vertical gap between rows oflegend items (if wrapped)
@@ -9,18 +14,23 @@ export type ScreenType = 'horizontal' | 'vertical' | 'entrance'
  * @prop.font - font family for legend text
  * @prop.className
  * @prop.description - description text for horizontal, vertical screens. 
+ * @prop.descriptionColor - color for description text, defaults to same as legend text color
+ * @prop.descriptionFontSize - font size for description text, defaults to 22px
  */
 export type LegendConfig = {
-  color: string;
+  labelColor: string;
   mode: "light" | "dark";
   font: string;
-  fontSize: string;
+  itemFontSize: string;
+  itemFontWeight: number;
   gap: string;
   gapItems: string;
   rowGap: string;
   imgSize: string;
   className?: string;
   description?: string;
+  descriptionColor?: string;
+  descriptionFontSize?: string;
 }
 
 export type MenuItemData = {

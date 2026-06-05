@@ -22,9 +22,9 @@ export const DietaryLegend = ({ config }: DietaryLegendProps) => (
           display: 'flex',
           gap: '4px',
           alignItems: 'baseline',
-          fontSize: '21px',
+          fontSize: config.descriptionFontSize ?? '22px',
           whiteSpace: 'nowrap',
-          color: '#005289',
+          color: config.descriptionColor ?? config.labelColor,
         }}
       >
         {splitDescription(config.description).map((part, i) =>
@@ -48,9 +48,9 @@ export const DietaryLegend = ({ config }: DietaryLegendProps) => (
           <span
             style={{
               fontFamily: config.font,
-              fontWeight: 700,
-              fontSize: config.fontSize,
-              color: config.color,
+              fontWeight: config.itemFontWeight,
+              fontSize: config.itemFontSize,
+              color: config.labelColor,
               textTransform: 'uppercase',
               whiteSpace: 'nowrap',
             }}

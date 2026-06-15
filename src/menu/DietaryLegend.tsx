@@ -29,7 +29,7 @@ export const DietaryLegend = ({ config }: DietaryLegendProps) => (
       >
         {splitDescription(config.description).map((part, i) =>
           /\S+\.\S+\/\S+/.test(part)
-            ? <strong key={i} style={{ fontWeight: 700, letterSpacing: '0.42px' }}>{part}</strong>
+            ? <strong key={i} style={{ fontWeight: 700, letterSpacing: config.strongLetterSpacing ?? '0.42px' }}>{part}</strong>
             : <span key={i} style={{ fontWeight: 400 }}>{part}</span>
         )}
       </p>
@@ -51,6 +51,7 @@ export const DietaryLegend = ({ config }: DietaryLegendProps) => (
               fontWeight: config.itemFontWeight,
               fontSize: config.itemFontSize,
               color: config.labelColor,
+              letterSpacing: '0.5px',
               textTransform: 'uppercase',
               whiteSpace: 'nowrap',
             }}

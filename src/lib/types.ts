@@ -12,6 +12,7 @@ export type ScreenType = 'horizontal' | 'vertical' | 'entrance'
  * @prop.rowGap - vertical gap between rows oflegend items (if wrapped)
  * @prop.imgSize - size of dietary icon (width and height square)
  * @prop.font - font family for legend text
+ * @prop.strongLetterSpacing - letter spacing for strong text (e.g. in description)
  * @prop.className
  * @prop.description - description text for horizontal, vertical screens. 
  * @prop.descriptionColor - color for description text, defaults to same as legend text color
@@ -27,6 +28,7 @@ export type LegendConfig = {
   gapItems: string;
   rowGap: string;
   imgSize: string;
+  strongLetterSpacing?: string;
   className?: string;
   description?: string;
   descriptionColor?: string;

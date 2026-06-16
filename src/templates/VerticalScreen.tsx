@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import type { MergedMenuData, LegendConfig } from '@/lib/types'
 import { MenuItemList } from '@/menu/MenuItemList'
+import { MenuTypeNotice } from '@/menu/MenuTypeNotice'
 import { DietaryLegend } from '@/menu/DietaryLegend'
 import { useVisibleCount } from '@/hooks/useVisibleCount'
 import './VerticalScreen.css'
@@ -14,10 +15,11 @@ type VerticalScreenProps = {
 export const VerticalScreen = ({ data, station, legendConfig }: VerticalScreenProps) => {
   const stationKey = station.toLowerCase().trim().replace(/\s+/g, ' ')
   const stationTitle = stationKey.replace(/\b\w/g, c => c.toUpperCase())
+  const isMinimal = new URLSearchParams(window.location.search).get('minimal') === 'true'
 
   const items = useMemo(() => data.stations[stationKey] ?? [], [data, stationKey])
 
-  const { containerRef: listContainerRef, visibleCount, measure } = useVisibleCount()
+  const { containerRef, visibleCount, measure } = useVisibleCount()
   const [pageOffset, setPageOffset] = useState(0)
 
   const rotationInterval = 15_000
@@ -51,7 +53,7 @@ export const VerticalScreen = ({ data, station, legendConfig }: VerticalScreenPr
 
       <header className="screen-vertical__header">
         <div className="screen-vertical__header-logo" />
-        <h1 className="screen-vertical__header-title">{stationTitle}</h1>
+        {!isMinimal && <h1 className="screen-vertical__header-title">{stationTitle}</h1>}
         <div className="screen-vertical__header-certificate">
           <div className="screen-vertical__header-certificate-placeholder" />
         </div>
@@ -65,11 +67,26 @@ export const VerticalScreen = ({ data, station, legendConfig }: VerticalScreenPr
 
         <div className="screen-vertical__main">
 
-          <div className="screen-vertical__main-hero" ref={listContainerRef}>
-            <MenuItemList items={currentItems} iconSize="42px" gap="8px" nameSize="75px" descriptionSize="36px" className="items-center text-center" />
+          <div className="screen-vertical__main-hero">
+            {items.length === 0 ? (
+              <MenuTypeNotice />
+            ) : (
+              <>
+                <div
+                  className="screen-vertical__main-list screen-vertical__main-list--measure"
+                  ref={containerRef}
+                  aria-hidden="true"
+                >
+                  <MenuItemList items={rotatedItems} iconSize="42px" gap="8px" nameSize="75px" descriptionSize="36px" className="items-center text-center" />
+                </div>
+                <div className="screen-vertical__main-list">
+                  <MenuItemList items={currentItems} iconSize="42px" gap="8px" nameSize="75px" descriptionSize="36px" className="items-center text-center" />
+                </div>
+              </>
+            )}
           </div>
 
-          <div className="screen-vertical__footer">
+          <div className={`screen-vertical__footer${isMinimal ? ' invisible' : ''}`}>
             <div className="screen-vertical__footer-inner">
               <DietaryLegend config={legendConfig} />
             </div>

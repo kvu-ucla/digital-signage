@@ -12,6 +12,7 @@ export type EntranceScreenProps = {
 };
 
 export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenProps) => {
+  const isMinimal = new URLSearchParams(window.location.search).get('minimal') === 'true'
 
   if (data.stationsWithRegions.length === 0) {
     return (
@@ -28,7 +29,7 @@ export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenPro
       {header}
 
       <div
-        className="screen-entrance__bar"
+        className={`screen-entrance__bar${isMinimal ? ' invisible' : ''}`}
         style={{ gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))` }}
       >
         {sortedRegions.map(([position, stations], index) => (
@@ -63,7 +64,7 @@ export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenPro
         ))}
       </main>
 
-      <div className="screen-entrance__footer">
+      <div className={`screen-entrance__footer${isMinimal ? ' invisible' : ''}`}>
         <div className="screen-entrance__footer-rule" />
         <div className="screen-entrance__footer-legend">
           <DietaryLegend config={legendConfig} />

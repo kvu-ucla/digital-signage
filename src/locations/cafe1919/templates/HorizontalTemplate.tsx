@@ -1,5 +1,5 @@
 import type { MergedMenuData } from "@/lib/types";
-import { MenuItemList } from "@/menu/MenuItemList";
+import { MenuItemList } from "@/menu/ModMenuList";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import { LEGEND_CONFIG, MENU_ITEM_CONFIG } from "../config";
 
@@ -48,7 +48,7 @@ export default function HorizontalTemplate({ data }: Cafe1919TemplateProps) {
     <div className="flex min-h-screen items-center justify-center bg-white">
       <div className="relative h-[1080px] w-[1920px] overflow-hidden">
         <img
-          src="cafe1919/Cafe 1919 Background.png"
+          src="backgrounds/c1919-bg.png"
           alt=""
           className="pointer-events-none absolute inset-0 h-full w-full object-fill"
         />
@@ -83,7 +83,7 @@ function SideInfoPanel() {
         <div className="mx-auto w-[85%] border-b-2 border-[#c6a88e] pb-5">
           <div className="mx-auto h-[261px] w-[261px] bg-white">
             <img
-              src="cafe1919/qr.svg"
+              src="backgrounds/c1919-qr.svg"
               alt="QR code"
               className="h-full w-full object-contain"
             />

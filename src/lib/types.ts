@@ -36,6 +36,18 @@ export type LegendConfig = {
   descriptionFontSize?: string;
 }
 
+export type MenuItemConfig = {
+  gap: string
+  divClassName: string,
+  itemClassName: string,
+  dietaryClassName: string,
+
+  priceClassName?: string //set to hidden if no price
+  pricedivClassName?: string, //set to empty string if no price
+
+  summaryClassName?: string, //set to hidden if no summary
+}
+
 export type MenuItemData = {
   recipeNumber: string
   name: string

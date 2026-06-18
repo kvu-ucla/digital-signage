@@ -1,8 +1,8 @@
 import type { ReactElement, ReactNode } from "react";
-import { MenuItem } from "../../../menu/MenuItem";
+import { MenuItem } from "@/menu/ModMenuList";
 import { getStationItems } from "../helpers/rendezvous";
-import { DietaryLegend } from "../../../menu/DietaryLegend";
-import type { MenuItemConfig, MenuItemData, MergedMenuData } from "../../../lib/types";
+import { DietaryLegend } from "@/menu/DietaryLegend";
+import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
 import { LEGEND_CONFIG, NAME_ONLY_CONFIG, PRICED_ITEM_CONFIG, ICON_ITEM_CONFIG, COMPACT_PRICE_CONFIG } from "../config";
 
 type WestBYOScreenProps = {

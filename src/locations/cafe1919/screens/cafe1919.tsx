@@ -20,7 +20,6 @@ export const MainScreen = ({ data, station, screenType }: Cafe1919ScreenProps) =
         );
     }
 
-
     const validPositionsSet = new Set(validRegions);
 
     const filteredData: MergedMenuData = {
@@ -30,18 +29,27 @@ export const MainScreen = ({ data, station, screenType }: Cafe1919ScreenProps) =
         ),
     };
     
-    if (screenType === "horizontal") {
+    if (screenType === "horizontal" && (station === "mains" || station === "sides" || station === "late-night")) {
         return (
             <HorizontalTemplate 
                 data={filteredData}
             />
         );
     }
-    else {
+    else if (screenType === "vertical" && station === "specials") {
         return (
             <VerticalTemplate
                 data={filteredData}
             />
+        )
+    }
+    else {
+        return (
+            <main className="flex h-screen items-center justify-center text-[40px]">
+                <div className="text-[40px]">
+                    ERROR: INVALID URL
+                </div>
+            </main>
         )
     }
 };

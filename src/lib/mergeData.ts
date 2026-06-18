@@ -8,7 +8,7 @@ export const mergeData = (
 
   const stationItemsLookup = new Map<
     string,
-    { name: string; items: MenuItemData[] }
+    { name: string; items:Array<MenuItemData> }
   >();
 
   for (const [stationName, items] of Object.entries(menuData.stations)) {

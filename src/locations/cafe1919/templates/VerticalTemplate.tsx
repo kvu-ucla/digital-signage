@@ -1,5 +1,5 @@
-import type { MergedMenuData, MenuItemConfig } from "../../../lib/types";
-import { MenuItemList } from "../../../menu/MenuItemList";
+import type { MergedMenuData, MenuItemConfig } from "@/lib/types";
+import { MenuItemList } from "@/menu/ModMenuList";
 
 const MENU_ITEM_CONFIG: MenuItemConfig = {
     gap: "10px",

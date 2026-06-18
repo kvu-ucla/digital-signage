@@ -21,8 +21,21 @@ export const LOCATIONS: Record<string, LocationConfig> = {
           "PIZZETTE",
           "PANINI",
           "SOFT BAKED PRETZEL",
-          "SC PRETZEL SAUCE"
+          "SC PRETZEL SAUCE",
         ],
+      },
+    },
+  },
+  'rendezvous': {
+    displayName: 'Rendezvous',
+    gid: "1622975910",
+    xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/Rendezvous',
+    stylesheet: 'example-location.css',
+    screens: {
+      'West-byo': {
+        menus: ["breakfast", "lunch", "dinner"],
+        type: "horizontal",
+        requiresStation: false,
       },
     },
   },

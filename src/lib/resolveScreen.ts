@@ -18,6 +18,8 @@ const screenModules = import.meta.glob<ScreenModule>('../locations/*/screens/*.t
   eager: true,
 })
 
+console.log("Loaded screen modules:", Object.keys(screenModules))
+
 const toPascalCase = (value: string): string =>
   value
     .split(/[\s-_]+/)

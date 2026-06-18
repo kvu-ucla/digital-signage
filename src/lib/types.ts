@@ -30,6 +30,7 @@ export type LegendConfig = {
   imgSize: string;
   strongLetterSpacing?: string;
   className?: string;
+  iconLabelOffset?: string;
   description?: string;
   descriptionColor?: string;
   descriptionFontSize?: string;

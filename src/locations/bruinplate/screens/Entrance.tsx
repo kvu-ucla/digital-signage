@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import type { ScreenProps } from "@/lib/resolveScreen";
+=======
+import type { ScreenProps } from "../../../lib/resolveScreen";
+>>>>>>> 8f9a397 (type:[feat] add cafe1919/rendezvous west)
 import { EntranceScreen } from "../template";
 import { LEGEND_CONFIG } from "../config";
 

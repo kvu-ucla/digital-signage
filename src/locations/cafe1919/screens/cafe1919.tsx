@@ -1,4 +1,4 @@
-import type { MergedMenuData } from "../../../lib/types";
+import type { MergedMenuData } from "@/lib/types";
 import { SCREEN_CONFIG } from "../config";
 import HorizontalTemplate from "../templates/HorizontalTemplate";
 import VerticalTemplate from "../templates/VerticalTemplate";

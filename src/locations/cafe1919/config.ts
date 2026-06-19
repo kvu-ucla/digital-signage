@@ -8,7 +8,7 @@ export const LEGEND_CONFIG: LegendConfig = {
     itemFontWeight: 700,
     gap: "10px",
     gapItems: "20px",
-    rowGap: "20px",
+    rowGap: "13px",
     imgSize: "20px",
 };
 

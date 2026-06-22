@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import type { MergedMenuData, LegendConfig } from '@/lib/types'
 import { FeaturedItem } from '@/menu/FeaturedItem'
 import { MenuItemList } from '@/menu/MenuItemList'
+import { MenuTypeNotice } from '@/menu/MenuTypeNotice'
 import { DietaryLegend } from '@/menu/DietaryLegend'
 import { useVisibleCount } from '@/hooks/useVisibleCount'
 import './HorizontalScreen.css'
@@ -15,10 +16,11 @@ type HorizontalScreenProps = {
 export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScreenProps) => {
   const stationKey = station.toLowerCase().trim().replace(/\s+/g, ' ')
   const stationTitle = stationKey.replace(/\b\w/g, c => c.toUpperCase())
+  const isMinimal = new URLSearchParams(window.location.search).get('minimal') === 'true'
   const items = useMemo(() => data.stations[stationKey] ?? [], [data, stationKey])
 
   const [featuredIndex, setFeaturedIndex] = useState(0)
-  const { containerRef: listContainerRef, visibleCount, measure } = useVisibleCount()
+  const { containerRef, visibleCount, measure } = useVisibleCount()
 
   useEffect(() => {
     setFeaturedIndex(0)
@@ -48,7 +50,7 @@ export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScre
 
       <header className="screen-horizontal__header">
         <div className="screen-horizontal__header-logo" />
-        <h1 className="screen-horizontal__header-title">{stationTitle}</h1>
+        {!isMinimal && <h1 className="screen-horizontal__header-title">{stationTitle}</h1>}
         <div className="screen-horizontal__header-certificate">
           <div className="screen-horizontal__header-certificate-placeholder" />
         </div>
@@ -62,9 +64,11 @@ export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScre
 
         <div className="screen-horizontal__main">
           <div className="screen-horizontal__main-hero">
-            {featuredItem && <FeaturedItem item={featuredItem} />}
+            {items.length === 0
+              ? <MenuTypeNotice />
+              : featuredItem && <FeaturedItem item={featuredItem} />}
           </div>
-          <div className="screen-horizontal__footer">
+          <div className={`screen-horizontal__footer${isMinimal ? ' invisible' : ''}`}>
             <div className="screen-horizontal__footer-inner">
               <DietaryLegend config={legendConfig} />
             </div>
@@ -72,8 +76,17 @@ export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScre
         </div>
 
         <div className="screen-horizontal__side">
-          <div className="screen-horizontal__side-inner" ref={listContainerRef}>
-            <MenuItemList items={displayListItems} iconSize="30px" gap="8px" />
+          <div className="screen-horizontal__side-fit">
+            <div
+              className="screen-horizontal__side-inner screen-horizontal__side-inner--measure"
+              ref={containerRef}
+              aria-hidden="true"
+            >
+              <MenuItemList items={rotatedItems} iconSize="30px" gap="8px" />
+            </div>
+            <div className="screen-horizontal__side-inner">
+              <MenuItemList items={displayListItems} iconSize="30px" gap="8px" />
+            </div>
           </div>
         </div>
 

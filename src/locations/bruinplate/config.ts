@@ -1,4 +1,4 @@
-import type { LegendConfig } from "@/lib/types";
+import type { LegendConfig } from "../../lib/types";
 
 export const LEGEND_CONFIG: LegendConfig = {
     labelColor: "#4d4d4f",

@@ -52,6 +52,27 @@
   src: url('/fonts/KariPro-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
+  font-family: 'Tablet Gothic Condensed';
+  src: url('/fonts/TabletGothicCondensed-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tablet Gothic Condensed Bold';
+  src: url('/fonts/TabletGothicCondensed-Bold.ttf');
+  font-weight: 700;
+  font-style: bold;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url('/fonts/AvenirNextCondensed-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* CSS custom property defaults — overridden by location theme stylesheets */

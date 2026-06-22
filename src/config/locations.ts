@@ -1,11 +1,11 @@
-import type { LocationConfig } from '@/lib/types'
+import type { LocationConfig } from '../lib/types'
 
 export const LOCATIONS: Record<string, LocationConfig> = {
   'bruinplate': {
     displayName: 'Bruin Plate',
     gid: '932045808',
     xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/BruinPlate',
-    stylesheet: 'bruinplate.css',
+    stylesheet: 'example-location.css',
   },
   'cafe1919': {
     displayName: 'Cafe 1919',
@@ -45,10 +45,8 @@ export const LOCATIONS: Record<string, LocationConfig> = {
     gid: 'REPLACE_WITH_YOUR_GOOGLE_SHEET_GID',
     stylesheet: 'example-location.css',
   },
-  'covelepicuria': {
+  'covelepicuria': { // for pagination testing with many items
     displayName: 'Epicuria at Covel',
-    xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/CovelEpicuria',
-    gid: '1777114522',
-    stylesheet: 'covelepicuria.css',
+    xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/CovelEpicuria'
   }
 }

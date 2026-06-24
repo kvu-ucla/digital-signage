@@ -7,10 +7,11 @@ type UseAutoRefreshOptions = {
 
 export function useAutoRefresh({
   maxUptime = 24 * 60 * 60 * 1000,
-  versionCheckInterval = 10 * 60 * 1000,
+  versionCheckInterval = 3 * 60 * 1000,
 }: UseAutoRefreshOptions = {}): void {
   const startTime = useRef(0);
   const currentVersion = useRef<string | null>(null);
+  const reloadPending = useRef(false);
 
   // Initialize start time on first render
   useEffect(() => {
@@ -30,9 +31,14 @@ export function useAutoRefresh({
         if (!currentVersion.current) {
           currentVersion.current = version;
           console.log('[AutoRefresh] Current version:', version);
-        } else if (currentVersion.current !== version) {
-          console.log('[AutoRefresh] New version detected:', version, '- reloading');
-          window.location.reload();
+        } else if (currentVersion.current !== version && !reloadPending.current) {
+          console.log('[AutoRefresh] New version detected:', version, '- waiting 30s before reload to ensure deployment is complete');
+          reloadPending.current = true;
+          // Wait 30 seconds to ensure all new files are fully deployed
+          setTimeout(() => {
+            console.log('[AutoRefresh] Reloading to version:', version);
+            window.location.reload();
+          }, 30000);
         }
       } catch {
         // Silently fail on version check errors

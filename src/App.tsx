@@ -165,7 +165,9 @@ export const App = () => {
   const location = normalizeParam(params.get("location")) ?? "";
   const screen = normalizeParam(params.get("screen")) ?? "";
   const station = normalizeParam(params.get("station"));
-  const menuType = getMenuType();
+  // DISABLED: Menu type query param filtering
+  // const menuType = getMenuType();
+  const menuType = undefined;
 
   const overlayId = params.get("overlay-id");
   const overlayUrl = overlayId

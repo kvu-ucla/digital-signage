@@ -6,7 +6,8 @@ import { useAutoRefresh } from "@/hooks/useAutoRefresh";
 import { useMealPeriod } from "@/hooks/useMealPeriod";
 import { resolveScreen, getScreenCandidates, type ScreenProps } from "@/lib/resolveScreen";
 import { isMockMode, applyMockData } from "@/lib/mockMode";
-import { normalizeParam, getMenuType } from "@/lib/queryParams";
+import { normalizeParam } from "@/lib/queryParams";
+// import { getMenuType } from "@/lib/queryParams"; // DISABLED
 
 const queryClient = new QueryClient();
 
@@ -167,7 +168,7 @@ export const App = () => {
   const station = normalizeParam(params.get("station"));
   // DISABLED: Menu type query param filtering
   // const menuType = getMenuType();
-  const menuType = undefined;
+  const menuType = null;
 
   const overlayId = params.get("overlay-id");
   const overlayUrl = overlayId

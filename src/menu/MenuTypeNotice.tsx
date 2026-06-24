@@ -1,12 +1,12 @@
-// Recognized menu types. A requested type outside this set is treated as
-// invalid (a misconfig/typo) rather than "not served right now".
+import { getMenuType } from '@/lib/queryParams'
+
 const KNOWN_MENU_TYPES = new Set(['breakfast', 'lunch', 'dinner', 'late night'])
 
 const titleCase = (value: string): string =>
   value.replace(/\b\w/g, (c) => c.toUpperCase())
 
 export const MenuTypeNotice = () => {
-  const menuType = new URLSearchParams(window.location.search).get('menu')?.toLowerCase().trim() || null
+  const menuType = getMenuType()
 
   let message: string
   if (menuType && !KNOWN_MENU_TYPES.has(menuType)) {

@@ -3,16 +3,13 @@ import  WestBYOScreen  from "../templates/WestByoTemplate";
 
 type RendezvousDisplayProps = {
   data: MergedMenuData;
-  station: string;
-  screenType: string;
 };
 
-export const RendezvousDisplay = ({ data, station, screenType }: RendezvousDisplayProps) => {
+export const RendezvousDisplay = ({ data }: RendezvousDisplayProps) => {
 
   return (
     <WestBYOScreen
           data={data}
-          station={station}
     />
   );
 };

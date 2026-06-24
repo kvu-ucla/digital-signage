@@ -4,6 +4,7 @@ import { MenuItemList } from '@/menu/MenuItemList'
 import { MenuTypeNotice } from '@/menu/MenuTypeNotice'
 import { DietaryLegend } from '@/menu/DietaryLegend'
 import { useVisibleCount } from '@/hooks/useVisibleCount'
+import { getDisplayMode } from '@/lib/queryParams'
 import './VerticalScreen.css'
 
 type VerticalScreenProps = {
@@ -13,9 +14,9 @@ type VerticalScreenProps = {
 }
 
 export const VerticalScreen = ({ data, station, legendConfig }: VerticalScreenProps) => {
+  const { isMinimal } = getDisplayMode()
   const stationKey = station.toLowerCase().trim().replace(/\s+/g, ' ')
   const stationTitle = stationKey.replace(/\b\w/g, c => c.toUpperCase())
-  const isMinimal = new URLSearchParams(window.location.search).get('minimal') === 'true'
 
   const items = useMemo(() => data.stations[stationKey] ?? [], [data, stationKey])
 
@@ -86,7 +87,7 @@ export const VerticalScreen = ({ data, station, legendConfig }: VerticalScreenPr
             )}
           </div>
 
-          <div className={`screen-vertical__footer${isMinimal ? ' invisible' : ''}`}>
+          <div className="screen-vertical__footer">
             <div className="screen-vertical__footer-inner">
               <DietaryLegend config={legendConfig} />
             </div>

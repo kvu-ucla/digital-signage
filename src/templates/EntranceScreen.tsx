@@ -3,6 +3,7 @@ import type { MergedMenuData, LegendConfig, StationWithRegion } from "@/lib/type
 import { MenuItemList } from "@/menu/MenuItemList";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import { CyclingColumn } from "@/components/CyclingColumns";
+import { getDisplayMode } from "@/lib/queryParams";
 import "./EntranceScreen.css";
 
 export type EntranceScreenProps = {
@@ -12,8 +13,7 @@ export type EntranceScreenProps = {
 };
 
 export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenProps) => {
-  const isMinimal = new URLSearchParams(window.location.search).get('minimal') === 'true'
-
+  const { isMinimal } = getDisplayMode();
   if (data.stationsWithRegions.length === 0) {
     return (
       <div className="screen">
@@ -64,7 +64,7 @@ export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenPro
         ))}
       </main>
 
-      <div className={`screen-entrance__footer${isMinimal ? ' invisible' : ''}`}>
+      <div className="screen-entrance__footer">
         <div className="screen-entrance__footer-rule" />
         <div className="screen-entrance__footer-legend">
           <DietaryLegend config={legendConfig} />

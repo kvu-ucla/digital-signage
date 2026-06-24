@@ -2,15 +2,12 @@ import { Component, useEffect, type ComponentType, type ReactNode } from "react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LOCATIONS } from "@/locations";
 import { useMenu } from "@/hooks/useMenu";
+import { useAutoRefresh } from "@/hooks/useAutoRefresh";
 import { resolveScreen, getScreenCandidates, type ScreenProps } from "@/lib/resolveScreen";
 import { isMockMode, applyMockData } from "@/lib/mockMode";
+import { normalizeParam, getMenuType } from "@/lib/queryParams";
 
 const queryClient = new QueryClient();
-
-const normalizeParam = (value: string | null): string | null => {
-  if (!value) return null;
-  return value.toLowerCase().trim().replace(/\s+/g, " ");
-};
 
 const loadStylesheet = (stylesheet?: string): void => {
   const existing = document.getElementById("location-theme");
@@ -108,6 +105,8 @@ const ScreenLoader = ({
     menuType: menuType ?? undefined,
   });
 
+  useAutoRefresh({ data, isLoading });
+
   if (isLoading) {
     return <ErrorMessage>Loading menu…</ErrorMessage>;
   }
@@ -160,7 +159,7 @@ export const App = () => {
   const location = normalizeParam(params.get("location")) ?? "";
   const screen = normalizeParam(params.get("screen")) ?? "";
   const station = normalizeParam(params.get("station"));
-  const menuType = normalizeParam(params.get("menu"));
+  const menuType = getMenuType();
 
   const overlayId = params.get("overlay-id");
   const overlayUrl = overlayId

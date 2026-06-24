@@ -4,7 +4,7 @@ export const mergeData = (
   menuData: MenuData,
   sheetRows: Array<Record<string, string>> | null,
 ): MergedMenuData => {
-  const normalize = (value: string) => value.toLowerCase().trim();
+  const normalize = (value: string): string => value.toLowerCase().trim();
 
   const stationItemsLookup = new Map<
     string,

@@ -45,7 +45,7 @@ export const DietaryLegend = ({ config }: DietaryLegendProps) => (
           style={{ gap: config.gap, height: config.imgSize }}
         >
           <DietaryIcon dietaryLabel={key} mode={config.mode} size={config.imgSize} />
-          <span className = {`${config.iconLabelOffset ?? ''}`}
+          <span className = {config.iconLabelOffset ?? ''}
             style={{
               fontFamily: config.font,
               fontWeight: config.itemFontWeight,

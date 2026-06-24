@@ -5,6 +5,7 @@ import { MenuItemList } from '@/menu/MenuItemList'
 import { MenuTypeNotice } from '@/menu/MenuTypeNotice'
 import { DietaryLegend } from '@/menu/DietaryLegend'
 import { useVisibleCount } from '@/hooks/useVisibleCount'
+import { getDisplayMode } from '@/lib/queryParams'
 import './HorizontalScreen.css'
 
 type HorizontalScreenProps = {
@@ -14,9 +15,9 @@ type HorizontalScreenProps = {
 }
 
 export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScreenProps) => {
+  const { isMinimal } = getDisplayMode()
   const stationKey = station.toLowerCase().trim().replace(/\s+/g, ' ')
   const stationTitle = stationKey.replace(/\b\w/g, c => c.toUpperCase())
-  const isMinimal = new URLSearchParams(window.location.search).get('minimal') === 'true'
   const items = useMemo(() => data.stations[stationKey] ?? [], [data, stationKey])
 
   const [featuredIndex, setFeaturedIndex] = useState(0)
@@ -68,7 +69,7 @@ export const HorizontalScreen = ({ data, station, legendConfig }: HorizontalScre
               ? <MenuTypeNotice />
               : featuredItem && <FeaturedItem item={featuredItem} />}
           </div>
-          <div className={`screen-horizontal__footer${isMinimal ? ' invisible' : ''}`}>
+          <div className="screen-horizontal__footer">
             <div className="screen-horizontal__footer-inner">
               <DietaryLegend config={legendConfig} />
             </div>

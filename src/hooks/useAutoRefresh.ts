@@ -24,6 +24,7 @@ export function useAutoRefresh({
   useEffect(() => {
     const checkVersion = async (): Promise<void> => {
       try {
+        console.log('[AutoRefresh] Checking for new version...');
         const res = await fetch(`/dining/version.json?${Date.now().toString()}`);
         const json = await res.json() as { version: string };
         const { version } = json;

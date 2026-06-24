@@ -1,21 +1,8 @@
-import { getMenuType } from '@/lib/queryParams'
-
-const KNOWN_MENU_TYPES = new Set(['breakfast', 'lunch', 'dinner', 'late night'])
-
-const titleCase = (value: string): string =>
-  value.replace(/\b\w/g, (c) => c.toUpperCase())
+// DISABLED: Menu type logic (menuType query param is disabled)
+// import { getMenuType } from '@/lib/queryParams'
 
 export const MenuTypeNotice = () => {
-  const menuType = getMenuType()
-
-  let message: string
-  if (menuType && !KNOWN_MENU_TYPES.has(menuType)) {
-    message = `Unrecognized menu type: “${menuType}”`
-  } else if (menuType) {
-    message = `${titleCase(menuType)} menu is not available right now.`
-  } else {
-    message = 'Menu is not available right now.'
-  }
+  const message = "We're Closed"
 
   return (
     <div className="flex w-full flex-col items-center justify-center">

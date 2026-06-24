@@ -1,24 +1,5 @@
-/* 
-Example output for if checked at 2:29 PM
-
-{
-  BruinCafe: "lunch",
-  BruinPlate: "lunch",
-  Cafe1919: null,
-  CovelEpicuria: "lunch",
-  DeNeveDining: "lunch",
-  EpicatAckerman: null,
-  FacultyClub: null,
-  FeastatRieber: "lunch",
-  GeffenAcademy: null,
-  HedrickStudy: null,
-  Rendezvous: null,
-  TheDrey: "lunch",
-}
-*/
-
 import { fetchCsv } from './fetchMenu'
-import type { MealTimeSchedule, MealPeriodTimes } from './types'
+import type { MealTimeSchedule, MealPeriodTimes, MealTimeMap } from './types'
 
 const GID = '1246955051';
 
@@ -50,7 +31,6 @@ export const parseMealTimeSchedule = (csvText: string): MealTimeSchedule => {
 
   const locationCol = findCol('Location');
   if (locationCol === null) {
-    console.warn('parseMealTimeSchedule: Could not find "Location" column');
     return {};
   }
 
@@ -88,3 +68,69 @@ export const parseMealTimeSchedule = (csvText: string): MealTimeSchedule => {
 
   return schedule;
 };
+
+function parseTime(timeStr: string): { hours: number; minutes: number } | null {
+  const match = timeStr.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+  if (!match || !match[1] || !match[2] || !match[3]) return null;
+
+  let hours = parseInt(match[1], 10);
+  const minutes = parseInt(match[2], 10);
+  const meridiem = match[3].toUpperCase();
+
+  if (meridiem === 'PM' && hours !== 12) {
+    hours += 12;
+  } else if (meridiem === 'AM' && hours === 12) {
+    hours = 0;
+  }
+
+  return { hours, minutes };
+}
+
+function isCurrentlyInPeriod(
+  start: string,
+  end: string,
+  now: Date = new Date()
+): boolean {
+  const startTime = parseTime(start);
+  const endTime = parseTime(end);
+
+  if (!startTime || !endTime) return false;
+
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  const startMinutes = startTime.hours * 60 + startTime.minutes;
+  let endMinutes = endTime.hours * 60 + endTime.minutes;
+
+  if (endMinutes < startMinutes) {
+    endMinutes += 24 * 60;
+    if (currentMinutes < startMinutes) {
+      const adjustedCurrent = currentMinutes + 24 * 60;
+      return adjustedCurrent >= startMinutes && adjustedCurrent < endMinutes;
+    }
+  }
+
+  return currentMinutes >= startMinutes && currentMinutes < endMinutes;
+}
+
+export function getCurrentMealPeriods(
+  schedule: MealTimeSchedule,
+  now: Date = new Date()
+): MealTimeMap {
+  const result: MealTimeMap = {};
+
+  for (const [locationName, mealTimes] of Object.entries(schedule)) {
+    let currentPeriod: string | null = null;
+
+    const periods: Array<keyof MealPeriodTimes> = ['breakfast', 'lunch', 'dinner', 'latenight'];
+    for (const period of periods) {
+      const times = mealTimes[period];
+      if (times && isCurrentlyInPeriod(times.start, times.end, now)) {
+        currentPeriod = period;
+        break;
+      }
+    }
+
+    result[locationName] = currentPeriod;
+  }
+
+  return result;
+}

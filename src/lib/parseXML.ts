@@ -33,7 +33,10 @@ export const parseXml = ({ xmlText, menuTypeFilter }: ParseXmlOptions): MenuData
   const stationMap = new Map<string, Array<MenuItemData>>()
 
   for (const recipeEl of recipeEls) {
-    if (menuTypeFilter && getTagText(recipeEl, 'Menu_Type').toLowerCase().trim() !== menuTypeFilter) continue
+    const itemMealType = getTagText(recipeEl, 'Menu_Type').toLowerCase().trim()
+
+    // Skip if we have a filter and this item doesn't match
+    if (menuTypeFilter && itemMealType !== menuTypeFilter) continue
 
     const stationName = normalizeStationName(getTagText(recipeEl, 'Menu_Meal_Option'))
 
@@ -47,11 +50,14 @@ export const parseXml = ({ xmlText, menuTypeFilter }: ParseXmlOptions): MenuData
       description: getTagNullableText(recipeEl, 'Description'),
       price: getTagNullableText(recipeEl, 'Sales_Price'),
       dietaryLabels,
+      mealType: itemMealType,
     }
 
     const existing = stationMap.get(stationName)
     if (existing) {
-      const isDuplicate = existing.some(i => i.recipeNumber === item.recipeNumber)
+      const isDuplicate = existing.some(i =>
+        i.recipeNumber === item.recipeNumber && i.mealType === item.mealType
+      )
       if (!isDuplicate) existing.push(item)
     } else {
       stationMap.set(stationName, [item])

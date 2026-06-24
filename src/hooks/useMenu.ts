@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 import { LOCATIONS } from "@/locations";
 import { fetchXml, fetchCsv } from "@/lib/fetchMenu";
 import { parseXml } from "@/lib/parseXML";
 import { parseCsv } from "@/lib/parseCSV";
 import { mergeData } from "@/lib/mergeData";
-import type { MergedMenuData } from "@/lib/types";
+import type { MergedMenuData, MenuItemData } from "@/lib/types";
 
 type UseMenuOptions = {
   location: string;
-  menuType?: string;
+  menuType?: string | null;
 };
 
 type UseMenuResult = {
@@ -27,13 +28,11 @@ export const useMenu = ({
     throw new Error(`Invalid location: ${location}`);
   }
   
-  const normalizedMenuType = menuType?.toLowerCase().trim();
-
   const xmlQuery = useQuery({
-    queryKey: ["menu-xml", location, normalizedMenuType],
+    queryKey: ["menu-xml", location],
     queryFn: async () => {
       const xmlText = await fetchXml(config.xmlUrl);
-      return parseXml({ xmlText, menuTypeFilter: normalizedMenuType });
+      return parseXml({ xmlText });
     },
     refetchInterval: 5 * 60_000,
     retry: 2,
@@ -53,12 +52,43 @@ export const useMenu = ({
     retry: 1,
   });
 
-  const mergedData: MergedMenuData | null =
-    xmlQuery.data && sheetQuery.data
-      ? mergeData(xmlQuery.data, sheetQuery.data)
-      : xmlQuery.data
-        ? mergeData(xmlQuery.data, null)
-        : null;
+  const mergedData = useMemo<MergedMenuData | null>(() => {
+    let data = xmlQuery.data;
+
+    if (!data) return null;
+
+    // If menuType is explicitly null (location closed), return empty data
+    if (menuType === null) {
+      return {
+        ...data,
+        stations: {},
+        stationsWithRegions: [],
+      };
+    }
+
+    // Filter by meal type if specified
+    if (menuType) {
+      const normalizedMenuType = menuType.toLowerCase().trim();
+      const filteredStations: Record<string, ReadonlyArray<MenuItemData>> = {};
+
+      for (const [stationName, items] of Object.entries(data.stations)) {
+        const filteredItems = items.filter(item => item.mealType === normalizedMenuType);
+        if (filteredItems.length > 0) {
+          filteredStations[stationName] = filteredItems;
+        }
+      }
+
+      data = {
+        ...data,
+        stations: filteredStations,
+      };
+    }
+
+    if (sheetQuery.data) {
+      return mergeData(data, sheetQuery.data);
+    }
+    return mergeData(data, null);
+  }, [xmlQuery.data, sheetQuery.data, menuType]);
 
   return {
     data: mergedData,

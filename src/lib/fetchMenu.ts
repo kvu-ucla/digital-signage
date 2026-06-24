@@ -1,7 +1,8 @@
 const SHEET_ID: string = "1lNHtNE9b7w93RNa2lvKk6DhXXTU9_pYLuzcsdWHGElE";
 
 export const fetchXml = async (url: string): Promise<string> => {
-  const response = await fetch(url);
+  const cacheBustedUrl = `${url}?t=${Date.now()}`;
+  const response = await fetch(cacheBustedUrl, { cache: "no-store" });
   if (!response.ok) {
     throw new Error(`XML fetch failed: ${response.status} ${response.statusText}`)
   }

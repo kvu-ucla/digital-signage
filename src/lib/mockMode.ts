@@ -9,6 +9,7 @@ export const MOCK_ITEM: MenuItemData = {
   description: 'Items are subject to change based on availability without prior notice. Sometimes the descriptions get super super duper lengthy and really detailed',
   price: null,
   dietaryLabels: ['Gluten', 'Wheat', 'Dairy', 'Eggs', 'Soy', 'Fish', 'Crustacean-Shellfish', 'Peanut', 'Tree-Nuts', 'Sesame', 'Alcohol'],
+  mealType: 'lunch',
 }
 
 const mockItems = (): Array<MenuItemData> =>

@@ -54,6 +54,7 @@ export type MenuItemData = {
   description: string | null
   price: string | null
   dietaryLabels: ReadonlyArray<string>
+  mealType: string
 }
 
 export type MenuData = {

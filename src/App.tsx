@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LOCATIONS } from "@/locations";
 import { useMenu } from "@/hooks/useMenu";
 import { useAutoRefresh } from "@/hooks/useAutoRefresh";
+import { useMealPeriod } from "@/hooks/useMealPeriod";
 import { resolveScreen, getScreenCandidates, type ScreenProps } from "@/lib/resolveScreen";
 import { isMockMode, applyMockData } from "@/lib/mockMode";
 import { normalizeParam, getMenuType } from "@/lib/queryParams";
@@ -100,14 +101,19 @@ const ScreenLoader = ({
   station,
   menuType,
 }: ScreenLoaderProps) => {
+  const { mealPeriod, isLoading: isMealPeriodLoading } = useMealPeriod(location, menuType);
+
+  // When there's no manual override and no meal period, pass null to show nothing
+  const effectiveMenuType = menuType !== null ? menuType : mealPeriod;
+
   const { data, isLoading, error } = useMenu({
     location,
-    menuType: menuType ?? undefined,
+    menuType: effectiveMenuType === null ? null : (effectiveMenuType ?? undefined),
   });
 
-  useAutoRefresh({ data, isLoading });
+  useAutoRefresh();
 
-  if (isLoading) {
+  if (isLoading || isMealPeriodLoading) {
     return <ErrorMessage>Loading menu…</ErrorMessage>;
   }
 

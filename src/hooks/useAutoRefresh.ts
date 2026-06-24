@@ -1,19 +1,14 @@
 import { useEffect, useRef } from 'react';
 
 type UseAutoRefreshOptions = {
-  data: unknown;
-  isLoading: boolean;
   maxUptime?: number;
   versionCheckInterval?: number;
 }
 
 export function useAutoRefresh({
-  data,
-  isLoading,
   maxUptime = 24 * 60 * 60 * 1000,
   versionCheckInterval = 10 * 60 * 1000,
-}: UseAutoRefreshOptions): void {
-  const isInitialLoad = useRef(true);
+}: UseAutoRefreshOptions = {}): void {
   const startTime = useRef(0);
   const currentVersion = useRef<string | null>(null);
 
@@ -23,21 +18,6 @@ export function useAutoRefresh({
       startTime.current = Date.now();
     }
   }, []);
-
-  // Refresh when TanStack Query detects data changes
-  useEffect(() => {
-    if (isLoading || !data) return;
-
-    if (isInitialLoad.current) {
-      isInitialLoad.current = false;
-      return;
-    }
-
-    console.log('[AutoRefresh] Menu data changed, refreshing...');
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
-  }, [data, isLoading]);
 
   // Check for new app version
   useEffect(() => {
@@ -51,11 +31,11 @@ export function useAutoRefresh({
           currentVersion.current = version;
           console.log('[AutoRefresh] Current version:', version);
         } else if (currentVersion.current !== version) {
-          console.log('[AutoRefresh] New version detected:', version, '(was:', currentVersion.current, ')');
+          console.log('[AutoRefresh] New version detected:', version, '- reloading');
           window.location.reload();
         }
       } catch {
-        console.warn('[AutoRefresh] Version check failed');
+        // Silently fail on version check errors
       }
     };
 
@@ -73,7 +53,6 @@ export function useAutoRefresh({
     const interval = setInterval(() => {
       const uptime = Date.now() - startTime.current;
       if (uptime >= maxUptime) {
-        console.log('[AutoRefresh] Max uptime reached, refreshing...');
         window.location.reload();
       }
     }, 60 * 60 * 1000);

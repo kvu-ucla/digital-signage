@@ -34,8 +34,8 @@ export function useMealPeriod(
 
       return getCurrentMealPeriods(schedule);
     },
-    staleTime: 60 * 60 * 1000,
-    refetchInterval: 60 * 60 * 1000,
+    staleTime: 2 * 60 * 1000,
+    refetchInterval: 3 * 60 * 1000,
     retry: 2,
   });
 

@@ -22,10 +22,9 @@ export const MENU_ITEM_CONFIG: MenuItemConfig = {
     summaryClassName: "mt-2 text-[18px] leading-tight text-[#5c452b]",
 }
 
-export const SCREEN_CONFIG: { [key: string]: Array<number> } = {
-    mains: [2, 3, 4],
-    sides: [6, 7, 8],
-    "late night": [10, 11, 12],
-    specials: [13],
+export const PAGE_CONFIG: Record<string, { regions: Array<number>; type: "horizontal" | "vertical" }> = {
+    "1": { regions: [2, 3, 4], type: "horizontal" },
+    "2": { regions: [6, 7, 8], type: "horizontal" },
+    "3": { regions: [10, 11, 12], type: "horizontal" },
+    "4": { regions: [13], type: "vertical" },
 }
-

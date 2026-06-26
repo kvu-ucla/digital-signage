@@ -44,7 +44,7 @@ export function MenuColumn({ stations }: MenuColumnProps) {
   return (
     <div
       className="flex h-full flex-col text-[#451c00]"
-      style={{ fontFamily: "Arial Narrow Bold" }}
+      style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
     >
       {stations.map(({ name, items }) => (
         <div key={name}>
@@ -88,7 +88,7 @@ function MenuTitle({ title }: MenuTitleProps) {
       <div className="flex h-[163px] items-center justify-center border-b-8 border-b-[#c6a88e] bg-[#d83f22] py-5 text-white">
         <h2
           className="mt-2 text-[128px] uppercase leading-none"
-          style={{ fontFamily: "Arial Narrow Bold" }}
+          style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
         >
           {title}
         </h2>

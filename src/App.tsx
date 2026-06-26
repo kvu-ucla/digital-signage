@@ -158,9 +158,13 @@ export const App = () => {
   const params = new URLSearchParams(window.location.search);
 
   const location = normalizeParam(params.get("location")) ?? "";
-  const screen = normalizeParam(params.get("screen")) ?? "";
+    const screenParam = normalizeParam(params.get("screen"));
+  const screen = screenParam && /^\d+$/.test(screenParam)
+    ? `page${screenParam}`
+    : (screenParam ?? "");
   const station = normalizeParam(params.get("station"));
   const menuType = normalizeParam(params.get("menu"));
+
 
   const overlayId = params.get("overlay-id");
   const overlayUrl = overlayId

@@ -29,7 +29,7 @@ type CompactPriceListProps = {
   iconSize?: string;
 };
 
-export default function WestBYOScreen({ data, station }: WestBYOScreenProps): ReactElement {
+export default function WestBYOScreen({ data }: WestBYOScreenProps): ReactElement {     // removed station due to build errors; may need to add back later
   console.log("data:", data)
   const title = "BUILD YOUR OWN ENTRÉE";
   const styleItems = getStationItems(data, "STYLE");

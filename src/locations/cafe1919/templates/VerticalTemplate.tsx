@@ -1,12 +1,7 @@
-import type { MergedMenuData, MenuItemConfig } from "@/lib/types";
+import type { MergedMenuData } from "@/lib/types";
 import { MenuItemList } from "@/menu/ModMenuList";
-
-const MENU_ITEM_CONFIG: MenuItemConfig = {
-    gap: "10px",
-    divClassName: "",
-    itemClassName: "max-w-[80%] break-words text-[25px] uppercase leading-none text-[#451c00]",
-    dietaryClassName: "mt-1 mb-15 flex flex-wrap leading-none",
-}
+import { VERTICAL_MENU_ITEM_CONFIG } from "../config";
+import { displayTitleForStation } from "../helpers/cafe1919";
 
 type Cafe1919TemplateProps = {
   data: MergedMenuData;
@@ -14,7 +9,7 @@ type Cafe1919TemplateProps = {
 
 export default function Cafe1919VerticalTemplate({ data }: Cafe1919TemplateProps) {
     return (
-    <div className=" flex min-h-screen items-center justify-center bg-white">
+    <div className="flex min-h-screen items-center justify-center bg-white">
         <div className="relative h-[1920px] w-[1080px] overflow-hidden bg-[#ede0d7]">
             <MenuColumn stations={data.stationsWithRegions.flatMap((station) =>
                 station.items.length > 0
@@ -65,7 +60,7 @@ export function MenuColumn({ stations }: MenuColumnProps) {
             "
           >
             {items.length ? (
-              <MenuItemList items={items} size="56px" menuItemConfig={MENU_ITEM_CONFIG} />
+              <MenuItemList items={items} size="56px" menuItemConfig={VERTICAL_MENU_ITEM_CONFIG} />
             ) : (
               <p className="text-[22px] uppercase text-#5c452b">
                 No items available
@@ -95,18 +90,4 @@ function MenuTitle({ title }: MenuTitleProps) {
       </div>
     </section>
   );
-}
-
-function displayTitleForStation(station: string) {
-  const titles: Record<string, string> = {
-    PIZZETTE: "Pizzette",
-    PANINI: "Panini",
-    INSALATE: "Insalate",
-    PRETZELS: "Pretzels",
-    "DAILY SPECIALS": "Daily Specials",
-    GELATO: "Gelato",
-    DESSERTS: "Desserts",
-  };
-
-  return titles[station.toUpperCase()] ?? station;
 }

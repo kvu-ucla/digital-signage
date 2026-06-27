@@ -2,6 +2,7 @@ import type { MergedMenuData } from "@/lib/types";
 import { MenuItemList } from "@/menu/ModMenuList";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import { LEGEND_CONFIG, MENU_ITEM_CONFIG } from "../config";
+import { displayTitleForStation } from "../helpers/cafe1919";
 
 type Cafe1919TemplateProps = {
   data: MergedMenuData;
@@ -106,30 +107,24 @@ function SideInfoPanel() {
             className="mx-auto my-auto max-w-[400px] text-[25px] leading-tight"
             style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
           >
-            Any Pizzette, Panini, Insalate, or Pretzel + 1 Side + 1 Fountain
-            Drink
+            Any Pizzette, Panini, Insalate, or Pretz
+            <br />
+            &amp; Any Fountain Drink or Bottled Beverage
+          </p>
+        </div>
+
+        <div className="mx-auto w-[85%] pt-2 text-center">
+          <p
+            className="text-[25px] leading-tight"
+            style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
+          >
+            $7.99 + Tax
           </p>
         </div>
       </section>
 
       <section className="pt-3 text-center">
-        <h3
-          className="text-[40px] uppercase"
-          style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
-        >
-          1 Swipe Dessert Deal
-        </h3>
-
-        <p
-          className="mx-auto max-w-[350px] text-[25px] leading-tight"
-          style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
-        >
-          Up to 2 Flavors + Up to 2 Toppings OR 1 Daily Special
-        </p>
-      </section>
-
-      <section className="pt-3 text-center">
-        <div className="mx-auto w-[85%] border-b-2 border-[#c6a88e] pb-5">
+        <div className="mx-auto w-[85%] border-b-2 border-[#c6a88e] pb-3 text-center">
           <h3
             className="text-[40px] uppercase"
             style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
@@ -236,18 +231,4 @@ function MenuTitle({ title }: MenuTitleProps) {
       </div>
     </section>
   );
-}
-
-function displayTitleForStation(station: string) {
-  const titles: Record<string, string> = {
-    PIZZETTE: "Pizzette",
-    PANINI: "Panini",
-    INSALATE: "Insalate",
-    PRETZELS: "Pretzels",
-    "DAILY SPECIALS": "Daily Specials",
-    GELATO: "Gelato",
-    DESSERTS: "Desserts",
-  };
-
-  return titles[station.toUpperCase()] ?? station;
 }

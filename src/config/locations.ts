@@ -13,19 +13,30 @@ export const LOCATIONS: Record<string, LocationConfig> = {
     xmlUrl: 'https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/Cafe1919',
     stylesheet: 'example-location.css',
     screens: {
-      Mains: {
-        menus: ["breakfast", "lunch", "dinner"],
+      Page1: {
         type: "horizontal",
-        requiresStation: true,
-        stations: [
-          "PIZZETTE",
-          "PANINI",
-          "SOFT BAKED PRETZEL",
-          "SC PRETZEL SAUCE",
-        ],
+        requiresStation: false,
+      },
+      Page2: {
+        type: "horizontal",
+        requiresStation: false,
+      },
+      Page3: {
+        type: "horizontal",
+        requiresStation: false,
+      },
+      Page4: {
+        type: "vertical",
+        requiresStation: false,
+      },
+      Entrance: {
+        type: "entrance",
+        requiresStation: false,
       },
     },
   },
+
+
   'rendezvous': {
     displayName: 'Rendezvous',
     gid: "1622975910",

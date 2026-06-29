@@ -2,6 +2,7 @@ import type { MergedMenuData } from "@/lib/types";
 import { MenuItemList } from "@/menu/ModMenuList";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import { LEGEND_CONFIG, MENU_ITEM_CONFIG } from "../config";
+import { displayTitleForStation } from "../helpers/cafe1919";
 
 type Cafe1919TemplateProps = {
   data: MergedMenuData;
@@ -72,7 +73,7 @@ function SideInfoPanel() {
         <div className="flex h-[54px] items-center justify-center border-b-4 border-b-[#c6a88e] bg-[#d83f22] py-5 text-white">
           <h2
             className="mt-1 text-[40px] uppercase leading-none"
-            style={{ fontFamily: "Arial Narrow Bold" }}
+            style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
           >
             SCAN FOR FULL MENU
           </h2>
@@ -95,7 +96,7 @@ function SideInfoPanel() {
         <div className="mx-auto w-[85%] text-center">
           <h3
             className="text-[40px] uppercase"
-            style={{ fontFamily: "Arial Narrow Bold" }}
+            style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
           >
             1 Swipe Meal Deal
           </h3>
@@ -104,42 +105,36 @@ function SideInfoPanel() {
         <div className="mx-auto w-[85%] text-center">
           <p
             className="mx-auto my-auto max-w-[400px] text-[25px] leading-tight"
-            style={{ fontFamily: "Arial Narrow Bold" }}
+            style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
           >
-            Any Pizzette, Panini, Insalate, or Pretzel + 1 Side + 1 Fountain
-            Drink
+            Any Pizzette, Panini, Insalate, or Pretz
+            <br />
+            &amp; Any Fountain Drink or Bottled Beverage
+          </p>
+        </div>
+
+        <div className="mx-auto w-[85%] pt-2 text-center">
+          <p
+            className="text-[25px] leading-tight"
+            style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
+          >
+            $7.99 + Tax
           </p>
         </div>
       </section>
 
       <section className="pt-3 text-center">
-        <h3
-          className="text-[40px] uppercase"
-          style={{ fontFamily: "Arial Narrow Bold" }}
-        >
-          1 Swipe Dessert Deal
-        </h3>
-
-        <p
-          className="mx-auto max-w-[350px] text-[25px] leading-tight"
-          style={{ fontFamily: "Arial Narrow Bold" }}
-        >
-          Up to 2 Flavors + Up to 2 Toppings OR 1 Daily Special
-        </p>
-      </section>
-
-      <section className="pt-3 text-center">
-        <div className="mx-auto w-[85%] border-b-2 border-[#c6a88e] pb-5">
+        <div className="mx-auto w-[85%] border-b-2 border-[#c6a88e] pb-3 text-center">
           <h3
             className="text-[40px] uppercase"
-            style={{ fontFamily: "Arial Narrow Bold" }}
+            style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
           >
             Accepted Payment
           </h3>
 
           <p
             className="text-[25px] leading-tight"
-            style={{ fontFamily: "Arial Narrow Bold" }}
+            style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
           >
             Bruincard EasyPay, Credit/Debit Card
           </p>
@@ -151,7 +146,7 @@ function SideInfoPanel() {
       </section>
 
       <div className="mt-auto pb-5 text-center text-[14px] leading-tight text-white">
-        <h4 className="text-[18px]" style={{ fontFamily: "Arial Narrow" }}>
+        <h4 className="text-[18px]" style={{ fontFamily: "Arial Narrow, Arial, sans-serif" }}>
           For allergen and nutritional information, visit
           <br />
           menu.dining.ucla.edu/Menus/Cafe1919
@@ -185,7 +180,7 @@ export function MenuColumn({ stations }: MenuColumnProps) {
   return (
     <div
       className="flex h-full flex-col text-[#451c00]"
-      style={{ fontFamily: "Arial Narrow Bold" }}
+      style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
     >
       {sortedStations.map(({ name, items }) => (
         <div key={name}>
@@ -229,25 +224,11 @@ function MenuTitle({ title }: MenuTitleProps) {
       <div className="flex h-[54px] items-center justify-center border-b-4 border-b-[#c6a88e] bg-[#d83f22] py-5 text-white">
         <h2
           className="mt-1 text-[40px] uppercase leading-none"
-          style={{ fontFamily: "Arial Narrow Bold" }}
+          style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
         >
           {title}
         </h2>
       </div>
     </section>
   );
-}
-
-function displayTitleForStation(station: string) {
-  const titles: Record<string, string> = {
-    PIZZETTE: "Pizzette",
-    PANINI: "Panini",
-    INSALATE: "Insalate",
-    PRETZELS: "Pretzels",
-    "DAILY SPECIALS": "Daily Specials",
-    GELATO: "Gelato",
-    DESSERTS: "Desserts",
-  };
-
-  return titles[station.toUpperCase()] ?? station;
 }

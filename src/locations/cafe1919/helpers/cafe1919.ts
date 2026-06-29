@@ -30,6 +30,28 @@ export function fillConfig(
   });
 }
 
+export function filterRegionsWithPlaceholders(
+  expectedRegions: ReadonlyArray<number>,
+  stationsWithRegions: ReadonlyArray<StationWithRegion>,
+): ReadonlyArray<StationWithRegion> {
+  const regionIndex = new Map<number, StationWithRegion>();
+  for (const station of stationsWithRegions) {
+    regionIndex.set(station.regionPosition, station);
+  }
+
+  return expectedRegions.map((position) => {
+    const existing = regionIndex.get(position);
+    if (existing) return existing;
+
+    return {
+      name: "",
+      items: [],
+      regionPosition: position,
+      regionOrder: 0,
+    };
+  });
+}
+
 export function regionToPage(
   sheetData: SheetData,
 ): Record<Cafe1919DisplayId, StationConfig> {

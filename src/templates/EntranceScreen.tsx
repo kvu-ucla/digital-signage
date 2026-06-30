@@ -60,26 +60,28 @@ export const EntranceScreen = ({
           gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))`,
         }}
       >
-        {sortedRegions.map(([position, stations]) => (
-          <section key={position} className="screen-entrance__region">
-            {stations.map(({ name, items }) => {
-              const itemNodes = items.map((item) => (
-                <MenuItemList
-                  key={item.recipeNumber}
-                  items={[item]}
-                  iconSize="30px"
-                  gap="10px"
-                  className="items-center text-center"
-                />
-              ));
-              return (
-                <div key={name} className="screen-entrance__items">
-                  <CyclingColumn>{itemNodes}</CyclingColumn>
-                </div>
-              );
-            })}
-          </section>
-        ))}
+        {sortedRegions.map(([position, stations]) => {
+          // Combine all items from all stations in this region/column
+          const allItemNodes = stations.flatMap(({ items }) =>
+            items.map((item) => (
+              <MenuItemList
+                key={item.recipeNumber}
+                items={[item]}
+                iconSize="30px"
+                gap="10px"
+                className="items-center text-center"
+              />
+            ))
+          );
+
+          return (
+            <section key={position} className="screen-entrance__region">
+              <div className="screen-entrance__items">
+                <CyclingColumn>{allItemNodes}</CyclingColumn>
+              </div>
+            </section>
+          );
+        })}
       </main>
 
       <div className="screen-entrance__footer">

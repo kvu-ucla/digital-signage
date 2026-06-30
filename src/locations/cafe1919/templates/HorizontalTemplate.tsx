@@ -1,7 +1,7 @@
 import type { MergedMenuData } from "@/lib/types";
 import { MenuItemList } from "@/menu/ModMenuList";
-import { DietaryLegend } from "@/menu/DietaryLegend";
-import { LEGEND_CONFIG, MENU_ITEM_CONFIG } from "../config";
+// import { DietaryLegend } from "@/menu/DietaryLegend"; // Used in commented out SideInfoPanel
+import { /* LEGEND_CONFIG, */ MENU_ITEM_CONFIG } from "../config";
 import { displayTitleForStation } from "../helpers/cafe1919";
 
 type Cafe1919TemplateProps = {
@@ -55,127 +55,152 @@ export default function HorizontalTemplate({ data }: Cafe1919TemplateProps) {
         />
 
         <main className="relative grid h-[1080px] w-[1920px] grid-cols-[471px_471px_471px_471px] gap-x-3">
-          <SideInfoPanel />
+          {sortedRegions.map(([position, stations]) => {
+            // Special handling for image regions
+            if (position === 1 || position === 5) {
+              return (
+                <div key={position} className="relative h-full">
+                  <img
+                    src={`${import.meta.env.BASE_URL}images/Lunch Dinner Region 1 and 5.png`}
+                    alt="Lunch/Dinner Menu Info"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              );
+            }
 
-          {sortedRegions.map(([position, stations]) => (
-            <MenuColumn key={position} stations={stations} />
-          ))}
+            if (position === 9) {
+              return (
+                <div key={position} className="relative h-full">
+                  <img
+                    src={`${import.meta.env.BASE_URL}images/Late Night Region 9.png`}
+                    alt="Late Night Menu Info"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              );
+            }
+
+            // Regular menu columns for other regions
+            return <MenuColumn key={position} stations={stations} />;
+          })}
         </main>
       </div>
     </div>
   );
 }
 
-function SideInfoPanel() {
-  return (
-    <div className="flex h-full flex-col text-white">
-      <section>
-        <div className="flex h-[54px] items-center justify-center border-b-4 border-b-[#c6a88e] bg-[#d83f22] py-5 text-white">
-          <h2
-            className="mt-1 text-[40px] uppercase leading-none"
-            style={{
-              fontFamily: "Arial Narrow, Arial, sans-serif",
-              fontWeight: 700,
-            }}
-          >
-            SCAN FOR FULL MENU
-          </h2>
-        </div>
-      </section>
-
-      <section className="pt-5 text-center">
-        <div className="mx-auto w-[85%] border-b-2 border-[#c6a88e] pb-5">
-          <div className="mx-auto h-[261px] w-[261px] bg-white">
-            <img
-              src="backgrounds/c1919-qr.svg"
-              alt="QR code"
-              className="h-full w-full object-contain"
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="pt-3 text-center">
-        <div className="mx-auto w-[85%] text-center">
-          <h3
-            className="text-[40px] uppercase"
-            style={{
-              fontFamily: "Arial Narrow, Arial, sans-serif",
-              fontWeight: 700,
-            }}
-          >
-            1 Swipe Meal Deal
-          </h3>
-        </div>
-
-        <div className="mx-auto w-[85%] text-center">
-          <p
-            className="mx-auto my-auto max-w-[400px] text-[25px] leading-tight"
-            style={{
-              fontFamily: "Arial Narrow, Arial, sans-serif",
-              fontWeight: 700,
-            }}
-          >
-            Any Pizzette, Panini, Insalate, or Pretz
-            <br />
-            &amp; Any Fountain Drink or Bottled Beverage
-          </p>
-        </div>
-
-        <div className="mx-auto w-[85%] pt-2 text-center">
-          <p
-            className="text-[25px] leading-tight"
-            style={{
-              fontFamily: "Arial Narrow, Arial, sans-serif",
-              fontWeight: 700,
-            }}
-          >
-            $7.99 + Tax
-          </p>
-        </div>
-      </section>
-
-      <section className="pt-3 text-center">
-        <div className="mx-auto w-[85%] border-b-2 border-[#c6a88e] pb-3 text-center">
-          <h3
-            className="text-[40px] uppercase"
-            style={{
-              fontFamily: "Arial Narrow, Arial, sans-serif",
-              fontWeight: 700,
-            }}
-          >
-            Accepted Payment
-          </h3>
-
-          <p
-            className="text-[25px] leading-tight"
-            style={{
-              fontFamily: "Arial Narrow, Arial, sans-serif",
-              fontWeight: 700,
-            }}
-          >
-            Bruincard EasyPay, Credit/Debit Card
-          </p>
-        </div>
-      </section>
-
-      <section className="mx-auto w-[90%] pt-5 text-center">
-        <DietaryLegend config={LEGEND_CONFIG} />
-      </section>
-
-      <div className="mt-auto pb-5 text-center text-[14px] leading-tight text-white">
-        <h4
-          className="text-[18px]"
-          style={{ fontFamily: "Arial Narrow, Arial, sans-serif" }}
-        >
-          For allergen and nutritional information, visit
-          <br />
-          menu.dining.ucla.edu/Menus/Cafe1919
-        </h4>
-      </div>
-    </div>
-  );
-}
+// Original SideInfoPanel component - replaced by image regions 1, 5, and 9
+// function SideInfoPanel() {
+//   return (
+//     <div className="flex h-full flex-col text-white">
+//       <section>
+//         <div className="flex h-[54px] items-center justify-center border-b-4 border-b-[#c6a88e] bg-[#d83f22] py-5 text-white">
+//           <h2
+//             className="mt-1 text-[40px] uppercase leading-none"
+//             style={{
+//               fontFamily: "Arial Narrow, Arial, sans-serif",
+//               fontWeight: 700,
+//             }}
+//           >
+//             SCAN FOR FULL MENU
+//           </h2>
+//         </div>
+//       </section>
+//
+//       <section className="pt-5 text-center">
+//         <div className="mx-auto w-[85%] border-b-2 border-[#c6a88e] pb-5">
+//           <div className="mx-auto h-[261px] w-[261px] bg-white">
+//             <img
+//               src="backgrounds/c1919-qr.svg"
+//               alt="QR code"
+//               className="h-full w-full object-contain"
+//             />
+//           </div>
+//         </div>
+//       </section>
+//
+//       <section className="pt-3 text-center">
+//         <div className="mx-auto w-[85%] text-center">
+//           <h3
+//             className="text-[40px] uppercase"
+//             style={{
+//               fontFamily: "Arial Narrow, Arial, sans-serif",
+//               fontWeight: 700,
+//             }}
+//           >
+//             1 Swipe Meal Deal
+//           </h3>
+//         </div>
+//
+//         <div className="mx-auto w-[85%] text-center">
+//           <p
+//             className="mx-auto my-auto max-w-[400px] text-[25px] leading-tight"
+//             style={{
+//               fontFamily: "Arial Narrow, Arial, sans-serif",
+//               fontWeight: 700,
+//             }}
+//           >
+//             Any Pizzette, Panini, Insalate, or Pretz
+//             <br />
+//             &amp; Any Fountain Drink or Bottled Beverage
+//           </p>
+//         </div>
+//
+//         <div className="mx-auto w-[85%] pt-2 text-center">
+//           <p
+//             className="text-[25px] leading-tight"
+//             style={{
+//               fontFamily: "Arial Narrow, Arial, sans-serif",
+//               fontWeight: 700,
+//             }}
+//           >
+//             $7.99 + Tax
+//           </p>
+//         </div>
+//       </section>
+//
+//       <section className="pt-3 text-center">
+//         <div className="mx-auto w-[85%] border-b-2 border-[#c6a88e] pb-3 text-center">
+//           <h3
+//             className="text-[40px] uppercase"
+//             style={{
+//               fontFamily: "Arial Narrow, Arial, sans-serif",
+//               fontWeight: 700,
+//             }}
+//           >
+//             Accepted Payment
+//           </h3>
+//
+//           <p
+//             className="text-[25px] leading-tight"
+//             style={{
+//               fontFamily: "Arial Narrow, Arial, sans-serif",
+//               fontWeight: 700,
+//             }}
+//           >
+//             Bruincard EasyPay, Credit/Debit Card
+//           </p>
+//         </div>
+//       </section>
+//
+//       <section className="mx-auto w-[90%] pt-5 text-center">
+//         <DietaryLegend config={LEGEND_CONFIG} />
+//       </section>
+//
+//       <div className="mt-auto pb-5 text-center text-[14px] leading-tight text-white">
+//         <h4
+//           className="text-[18px]"
+//           style={{ fontFamily: "Arial Narrow, Arial, sans-serif" }}
+//         >
+//           For allergen and nutritional information, visit
+//           <br />
+//           menu.dining.ucla.edu/Menus/Cafe1919
+//         </h4>
+//       </div>
+//     </div>
+//   );
+// }
 
 type RegionStation = {
   name: string;

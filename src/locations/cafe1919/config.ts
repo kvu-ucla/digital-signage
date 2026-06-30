@@ -35,8 +35,8 @@ export const PAGE_CONFIG: Record<
   string,
   { regions: Array<number>; type: "horizontal" | "vertical" }
 > = {
-  "1": { regions: [2, 3, 4], type: "horizontal" },
-  "2": { regions: [6, 7, 8], type: "horizontal" },
-  "3": { regions: [10, 11, 12], type: "horizontal" },
+  "1": { regions: [1, 2, 3, 4], type: "horizontal" },  // Region 1 for lunch/dinner panel
+  "2": { regions: [5, 6, 7, 8], type: "horizontal" },  // Region 5 for lunch/dinner panel
+  "3": { regions: [9, 10, 11, 12], type: "horizontal" }, // Region 9 for late night panel
   "4": { regions: [13], type: "vertical" },
 };

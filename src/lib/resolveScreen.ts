@@ -1,12 +1,12 @@
 import type { ComponentType } from "react";
-import type { MergedMenuData } from "./types";
+import type { MergedMenuData, MealPeriod } from "./types";
 
 export type ScreenProps = {
   data: MergedMenuData;
   location: string;
   screenType: string;
   station: string;
-  menuType: string | null;
+  menuType: MealPeriod | null;
 };
 
 type ScreenModule = {

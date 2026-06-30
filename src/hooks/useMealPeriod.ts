@@ -5,16 +5,17 @@ import {
   getCurrentMealPeriods,
 } from "@/lib/fetchTimetable";
 import { getDelayToNext3MinMark } from "@/lib/syncedRefetch";
+import type { MealPeriod, MealTimeMap } from "@/lib/types";
 
 type UseMealPeriodResult = {
-  mealPeriod: string | null;
+  mealPeriod: MealPeriod | null;
   isLoading: boolean;
 };
 
 function findLocationInTimetable(
   locationKey: string,
-  timetableMap: Record<string, string | null>,
-): string | null {
+  timetableMap: MealTimeMap,
+): MealPeriod | null {
   const normalizedKey = locationKey.toLowerCase().replace(/\s+/g, "");
 
   for (const [timetableName, period] of Object.entries(timetableMap)) {
@@ -31,7 +32,7 @@ function findLocationInTimetable(
 
 export function useMealPeriod(
   locationKey: string,
-  manualOverride?: string | null,
+  manualOverride?: MealPeriod | null,
 ): UseMealPeriodResult {
   const { data, isLoading } = useQuery({
     queryKey: ["timetable"],

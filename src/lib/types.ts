@@ -91,6 +91,9 @@ export type MergedMenuData = MenuData & {
   stationsWithRegions: ReadonlyArray<StationWithRegion>;
 };
 
+export const MEAL_PERIODS = ["breakfast", "lunch", "dinner", "latenight", "all day"] as const;
+export type MealPeriod = typeof MEAL_PERIODS[number];
+
 export type MealPeriodTimes = {
   breakfast: { start: string; end: string } | null;
   lunch: { start: string; end: string } | null;
@@ -100,7 +103,7 @@ export type MealPeriodTimes = {
 
 export type MealTimeSchedule = Record<string, MealPeriodTimes>;
 
-export type MealTimeMap = Record<string, string | null>;
+export type MealTimeMap = Record<string, MealPeriod | null>;
 
 export type SheetRow = Array<string>;
 export type SheetData = Array<SheetRow>;

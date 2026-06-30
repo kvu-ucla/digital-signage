@@ -1,5 +1,10 @@
 import { fetchCsv } from "./fetchMenu";
-import type { MealTimeSchedule, MealPeriodTimes, MealTimeMap } from "./types";
+import type {
+  MealTimeSchedule,
+  MealPeriodTimes,
+  MealTimeMap,
+  MealPeriod,
+} from "./types";
 
 const GID = "1246955051";
 
@@ -51,15 +56,31 @@ export const parseMealTimeSchedule = (csvText: string): MealTimeSchedule => {
       latenight: null,
     };
 
-    for (const period of MEAL_PERIODS) {
-      const startCol = findCol(`${period.label}Start`);
-      const endCol = findCol(`${period.label}End`);
-      if (startCol === null || endCol === null) continue;
+    // Check for dailystart/dailyend (used by Cafe 1919 and similar locations)
+    const dailyStartCol = findCol("dailystart");
+    const dailyEndCol = findCol("dailyend");
 
-      const startStr = cols[startCol]?.trim();
-      const endStr = cols[endCol]?.trim();
-      if (startStr && endStr) {
-        mealTimes[period.key] = { start: startStr, end: endStr };
+    if (dailyStartCol !== null && dailyEndCol !== null) {
+      const dailyStart = cols[dailyStartCol]?.trim();
+      const dailyEnd = cols[dailyEndCol]?.trim();
+
+      if (dailyStart && dailyEnd) {
+        // Use "latenight" as a marker for daily schedule locations
+        // (chosen because it's least likely to conflict with regular meal periods)
+        mealTimes.latenight = { start: dailyStart, end: dailyEnd };
+      }
+    } else {
+      // Standard meal periods for dining halls
+      for (const period of MEAL_PERIODS) {
+        const startCol = findCol(`${period.label}Start`);
+        const endCol = findCol(`${period.label}End`);
+        if (startCol === null || endCol === null) continue;
+
+        const startStr = cols[startCol]?.trim();
+        const endStr = cols[endCol]?.trim();
+        if (startStr && endStr) {
+          mealTimes[period.key] = { start: startStr, end: endStr };
+        }
       }
     }
 
@@ -118,19 +139,40 @@ export function getCurrentMealPeriods(
   const result: MealTimeMap = {};
 
   for (const [locationName, mealTimes] of Object.entries(schedule)) {
-    let currentPeriod: string | null = null;
+    let currentPeriod: MealPeriod | null = null;
 
-    const periods: Array<keyof MealPeriodTimes> = [
-      "breakfast",
-      "lunch",
-      "dinner",
-      "latenight",
-    ];
-    for (const period of periods) {
-      const times = mealTimes[period];
-      if (times && isCurrentlyInPeriod(times.start, times.end, now)) {
-        currentPeriod = period;
-        break;
+    // Check if this is a daily schedule location (only latenight populated, no breakfast/lunch/dinner)
+    const isDailySchedule =
+      mealTimes.latenight &&
+      !mealTimes.breakfast &&
+      !mealTimes.lunch &&
+      !mealTimes.dinner;
+
+    if (isDailySchedule && mealTimes.latenight) {
+      // For daily schedule locations, check if currently open
+      if (
+        isCurrentlyInPeriod(
+          mealTimes.latenight.start,
+          mealTimes.latenight.end,
+          now,
+        )
+      ) {
+        currentPeriod = "all day"; // Return "all day" directly for daily schedule locations
+      }
+    } else {
+      // Standard meal period checking for dining halls
+      const periods: Array<keyof MealPeriodTimes> = [
+        "breakfast",
+        "lunch",
+        "dinner",
+        "latenight",
+      ];
+      for (const period of periods) {
+        const times = mealTimes[period];
+        if (times && isCurrentlyInPeriod(times.start, times.end, now)) {
+          currentPeriod = period;
+          break;
+        }
       }
     }
 

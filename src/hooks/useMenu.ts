@@ -5,11 +5,11 @@ import { fetchXml, fetchCsv } from "@/lib/fetchMenu";
 import { parseXml } from "@/lib/parseXML";
 import { parseCsv } from "@/lib/parseCSV";
 import { mergeData } from "@/lib/mergeData";
-import type { MergedMenuData, MenuItemData } from "@/lib/types";
+import type { MergedMenuData, MenuItemData, MealPeriod } from "@/lib/types";
 
 type UseMenuOptions = {
   location: string;
-  menuType?: string | null;
+  menuType?: MealPeriod | null;
 };
 
 type UseMenuResult = {
@@ -66,8 +66,28 @@ export const useMenu = ({
       };
     }
 
-    // Filter by meal type if specified
-    if (menuType) {
+    // Skip filtering for "all day" (used by Cafe 1919 when open)
+    // The items will already be tagged as "all day" in XML, so filter for that
+    if (menuType === "all day") {
+      const normalizedMenuType = "all day";
+      const filteredStations: Record<string, ReadonlyArray<MenuItemData>> = {};
+
+      for (const [stationName, items] of Object.entries(data.stations)) {
+        // For "all day", include items tagged as "all day" OR items with no meal type
+        const filteredItems = items.filter(
+          (item) => !item.mealType || item.mealType === normalizedMenuType,
+        );
+        if (filteredItems.length > 0) {
+          filteredStations[stationName] = filteredItems;
+        }
+      }
+
+      data = {
+        ...data,
+        stations: filteredStations,
+      };
+    } else if (menuType) {
+      // Filter by meal type for dining halls
       const normalizedMenuType = menuType.toLowerCase().trim();
       const filteredStations: Record<string, ReadonlyArray<MenuItemData>> = {};
 

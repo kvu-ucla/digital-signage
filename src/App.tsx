@@ -1,13 +1,21 @@
-import { Component, useEffect, type ComponentType, type ReactNode } from "react";
+import {
+  Component,
+  useEffect,
+  type ComponentType,
+  type ReactNode,
+} from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LOCATIONS } from "@/locations";
 import { useMenu } from "@/hooks/useMenu";
 import { useAutoRefresh } from "@/hooks/useAutoRefresh";
 import { useMealPeriod } from "@/hooks/useMealPeriod";
-import { resolveScreen, getScreenCandidates, type ScreenProps } from "@/lib/resolveScreen";
+import {
+  resolveScreen,
+  getScreenCandidates,
+  type ScreenProps,
+} from "@/lib/resolveScreen";
 import { isMockMode, applyMockData } from "@/lib/mockMode";
-import { normalizeParam } from "@/lib/queryParams";
-// import { getMenuType } from "@/lib/queryParams"; // DISABLED
+import { normalizeParam, getMenuType } from "@/lib/queryParams";
 
 const queryClient = new QueryClient();
 
@@ -102,14 +110,18 @@ const ScreenLoader = ({
   station,
   menuType,
 }: ScreenLoaderProps) => {
-  const { mealPeriod, isLoading: isMealPeriodLoading } = useMealPeriod(location, menuType);
+  const { mealPeriod, isLoading: isMealPeriodLoading } = useMealPeriod(
+    location,
+    menuType,
+  );
 
   // When there's no manual override and no meal period, pass null to show nothing
   const effectiveMenuType = menuType !== null ? menuType : mealPeriod;
 
   const { data, isLoading, error } = useMenu({
     location,
-    menuType: effectiveMenuType === null ? null : (effectiveMenuType ?? undefined),
+    menuType:
+      effectiveMenuType === null ? null : (effectiveMenuType ?? undefined),
   });
 
   useAutoRefresh();
@@ -122,15 +134,14 @@ const ScreenLoader = ({
     return <ErrorMessage>Menu data unavailable.</ErrorMessage>;
   }
 
-  const Screen = resolveScreen(location, screenType, station)
+  const Screen = resolveScreen(location, screenType, station);
 
   if (!Screen) {
-    const candidates = getScreenCandidates(location, screenType, station)
+    const candidates = getScreenCandidates(location, screenType, station);
     return (
       <ErrorMessage>
         <div>
-          Could not find a screen component for{" "}
-          <code>{location}</code>.
+          Could not find a screen component for <code>{location}</code>.
         </div>
         <div style={{ fontSize: "1rem", opacity: 0.75 }}>Tried:</div>
         <pre
@@ -145,7 +156,7 @@ const ScreenLoader = ({
           {candidates.join("\n")}
         </pre>
       </ErrorMessage>
-    )
+    );
   }
 
   return (
@@ -164,15 +175,13 @@ export const App = () => {
   const params = new URLSearchParams(window.location.search);
 
   const location = normalizeParam(params.get("location")) ?? "";
-    const screenParam = normalizeParam(params.get("screen"));
-  const screen = screenParam && /^\d+$/.test(screenParam)
-    ? `page${screenParam}`
-    : (screenParam ?? "");
+  const screenParam = normalizeParam(params.get("screen"));
+  const screen =
+    screenParam && /^\d+$/.test(screenParam)
+      ? `page${screenParam}`
+      : (screenParam ?? "");
   const station = normalizeParam(params.get("station"));
-  // DISABLED: Menu type query param filtering
-  // const menuType = getMenuType();
-  const menuType = null;
-
+  const menuType = getMenuType();
 
   const overlayId = params.get("overlay-id");
   const overlayUrl = overlayId
@@ -180,7 +189,7 @@ export const App = () => {
     : null;
   const bgParam = params.get("bg");
   const bgUrl = bgParam
-    ? `${import.meta.env.BASE_URL}${bgParam.replace(/^\//, '')}`
+    ? `${import.meta.env.BASE_URL}${bgParam.replace(/^\//, "")}`
     : null;
 
   const config = LOCATIONS[location];
@@ -190,7 +199,10 @@ export const App = () => {
   }, [config?.stylesheet]);
 
   useEffect(() => {
-    document.documentElement.classList.toggle("is-takeover", !!(overlayId || bgUrl));
+    document.documentElement.classList.toggle(
+      "is-takeover",
+      !!(overlayId || bgUrl),
+    );
   }, [overlayId, bgUrl]);
 
   if (!config) {
@@ -198,9 +210,7 @@ export const App = () => {
       <ErrorMessage>
         <div>
           Unknown location:{" "}
-          <code style={{ marginLeft: "0.5rem" }}>
-            {location || "(none)"}
-          </code>
+          <code style={{ marginLeft: "0.5rem" }}>{location || "(none)"}</code>
         </div>
       </ErrorMessage>
     );
@@ -215,9 +225,7 @@ export const App = () => {
           title="background overlay"
         />
       )}
-      {bgUrl && (
-        <img src={bgUrl} className="overlay-bg" alt="" />
-      )}
+      {bgUrl && <img src={bgUrl} className="overlay-bg" alt="" />}
       <QueryClientProvider client={queryClient}>
         <ErrorBoundary>
           <ScreenLoader

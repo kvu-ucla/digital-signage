@@ -1,4 +1,9 @@
-import type { MenuItemData, MenuData, StationWithRegion, MergedMenuData } from './types'
+import type {
+  MenuItemData,
+  MenuData,
+  StationWithRegion,
+  MergedMenuData,
+} from "./types";
 
 export const mergeData = (
   menuData: MenuData,
@@ -8,7 +13,7 @@ export const mergeData = (
 
   const stationItemsLookup = new Map<
     string,
-    { name: string; items:Array<MenuItemData> }
+    { name: string; items: Array<MenuItemData> }
   >();
 
   for (const [stationName, items] of Object.entries(menuData.stations)) {
@@ -44,9 +49,7 @@ export const mergeData = (
         regionPosition: Number.isNaN(parsedRegionPosition)
           ? 1
           : parsedRegionPosition,
-        regionOrder: Number.isNaN(parsedRegionOrder)
-          ? 0
-          : parsedRegionOrder,
+        regionOrder: Number.isNaN(parsedRegionOrder) ? 0 : parsedRegionOrder,
       });
     }
   }

@@ -1,4 +1,4 @@
-export type ScreenType = 'horizontal' | 'vertical' | 'entrance'
+export type ScreenType = "horizontal" | "vertical" | "entrance";
 
 /**
  * Configuration for dietary legend.
@@ -14,7 +14,7 @@ export type ScreenType = 'horizontal' | 'vertical' | 'entrance'
  * @prop.font - font family for legend text
  * @prop.strongLetterSpacing - letter spacing for strong text (e.g. in description)
  * @prop.className
- * @prop.description - description text for horizontal, vertical screens. 
+ * @prop.description - description text for horizontal, vertical screens.
  * @prop.descriptionColor - color for description text, defaults to same as legend text color
  * @prop.descriptionFontSize - font size for description text, defaults to 22px
  */
@@ -34,59 +34,62 @@ export type LegendConfig = {
   description?: string;
   descriptionColor?: string;
   descriptionFontSize?: string;
-}
+};
 
 export type MenuItemConfig = {
-  gap: string
-  divClassName: string,
-  itemClassName: string,
-  dietaryClassName: string,
+  gap: string;
+  divClassName: string;
+  itemClassName: string;
+  dietaryClassName: string;
 
-  priceClassName?: string //set to hidden if no price
-  pricedivClassName?: string, //set to empty string if no price
+  priceClassName?: string; //set to hidden if no price
+  pricedivClassName?: string; //set to empty string if no price
 
-  summaryClassName?: string, //set to hidden if no summary
-}
+  summaryClassName?: string; //set to hidden if no summary
+};
 
 export type MenuItemData = {
-  recipeNumber: string
-  name: string
-  description: string | null
-  price: string | null
-  dietaryLabels: ReadonlyArray<string>
-  mealType: string
-}
+  recipeNumber: string;
+  name: string;
+  description: string | null;
+  price: string | null;
+  dietaryLabels: ReadonlyArray<string>;
+  mealType: string;
+};
 
 export type MenuData = {
-  serveDate: string
-  locationNumber: string
-  menuType: string
-  stations: Record<string, ReadonlyArray<MenuItemData>>
-}
+  serveDate: string;
+  locationNumber: string;
+  menuType: string;
+  stations: Record<string, ReadonlyArray<MenuItemData>>;
+};
 
 export type LocationConfig = {
-  displayName: string
-  xmlUrl: string
-  gid?: string
-  stylesheet?: string
-  screens?: Record<string, {
-    menus?: ReadonlyArray<string>
-    type: ScreenType
-    requiresStation: boolean
-    stations?: ReadonlyArray<string>
-  }>
-}
+  displayName: string;
+  xmlUrl: string;
+  gid?: string;
+  stylesheet?: string;
+  screens?: Record<
+    string,
+    {
+      menus?: ReadonlyArray<string>;
+      type: ScreenType;
+      requiresStation: boolean;
+      stations?: ReadonlyArray<string>;
+    }
+  >;
+};
 
 export type StationWithRegion = {
-  name: string
-  items: ReadonlyArray<MenuItemData>
-  regionPosition: number
-  regionOrder: number
-}
+  name: string;
+  items: ReadonlyArray<MenuItemData>;
+  regionPosition: number;
+  regionOrder: number;
+};
 
 export type MergedMenuData = MenuData & {
-  stationsWithRegions: ReadonlyArray<StationWithRegion>
-}
+  stationsWithRegions: ReadonlyArray<StationWithRegion>;
+};
 
 export type MealPeriodTimes = {
   breakfast: { start: string; end: string } | null;

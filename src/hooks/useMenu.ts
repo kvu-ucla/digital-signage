@@ -27,7 +27,7 @@ export const useMenu = ({
   if (!config) {
     throw new Error(`Invalid location: ${location}`);
   }
-  
+
   const xmlQuery = useQuery({
     queryKey: ["menu-xml", location],
     queryFn: async () => {
@@ -72,7 +72,9 @@ export const useMenu = ({
       const filteredStations: Record<string, ReadonlyArray<MenuItemData>> = {};
 
       for (const [stationName, items] of Object.entries(data.stations)) {
-        const filteredItems = items.filter(item => item.mealType === normalizedMenuType);
+        const filteredItems = items.filter(
+          (item) => item.mealType === normalizedMenuType,
+        );
         if (filteredItems.length > 0) {
           filteredStations[stationName] = filteredItems;
         }

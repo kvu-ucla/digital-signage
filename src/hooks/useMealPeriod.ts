@@ -1,5 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-import { fetchTimetable, parseMealTimeSchedule, getCurrentMealPeriods } from '@/lib/fetchTimetable';
+import { useQuery } from "@tanstack/react-query";
+import {
+  fetchTimetable,
+  parseMealTimeSchedule,
+  getCurrentMealPeriods,
+} from "@/lib/fetchTimetable";
+import { getDelayToNext3MinMark } from "@/lib/syncedRefetch";
 
 type UseMealPeriodResult = {
   mealPeriod: string | null;
@@ -8,12 +13,14 @@ type UseMealPeriodResult = {
 
 function findLocationInTimetable(
   locationKey: string,
-  timetableMap: Record<string, string | null>
+  timetableMap: Record<string, string | null>,
 ): string | null {
-  const normalizedKey = locationKey.toLowerCase().replace(/\s+/g, '');
+  const normalizedKey = locationKey.toLowerCase().replace(/\s+/g, "");
 
   for (const [timetableName, period] of Object.entries(timetableMap)) {
-    const normalizedTimetableName = timetableName.toLowerCase().replace(/\s+/g, '');
+    const normalizedTimetableName = timetableName
+      .toLowerCase()
+      .replace(/\s+/g, "");
     if (normalizedKey === normalizedTimetableName) {
       return period;
     }
@@ -24,10 +31,10 @@ function findLocationInTimetable(
 
 export function useMealPeriod(
   locationKey: string,
-  manualOverride?: string | null
+  manualOverride?: string | null,
 ): UseMealPeriodResult {
   const { data, isLoading } = useQuery({
-    queryKey: ['timetable'],
+    queryKey: ["timetable"],
     queryFn: async () => {
       const csvText = await fetchTimetable();
       const schedule = parseMealTimeSchedule(csvText);
@@ -35,7 +42,7 @@ export function useMealPeriod(
       return getCurrentMealPeriods(schedule);
     },
     staleTime: 2 * 60 * 1000,
-    refetchInterval: 3 * 60 * 1000,
+    refetchInterval: getDelayToNext3MinMark,
     retry: 2,
   });
 
@@ -49,7 +56,7 @@ export function useMealPeriod(
 
   const period = findLocationInTimetable(locationKey, data);
 
-  console.log('[useMealPeriod]', {
+  console.log("[useMealPeriod]", {
     location: locationKey,
     period: period,
   });

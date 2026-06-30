@@ -1,9 +1,9 @@
-import type { MenuItemData } from '@/lib/types'
-import { DietaryIcon } from './DietaryIcon'
+import type { MenuItemData } from "@/lib/types";
+import { DietaryIcon } from "./DietaryIcon";
 
 type FeaturedItemProps = {
-  item: MenuItemData
-}
+  item: MenuItemData;
+};
 
 export const FeaturedItem = ({ item }: FeaturedItemProps) => (
   <div className="flex flex-col items-center gap-[42px] w-full">
@@ -13,7 +13,12 @@ export const FeaturedItem = ({ item }: FeaturedItemProps) => (
     {item.dietaryLabels.length > 0 && (
       <div className="flex gap-[8px] items-center h-[40px]">
         {item.dietaryLabels.map((label) => (
-          <DietaryIcon key={label} dietaryLabel={label} size="40px" mode="light" />
+          <DietaryIcon
+            key={label}
+            dietaryLabel={label}
+            size="40px"
+            mode="light"
+          />
         ))}
       </div>
     )}
@@ -23,4 +28,4 @@ export const FeaturedItem = ({ item }: FeaturedItemProps) => (
       </p>
     )}
   </div>
-)
+);

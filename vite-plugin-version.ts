@@ -1,7 +1,7 @@
-import { execSync } from 'child_process';
-import fs from 'fs';
-import path from 'path';
-import type { Plugin } from 'vite';
+import { execSync } from "child_process";
+import fs from "fs";
+import path from "path";
+import type { Plugin } from "vite";
 
 /**
  * Vite plugin that generates a version.json file during build.
@@ -9,13 +9,13 @@ import type { Plugin } from 'vite';
  */
 export function vitePluginVersion(): Plugin {
   return {
-    name: 'vite-plugin-version',
+    name: "vite-plugin-version",
     closeBundle() {
       let version: string;
 
       try {
         // Try to get git commit hash (works in CI and local git repos)
-        version = execSync('git rev-parse --short HEAD').toString().trim();
+        version = execSync("git rev-parse --short HEAD").toString().trim();
       } catch {
         // Fallback to timestamp if git is not available
         version = Date.now().toString();
@@ -27,8 +27,8 @@ export function vitePluginVersion(): Plugin {
       };
 
       // Write to dist/version.json
-      const outDir = path.resolve(process.cwd(), 'dist');
-      const versionFile = path.join(outDir, 'version.json');
+      const outDir = path.resolve(process.cwd(), "dist");
+      const versionFile = path.join(outDir, "version.json");
 
       fs.writeFileSync(versionFile, JSON.stringify(versionData, null, 2));
 

@@ -21,7 +21,7 @@ export default function HorizontalTemplate({ data }: Cafe1919TemplateProps) {
     number,
     Array<{
       name: string;
-      items: typeof data.stationsWithRegions[number]["items"];
+      items: (typeof data.stationsWithRegions)[number]["items"];
       order: number;
     }>
   >();
@@ -73,7 +73,10 @@ function SideInfoPanel() {
         <div className="flex h-[54px] items-center justify-center border-b-4 border-b-[#c6a88e] bg-[#d83f22] py-5 text-white">
           <h2
             className="mt-1 text-[40px] uppercase leading-none"
-            style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
+            style={{
+              fontFamily: "Arial Narrow, Arial, sans-serif",
+              fontWeight: 700,
+            }}
           >
             SCAN FOR FULL MENU
           </h2>
@@ -96,7 +99,10 @@ function SideInfoPanel() {
         <div className="mx-auto w-[85%] text-center">
           <h3
             className="text-[40px] uppercase"
-            style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
+            style={{
+              fontFamily: "Arial Narrow, Arial, sans-serif",
+              fontWeight: 700,
+            }}
           >
             1 Swipe Meal Deal
           </h3>
@@ -105,7 +111,10 @@ function SideInfoPanel() {
         <div className="mx-auto w-[85%] text-center">
           <p
             className="mx-auto my-auto max-w-[400px] text-[25px] leading-tight"
-            style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
+            style={{
+              fontFamily: "Arial Narrow, Arial, sans-serif",
+              fontWeight: 700,
+            }}
           >
             Any Pizzette, Panini, Insalate, or Pretz
             <br />
@@ -116,7 +125,10 @@ function SideInfoPanel() {
         <div className="mx-auto w-[85%] pt-2 text-center">
           <p
             className="text-[25px] leading-tight"
-            style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
+            style={{
+              fontFamily: "Arial Narrow, Arial, sans-serif",
+              fontWeight: 700,
+            }}
           >
             $7.99 + Tax
           </p>
@@ -127,14 +139,20 @@ function SideInfoPanel() {
         <div className="mx-auto w-[85%] border-b-2 border-[#c6a88e] pb-3 text-center">
           <h3
             className="text-[40px] uppercase"
-            style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
+            style={{
+              fontFamily: "Arial Narrow, Arial, sans-serif",
+              fontWeight: 700,
+            }}
           >
             Accepted Payment
           </h3>
 
           <p
             className="text-[25px] leading-tight"
-            style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
+            style={{
+              fontFamily: "Arial Narrow, Arial, sans-serif",
+              fontWeight: 700,
+            }}
           >
             Bruincard EasyPay, Credit/Debit Card
           </p>
@@ -146,7 +164,10 @@ function SideInfoPanel() {
       </section>
 
       <div className="mt-auto pb-5 text-center text-[14px] leading-tight text-white">
-        <h4 className="text-[18px]" style={{ fontFamily: "Arial Narrow, Arial, sans-serif" }}>
+        <h4
+          className="text-[18px]"
+          style={{ fontFamily: "Arial Narrow, Arial, sans-serif" }}
+        >
           For allergen and nutritional information, visit
           <br />
           menu.dining.ucla.edu/Menus/Cafe1919
@@ -173,7 +194,7 @@ export function MenuColumn({ stations }: MenuColumnProps) {
       station.name.toLowerCase().trim() === "daily specials"
         ? station.items
         : [...station.items].sort((a, b) =>
-            a.name.localeCompare(b.name, undefined, { sensitivity: "base" })
+            a.name.localeCompare(b.name, undefined, { sensitivity: "base" }),
           ),
   }));
 
@@ -201,7 +222,11 @@ export function MenuColumn({ stations }: MenuColumnProps) {
             "
           >
             {items.length ? (
-              <MenuItemList items={items} size="20px" menuItemConfig={MENU_ITEM_CONFIG} />
+              <MenuItemList
+                items={items}
+                size="20px"
+                menuItemConfig={MENU_ITEM_CONFIG}
+              />
             ) : (
               <p className="text-[22px] uppercase text-#5c452b">
                 No items available
@@ -224,7 +249,10 @@ function MenuTitle({ title }: MenuTitleProps) {
       <div className="flex h-[54px] items-center justify-center border-b-4 border-b-[#c6a88e] bg-[#d83f22] py-5 text-white">
         <h2
           className="mt-1 text-[40px] uppercase leading-none"
-          style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
+          style={{
+            fontFamily: "Arial Narrow, Arial, sans-serif",
+            fontWeight: 700,
+          }}
         >
           {title}
         </h2>

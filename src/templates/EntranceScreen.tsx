@@ -1,5 +1,9 @@
 import type { ReactNode } from "react";
-import type { MergedMenuData, LegendConfig, StationWithRegion } from "@/lib/types";
+import type {
+  MergedMenuData,
+  LegendConfig,
+  StationWithRegion,
+} from "@/lib/types";
 import { MenuItemList } from "@/menu/MenuItemList";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import { CyclingColumn } from "@/components/CyclingColumns";
@@ -12,7 +16,11 @@ export type EntranceScreenProps = {
   header?: ReactNode;
 };
 
-export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenProps) => {
+export const EntranceScreen = ({
+  data,
+  legendConfig,
+  header,
+}: EntranceScreenProps) => {
   const { isMinimal } = getDisplayMode();
   if (data.stationsWithRegions.length === 0) {
     return (
@@ -29,8 +37,10 @@ export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenPro
       {header}
 
       <div
-        className={`screen-entrance__bar${isMinimal ? ' invisible' : ''}`}
-        style={{ gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))` }}
+        className={`screen-entrance__bar${isMinimal ? " invisible" : ""}`}
+        style={{
+          gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))`,
+        }}
       >
         {sortedRegions.map(([position, stations], index) => (
           <div
@@ -46,13 +56,21 @@ export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenPro
 
       <main
         className="screen-entrance__main"
-        style={{ gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))` }}
+        style={{
+          gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))`,
+        }}
       >
         {sortedRegions.map(([position, stations]) => (
           <section key={position} className="screen-entrance__region">
             {stations.map(({ name, items }) => {
               const itemNodes = items.map((item) => (
-                <MenuItemList key={item.recipeNumber} items={[item]} iconSize="30px" gap="10px" className="items-center text-center" />
+                <MenuItemList
+                  key={item.recipeNumber}
+                  items={[item]}
+                  iconSize="30px"
+                  gap="10px"
+                  className="items-center text-center"
+                />
               ));
               return (
                 <div key={name} className="screen-entrance__items">
@@ -76,11 +94,13 @@ export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenPro
 
 type RegionStation = {
   name: string;
-  items: StationWithRegion['items'];
+  items: StationWithRegion["items"];
   order: number;
 };
 
-function groupByRegion(stations: MergedMenuData['stationsWithRegions']): Array<[number, Array<RegionStation>]> {
+function groupByRegion(
+  stations: MergedMenuData["stationsWithRegions"],
+): Array<[number, Array<RegionStation>]> {
   const map = new Map<number, Array<RegionStation>>();
 
   for (const { regionPosition, regionOrder, name, items } of stations) {

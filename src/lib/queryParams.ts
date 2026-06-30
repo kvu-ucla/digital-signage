@@ -10,6 +10,6 @@ export function getMenuType(): string | null {
 
 export function getDisplayMode(): { isMinimal: boolean } {
   const params = new URLSearchParams(window.location.search);
-  const isMinimal = params.get('minimal') === 'true';
+  const isMinimal = params.get("minimal") === "true";
   return { isMinimal };
 }

@@ -1,17 +1,16 @@
-import { MEAL_PERIODS, type MealPeriod } from "./types";
-
 export function normalizeParam(value: string | null): string | null {
   if (!value) return null;
   return value.toLowerCase().trim().replace(/\s+/g, " ");
 }
 
-export function getMenuType(): MealPeriod | null {
+export function getMenuType(): string | null {
   const params = new URLSearchParams(window.location.search);
   const menuParam = normalizeParam(params.get("menu"));
 
-  // Validate that it's a valid MealPeriod using the constant array
-  if (menuParam && MEAL_PERIODS.includes(menuParam as MealPeriod)) {
-    return menuParam as MealPeriod;
+  // Valid meal types: breakfast, lunch, dinner, latenight, all day
+  const validMealTypes = ["breakfast", "lunch", "dinner", "latenight", "all day"];
+  if (menuParam && validMealTypes.includes(menuParam)) {
+    return menuParam;
   }
 
   return null;

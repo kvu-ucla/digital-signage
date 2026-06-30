@@ -1,10 +1,5 @@
 import { fetchCsv } from "./fetchMenu";
-import type {
-  MealTimeSchedule,
-  MealPeriodTimes,
-  MealTimeMap,
-  MealPeriod,
-} from "./types";
+import type { MealTimeSchedule, MealPeriodTimes } from "./types";
 
 const GID = "1246955051";
 
@@ -135,11 +130,11 @@ function isCurrentlyInPeriod(
 export function getCurrentMealPeriods(
   schedule: MealTimeSchedule,
   now: Date = new Date(),
-): MealTimeMap {
-  const result: MealTimeMap = {};
+): Record<string, string | null> {
+  const result: Record<string, string | null> = {};
 
   for (const [locationName, mealTimes] of Object.entries(schedule)) {
-    let currentPeriod: MealPeriod | null = null;
+    let currentPeriod: string | null = null;
 
     // Check if this is a daily schedule location (only latenight populated, no breakfast/lunch/dinner)
     const isDailySchedule =

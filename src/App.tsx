@@ -16,7 +16,6 @@ import {
 } from "@/lib/resolveScreen";
 import { isMockMode, applyMockData } from "@/lib/mockMode";
 import { normalizeParam, getMenuType } from "@/lib/queryParams";
-import type { MealPeriod } from "@/lib/types";
 
 const queryClient = new QueryClient();
 
@@ -94,7 +93,7 @@ type ScreenLoaderProps = {
   location: string;
   screenType: string;
   station: string | null;
-  menuType: MealPeriod | null;
+  menuType: string | null;
 };
 
 type ResolvedScreenProps = ScreenProps & {

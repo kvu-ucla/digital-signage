@@ -5,11 +5,11 @@ import { fetchXml, fetchCsv } from "@/lib/fetchMenu";
 import { parseXml } from "@/lib/parseXML";
 import { parseCsv } from "@/lib/parseCSV";
 import { mergeData } from "@/lib/mergeData";
-import type { MergedMenuData, MenuItemData, MealPeriod } from "@/lib/types";
+import type { MergedMenuData, MenuItemData } from "@/lib/types";
 
 type UseMenuOptions = {
   location: string;
-  menuType?: MealPeriod | null;
+  menuType?: string | null;
 };
 
 type UseMenuResult = {

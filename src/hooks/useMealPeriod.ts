@@ -4,7 +4,6 @@ import {
   parseMealTimeSchedule,
   getCurrentMealPeriods,
 } from "@/lib/fetchTimetable";
-import { getDelayToNext3MinMark } from "@/lib/syncedRefetch";
 import type { MealPeriod, MealTimeMap } from "@/lib/types";
 
 type UseMealPeriodResult = {
@@ -43,7 +42,7 @@ export function useMealPeriod(
       return getCurrentMealPeriods(schedule);
     },
     staleTime: 2 * 60 * 1000,
-    refetchInterval: getDelayToNext3MinMark,
+    refetchInterval: 3 * 60_000, // Refetch every 3 minutes
     retry: 2,
   });
 

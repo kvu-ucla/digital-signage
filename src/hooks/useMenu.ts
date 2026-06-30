@@ -49,6 +49,7 @@ export const useMenu = ({
       return parsed;
     },
     enabled: !!config.gid,
+    refetchInterval: 3 * 60_000, // Refetch every 3 minutes
     retry: 1,
   });
 

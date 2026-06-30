@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { getDelayToNext3MinMark } from "@/lib/syncedRefetch";
 
 type UseAutoRefreshOptions = {
   maxUptime?: number;
@@ -21,7 +20,7 @@ export function useAutoRefresh({
     }
   }, []);
 
-  // Check for new app version (aligned to wall-clock 3-minute marks)
+  // Check for new app version
   useEffect(() => {
     const checkVersion = async (): Promise<void> => {
       try {
@@ -59,23 +58,13 @@ export function useAutoRefresh({
     // Initial check
     void checkVersion();
 
-    // Wait until next 3-minute mark, then check every 3 minutes
-    const initialDelay = getDelayToNext3MinMark();
-    const initialTimeout = setTimeout(() => {
+    // Check every 3 minutes
+    const interval = setInterval(() => {
       void checkVersion();
-      const interval = setInterval(() => {
-        void checkVersion();
-      }, versionCheckInterval);
-
-      // Store interval ID for cleanup
-      (initialTimeout as any).intervalId = interval;
-    }, initialDelay);
+    }, versionCheckInterval);
 
     return (): void => {
-      clearTimeout(initialTimeout);
-      if ((initialTimeout as any).intervalId) {
-        clearInterval((initialTimeout as any).intervalId);
-      }
+      clearInterval(interval);
     };
   }, [versionCheckInterval]);
 

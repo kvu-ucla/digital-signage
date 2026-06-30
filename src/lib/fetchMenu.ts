@@ -17,7 +17,7 @@ export const fetchCsv = async (gid: string): Promise<string> => {
       "SHEET_ID is not configured — update fetchMenu.ts with your Google Sheet ID",
     );
   }
-  const url = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTNxVJcODFyEeIwg5YnfblBE8xSQbSMYkCtvyT67aUnEUnhqiuRJ5oMUCK0sT7p39z5ddkva8-Pbzog/pub?gid=${gid}&single=true&output=csv`;
+  const url = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTNxVJcODFyEeIwg5YnfblBE8xSQbSMYkCtvyT67aUnEUnhqiuRJ5oMUCK0sT7p39z5ddkva8-Pbzog/pub?gid=${gid}&single=true&output=csv&t=${Date.now()}`;
   const response = await fetch(url, { cache: "no-store" });
   if (!response.ok) {
     throw new Error(

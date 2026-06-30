@@ -57,8 +57,8 @@ export const parseMealTimeSchedule = (csvText: string): MealTimeSchedule => {
     };
 
     // Check for dailystart/dailyend (used by Cafe 1919 and similar locations)
-    const dailyStartCol = findCol("dailystart");
-    const dailyEndCol = findCol("dailyend");
+    const dailyStartCol = findCol("DailyStart");
+    const dailyEndCol = findCol("DailyEnd");
 
     if (dailyStartCol !== null && dailyEndCol !== null) {
       const dailyStart = cols[dailyStartCol]?.trim();

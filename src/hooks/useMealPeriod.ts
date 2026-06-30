@@ -34,7 +34,7 @@ export function useMealPeriod(
 
       return getCurrentMealPeriods(schedule);
     },
-    staleTime: 2 * 60 * 1000,
+    staleTime: 0, // Always consider stale to ensure fresh meal period calculation
     refetchInterval: 3 * 60 * 1000,
     retry: 2,
   });
@@ -52,6 +52,7 @@ export function useMealPeriod(
   console.log('[useMealPeriod]', {
     location: locationKey,
     period: period,
+    time: new Date().toLocaleTimeString(),
   });
 
   return { mealPeriod: period, isLoading: false };

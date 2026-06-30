@@ -120,8 +120,7 @@ const ScreenLoader = ({
 
   const { data, isLoading, error } = useMenu({
     location,
-    menuType:
-      effectiveMenuType === null ? null : (effectiveMenuType ?? undefined),
+    menuType: effectiveMenuType,
   });
 
   useAutoRefresh();

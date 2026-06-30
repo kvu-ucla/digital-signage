@@ -49,6 +49,7 @@ export const useMenu = ({
       return parsed;
     },
     enabled: !!config.gid,
+    staleTime: 0, // Always fetch fresh data on mount
     refetchInterval: 3 * 60_000, // Refetch every 3 minutes
     retry: 1,
   });
@@ -67,8 +68,7 @@ export const useMenu = ({
       };
     }
 
-    // Skip filtering for "all day" (used by Cafe 1919 when open)
-    // The items will already be tagged as "all day" in XML, so filter for that
+    // Skip filtering for "all day" (used for boutique dining)
     if (menuType === "all day") {
       const normalizedMenuType = "all day";
       const filteredStations: Record<string, ReadonlyArray<MenuItemData>> = {};

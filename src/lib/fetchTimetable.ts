@@ -51,7 +51,7 @@ export const parseMealTimeSchedule = (csvText: string): MealTimeSchedule => {
       latenight: null,
     };
 
-    // Check for dailystart/dailyend (used by Cafe 1919 and similar locations)
+    // Check for DailyStart/DailyEnd (used by Cafe 1919 and similar locations)
     const dailyStartCol = findCol("DailyStart");
     const dailyEndCol = findCol("DailyEnd");
 
@@ -64,18 +64,18 @@ export const parseMealTimeSchedule = (csvText: string): MealTimeSchedule => {
         // (chosen because it's least likely to conflict with regular meal periods)
         mealTimes.latenight = { start: dailyStart, end: dailyEnd };
       }
-    } else {
-      // Standard meal periods for dining halls
-      for (const period of MEAL_PERIODS) {
-        const startCol = findCol(`${period.label}Start`);
-        const endCol = findCol(`${period.label}End`);
-        if (startCol === null || endCol === null) continue;
+    }
 
-        const startStr = cols[startCol]?.trim();
-        const endStr = cols[endCol]?.trim();
-        if (startStr && endStr) {
-          mealTimes[period.key] = { start: startStr, end: endStr };
-        }
+    // Standard meal periods for dining halls
+    for (const period of MEAL_PERIODS) {
+      const startCol = findCol(`${period.label}Start`);
+      const endCol = findCol(`${period.label}End`);
+      if (startCol === null || endCol === null) continue;
+
+      const startStr = cols[startCol]?.trim();
+      const endStr = cols[endCol]?.trim();
+      if (startStr && endStr) {
+        mealTimes[period.key] = { start: startStr, end: endStr };
       }
     }
 

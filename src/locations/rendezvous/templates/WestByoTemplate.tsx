@@ -3,7 +3,13 @@ import { MenuItem } from "@/menu/ModMenuList";
 import { getStationItems } from "../helpers/rendezvous";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
-import { LEGEND_CONFIG, NAME_ONLY_CONFIG, PRICED_ITEM_CONFIG, ICON_ITEM_CONFIG, COMPACT_PRICE_CONFIG } from "../config";
+import {
+  LEGEND_CONFIG,
+  NAME_ONLY_CONFIG,
+  PRICED_ITEM_CONFIG,
+  ICON_ITEM_CONFIG,
+  COMPACT_PRICE_CONFIG,
+} from "../config";
 
 type WestBYOScreenProps = {
   data: MergedMenuData;
@@ -29,8 +35,11 @@ type CompactPriceListProps = {
   iconSize?: string;
 };
 
-export default function WestBYOScreen({ data }: WestBYOScreenProps): ReactElement {     // removed station due to build errors; may need to add back later
-  console.log("data:", data)
+export default function WestBYOScreen({
+  data,
+}: WestBYOScreenProps): ReactElement {
+  // removed station due to build errors; may need to add back later
+  console.log("data:", data);
   const title = "BUILD YOUR OWN ENTRÉE";
   const styleItems = getStationItems(data, "STYLE");
   const fillingItems = getStationItems(data, "FILLING");
@@ -109,7 +118,7 @@ export default function WestBYOScreen({ data }: WestBYOScreenProps): ReactElemen
 
           <div className="absolute bottom-[0px] left-0 right-0 shrink-0">
             <div className="ml-auto mr-auto mt-1 flex w-[85%] items-center justify-center">
-                <DietaryLegend config={LEGEND_CONFIG} />
+              <DietaryLegend config={LEGEND_CONFIG} />
             </div>
           </div>
         </main>

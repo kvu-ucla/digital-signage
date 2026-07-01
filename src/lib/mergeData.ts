@@ -1,14 +1,19 @@
-import type { MenuItemData, MenuData, StationWithRegion, MergedMenuData } from './types'
+import type {
+  MenuItemData,
+  MenuData,
+  StationWithRegion,
+  MergedMenuData,
+} from "./types";
 
 export const mergeData = (
   menuData: MenuData,
   sheetRows: Array<Record<string, string>> | null,
 ): MergedMenuData => {
-  const normalize = (value: string) => value.toLowerCase().trim();
+  const normalize = (value: string): string => value.toLowerCase().trim();
 
   const stationItemsLookup = new Map<
     string,
-    { name: string; items:Array<MenuItemData> }
+    { name: string; items: Array<MenuItemData> }
   >();
 
   for (const [stationName, items] of Object.entries(menuData.stations)) {
@@ -44,9 +49,7 @@ export const mergeData = (
         regionPosition: Number.isNaN(parsedRegionPosition)
           ? 1
           : parsedRegionPosition,
-        regionOrder: Number.isNaN(parsedRegionOrder)
-          ? 0
-          : parsedRegionOrder,
+        regionOrder: Number.isNaN(parsedRegionOrder) ? 0 : parsedRegionOrder,
       });
     }
   }

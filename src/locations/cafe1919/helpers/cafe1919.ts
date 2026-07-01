@@ -17,7 +17,10 @@ export function fillConfig(
 
     let items: Array<MenuItemData>;
 
-    if (station.name.toUpperCase() === "DAILY SPECIALS" && displayId === "Sides") {
+    if (
+      station.name.toUpperCase() === "DAILY SPECIALS" &&
+      displayId === "Sides"
+    ) {
       const dayName = new Date()
         .toLocaleDateString("en-US", { weekday: "long" })
         .slice(0, 3);

@@ -7,20 +7,26 @@ type Cafe1919TemplateProps = {
   data: MergedMenuData;
 };
 
-export default function Cafe1919VerticalTemplate({ data }: Cafe1919TemplateProps) {
-    return (
+export default function Cafe1919VerticalTemplate({
+  data,
+}: Cafe1919TemplateProps) {
+  return (
     <div className="flex min-h-screen items-center justify-center bg-white">
-        <div className="relative h-[1920px] w-[1080px] overflow-hidden bg-[#ede0d7]">
-            <MenuColumn stations={data.stationsWithRegions.flatMap((station) =>
-                station.items.length > 0
-                ? [{
+      <div className="relative h-[1920px] w-[1080px] overflow-hidden bg-[#ede0d7]">
+        <MenuColumn
+          stations={data.stationsWithRegions.flatMap((station) =>
+            station.items.length > 0
+              ? [
+                  {
                     name: station.name,
                     items: station.items,
                     order: station.regionOrder,
-                }]
-                : []
-            )} />
-        </div>
+                  },
+                ]
+              : [],
+          )}
+        />
+      </div>
     </div>
   );
 }
@@ -60,7 +66,11 @@ export function MenuColumn({ stations }: MenuColumnProps) {
             "
           >
             {items.length ? (
-              <MenuItemList items={items} size="56px" menuItemConfig={VERTICAL_MENU_ITEM_CONFIG} />
+              <MenuItemList
+                items={items}
+                size="56px"
+                menuItemConfig={VERTICAL_MENU_ITEM_CONFIG}
+              />
             ) : (
               <p className="text-[22px] uppercase text-#5c452b">
                 No items available
@@ -83,7 +93,10 @@ function MenuTitle({ title }: MenuTitleProps) {
       <div className="flex h-[163px] items-center justify-center border-b-8 border-b-[#c6a88e] bg-[#d83f22] py-5 text-white">
         <h2
           className="mt-2 text-[128px] uppercase leading-none"
-          style={{ fontFamily: "Arial Narrow, Arial, sans-serif", fontWeight: 700 }}
+          style={{
+            fontFamily: "Arial Narrow, Arial, sans-serif",
+            fontWeight: 700,
+          }}
         >
           {title}
         </h2>

@@ -1,5 +1,5 @@
 import type { MergedMenuData } from "../../../lib/types";
-import  WestBYOScreen  from "../templates/WestByoTemplate";
+import WestBYOScreen from "../templates/WestByoTemplate";
 
 type RendezvousDisplayProps = {
   data: MergedMenuData;
@@ -7,12 +7,11 @@ type RendezvousDisplayProps = {
   screenType: string;
 };
 
-export const RendezvousDisplay = ({ data, station }: RendezvousDisplayProps) => {       // removed screenType due to build errors; may need to add back later
+export const RendezvousDisplay = ({
+  data,
+  station,
+}: RendezvousDisplayProps) => {
+  // removed screenType due to build errors; may need to add back later
 
-  return (
-    <WestBYOScreen
-          data={data}
-          station={station}
-    />
-  );
+  return <WestBYOScreen data={data} station={station} />;
 };

@@ -61,10 +61,6 @@ html:not(.is-takeover) .screen-horizontal__graphic {
   background: var(--ce-orange);
 }
 
-html:not(.is-takeover) .screen-horizontal__footer-inner {
-  border-top: 1px solid var(--ce-primary);
-}
-
 html:not(.is-takeover) .screen-horizontal__side {
   background: var(--ce-bg);
 }
@@ -85,10 +81,10 @@ html:not(.is-takeover) .screen-vertical {
 
 .screen-vertical__header {
   display: flex;
-  padding: 36px 100px;
+  padding: 90px 300px;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
 }
 
@@ -103,14 +99,16 @@ html:not(.is-takeover) .screen-vertical__header {
 
 .screen-vertical__header-title {
   color: white;
+  background: var(--ce-header);
+  display: flex;
+  padding: 40px 27px 30px 27px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 html:not(.is-takeover) .screen-vertical__graphic {
   background: var(--ce-orange);
-}
-
-html:not(.is-takeover) .screen-vertical__footer-inner {
-  border-top: 1px solid var(--ce-primary);
 }
 
 /* ── Entrance screen ── */

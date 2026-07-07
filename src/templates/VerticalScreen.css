@@ -92,16 +92,33 @@
 }
 
 .screen-vertical__main-hero {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-self: stretch;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.screen-vertical__main-list {
   display: flex;
   flex: 1 1 0;
   flex-direction: column;
   justify-content: top;
   align-items: center;
   gap: 120px 10px;
-  align-self: stretch;
   padding: 200px 36px;
   min-height: 0;
   overflow: hidden;
+}
+
+.screen-vertical__main-list--measure {
+  position: absolute;
+  inset: 0;
+  flex: none;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* ── Footer ── */

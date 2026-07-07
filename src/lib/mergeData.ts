@@ -1,69 +1,50 @@
-import type {
-  MenuItemData,
-  MenuData,
-  StationWithRegion,
-  MergedMenuData,
-} from "./types";
+import type { MenuData, StationWithRegion, MergedMenuData } from './types'
 
 export const mergeData = (
   menuData: MenuData,
   sheetRows: Array<Record<string, string>> | null,
 ): MergedMenuData => {
-  const normalize = (value: string): string => value.toLowerCase().trim();
-
-  const stationItemsLookup = new Map<
+  const regionLookup = new Map<
     string,
-    { name: string; items: Array<MenuItemData> }
-  >();
-
-  for (const [stationName, items] of Object.entries(menuData.stations)) {
-    stationItemsLookup.set(normalize(stationName), {
-      name: stationName,
-      items: [...items],
-    });
-  }
-
-  const stationsWithRegions: Array<StationWithRegion> = [];
+    { regionPosition: number; regionOrder: number }
+  >()
 
   if (sheetRows) {
     for (const row of sheetRows) {
-      const sheetStationName = row["Menu_Meal_Option"]?.trim();
-      if (!sheetStationName) continue;
+      const stationName = row['Menu_Meal_Option']?.toLowerCase().trim()
+      if (!stationName) continue
 
-      const normalizedStationName = normalize(sheetStationName);
+      const regionPositionRaw = row['Region Position']?.trim().toLowerCase()
+      if (!regionPositionRaw || regionPositionRaw === 'none') continue
 
-      const regionPositionRaw = row["Region Position"]?.trim();
-      if (!regionPositionRaw || regionPositionRaw.toLowerCase() === "none") {
-        continue;
-      }
-
-      const matchingStation = stationItemsLookup.get(normalizedStationName);
-      if (!matchingStation) continue;
-
-      const parsedRegionPosition = parseInt(regionPositionRaw, 10);
-      const parsedRegionOrder = parseInt(row["Region Order"] ?? "0", 10);
-
-      stationsWithRegions.push({
-        name: matchingStation.name,
-        items: matchingStation.items,
-        regionPosition: Number.isNaN(parsedRegionPosition)
-          ? 1
-          : parsedRegionPosition,
-        regionOrder: Number.isNaN(parsedRegionOrder) ? 0 : parsedRegionOrder,
-      });
+      regionLookup.set(stationName, {
+        regionPosition: parseInt(regionPositionRaw, 10) || 1,
+        regionOrder: parseInt(row['Region Order'] ?? '0', 10) || 0,
+      })
     }
   }
 
-  stationsWithRegions.sort((a, b) => {
-    if (a.regionPosition !== b.regionPosition) {
-      return a.regionPosition - b.regionPosition;
-    }
+  const stationsWithRegions: Array<StationWithRegion> = []
 
-    return a.regionOrder - b.regionOrder;
-  });
+  for (const [stationName, items] of Object.entries(menuData.stations)) {
+    const region = regionLookup.get(stationName.toLowerCase().trim())
+    if (!region) continue
+
+    stationsWithRegions.push({
+      name: stationName,
+      items,
+      regionPosition: region.regionPosition,
+      regionOrder: region.regionOrder,
+    })
+  }
+
+  stationsWithRegions.sort((a, b) => {
+    if (a.regionPosition !== b.regionPosition) return a.regionPosition - b.regionPosition
+    return a.regionOrder - b.regionOrder
+  })
 
   return {
     ...menuData,
     stationsWithRegions,
-  };
-};
+  }
+}

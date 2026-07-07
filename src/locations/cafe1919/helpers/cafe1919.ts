@@ -17,10 +17,7 @@ export function fillConfig(
 
     let items: Array<MenuItemData>;
 
-    if (
-      station.name.toUpperCase() === "DAILY SPECIALS" &&
-      displayId === "Sides"
-    ) {
+    if (station.name.toUpperCase() === "DAILY SPECIALS" && displayId === "Sides") {
       const dayName = new Date()
         .toLocaleDateString("en-US", { weekday: "long" })
         .slice(0, 3);
@@ -30,28 +27,6 @@ export function fillConfig(
     }
 
     return { ...station, items };
-  });
-}
-
-export function filterRegionsWithPlaceholders(
-  expectedRegions: ReadonlyArray<number>,
-  stationsWithRegions: ReadonlyArray<StationWithRegion>,
-): ReadonlyArray<StationWithRegion> {
-  const regionIndex = new Map<number, StationWithRegion>();
-  for (const station of stationsWithRegions) {
-    regionIndex.set(station.regionPosition, station);
-  }
-
-  return expectedRegions.map((position) => {
-    const existing = regionIndex.get(position);
-    if (existing) return existing;
-
-    return {
-      name: "",
-      items: [],
-      regionPosition: position,
-      regionOrder: 0,
-    };
   });
 }
 

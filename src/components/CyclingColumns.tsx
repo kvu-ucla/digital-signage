@@ -16,14 +16,10 @@ export const CyclingColumn = ({ children }: CyclingColumnProps) => {
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const ro = new ResizeObserver(() => {
-      setAvailableHeight(el.clientHeight);
-    });
+    const ro = new ResizeObserver(() => { setAvailableHeight(el.clientHeight); });
     ro.observe(el);
     setAvailableHeight(el.clientHeight);
-    return () => {
-      ro.disconnect();
-    };
+    return () => { ro.disconnect(); };
   }, []);
 
   const computePages = useCallback(() => {
@@ -70,25 +66,18 @@ export const CyclingColumn = ({ children }: CyclingColumnProps) => {
     const id = setInterval(() => {
       setCurrentPage((p) => (p + 1) % pages.length);
     }, CYCLE_INTERVAL_MS);
-    return () => {
-      clearInterval(id);
-    };
+    return () => { clearInterval(id); };
   }, [pages]);
 
   const visibleIndices = pages[currentPage] ?? [];
 
   return (
-    <div
-      ref={containerRef}
-      style={{ height: "100%", overflow: "hidden", position: "relative" }}
-    >
+    <div ref={containerRef} style={{ height: "100%", overflow: "hidden", position: "relative" }}>
       <div
         aria-hidden="true"
         style={{
           position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
+          top: 0, left: 0, right: 0,
           visibility: "hidden",
           pointerEvents: "none",
           display: "flex",
@@ -96,10 +85,7 @@ export const CyclingColumn = ({ children }: CyclingColumnProps) => {
           gap: 8,
         }}
       >
-        <div
-          ref={measureRef}
-          style={{ display: "flex", flexDirection: "column", gap: 8 }}
-        >
+        <div ref={measureRef} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {children}
         </div>
       </div>

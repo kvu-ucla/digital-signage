@@ -1,21 +1,17 @@
-import { DIETARY_LABELS } from "@/lib/dietaryLabels";
+import { DIETARY_LABELS } from '@/lib/dietaryLabels'
 
-type DietaryIconMode = "light" | "dark";
+type DietaryIconMode = 'light' | 'dark'
 
 type DietaryIconProps = {
-  dietaryLabel: string;
+  dietaryLabel: string
   size?: string;
-  mode?: DietaryIconMode;
-};
+  mode?: DietaryIconMode
+}
 
-export const DietaryIcon = ({
-  dietaryLabel,
-  size = "25px",
-  mode = "light",
-}: DietaryIconProps) => {
-  if (!DIETARY_LABELS.some(({ key }) => key === dietaryLabel)) return null;
+export const DietaryIcon = ({ dietaryLabel, size = '25px', mode = 'light' }: DietaryIconProps) => {
+  if (!DIETARY_LABELS.some(({ key }) => key === dietaryLabel)) return null
 
-  const slug = dietaryLabel.toLowerCase();
+  const slug = dietaryLabel.toLowerCase()
 
   return (
     <img
@@ -25,9 +21,9 @@ export const DietaryIcon = ({
       style={{
         width: size,
         height: size,
-        objectFit: "contain",
+        objectFit: 'contain',
         flexShrink: 0,
       }}
     />
-  );
-};
+  )
+}

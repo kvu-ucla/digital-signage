@@ -64,4 +64,23 @@ export const LOCATIONS: Record<string, LocationConfig> = {
     xmlUrl:
       "https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/CovelEpicuria",
   },
+  epicatackerman: {
+    displayName: "Epicuria at Ackerman",
+    xmlUrl: "https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/EpicatAckerman",
+    stylesheet: "example-location.css",
+    screens: {
+      left: {
+        type: "horizontal",
+        requiresStation: false,
+      },
+      center: {
+        type: "horizontal",
+        requiresStation: false,
+      },
+      right: {
+        type: "horizontal",
+        requiresStation: false,
+      }
+    },
+  },
 };

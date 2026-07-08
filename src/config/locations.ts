@@ -42,13 +42,24 @@ export const LOCATIONS: Record<string, LocationConfig> = {
     displayName: "Rendezvous",
     gid: "1622975910",
     xmlUrl:
-      "https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/Rendezvous",
+      "https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/Cafe1919",
     stylesheet: "example-location.css",
     screens: {
       "West-byo": {
         menus: ["breakfast", "lunch", "dinner"],
         type: "horizontal",
         requiresStation: false,
+      },
+      "daily-lunch-specials": {
+        menus: ["lunch"],
+        type: "horizontal",
+        requiresStation: false,
+      },
+      "east-freestyle": {
+        menus: ["lunch"],
+        type: "horizontal",
+        requiresStation: true,
+        stations: ["japanese-freestyle-bowl", "vietnamese-freestyle-bowl", "chinese-freestyle-bowl"],
       },
     },
   },

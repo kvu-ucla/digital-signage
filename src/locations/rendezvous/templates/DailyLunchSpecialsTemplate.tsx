@@ -1,6 +1,15 @@
 import type { ReactElement, ReactNode } from "react";
 import { MenuItem } from "@/menu/ModMenuList";
 import { getStationItems } from "../helpers/rendezvous";
+import {
+  DUMMY_MONDAY_ITEMS,
+  DUMMY_TUESDAY_ITEMS,
+  DUMMY_WEDNESDAY_ITEMS,
+  DUMMY_THURSDAY_ITEMS,
+  DUMMY_FRIDAY_ITEMS,
+  DUMMY_SATURDAY_ITEMS,
+  DUMMY_SUNDAY_ITEMS,
+} from "../helpers/dummyFreestyleData";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
 import { LEGEND_CONFIG, NAME_ONLY_CONFIG } from "../config";
@@ -23,18 +32,44 @@ type MenuItemGridProps = {
   iconSize?: string;
 };
 
+const withFallback = (
+  items: Array<MenuItemData>,
+  fallback: ReadonlyArray<MenuItemData>,
+): Array<MenuItemData> => (items.length > 0 ? items : [...fallback]);
+
 export default function DailyLunchSpecialsScreen({
   data,
 }: DailyLunchSpecialsScreenProps): ReactElement {
   console.log("data:", data);
   const title = "DAILY LUNCH SPECIALS";
-  const mondayItems = getStationItems(data, "MONDAY");
-  const tuesdayItems = getStationItems(data, "TUESDAY");
-  const wednesdayItems = getStationItems(data, "WEDNESDAY");
-  const thursdayItems = getStationItems(data, "THURSDAY");
-  const fridayItems = getStationItems(data, "FRIDAY");
-  const saturdayItems = getStationItems(data, "SATURDAY");
-  const sundayItems = getStationItems(data, "SUNDAY");
+  const mondayItems = withFallback(
+    getStationItems(data, "MONDAY"),
+    DUMMY_MONDAY_ITEMS,
+  );
+  const tuesdayItems = withFallback(
+    getStationItems(data, "TUESDAY"),
+    DUMMY_TUESDAY_ITEMS,
+  );
+  const wednesdayItems = withFallback(
+    getStationItems(data, "WEDNESDAY"),
+    DUMMY_WEDNESDAY_ITEMS,
+  );
+  const thursdayItems = withFallback(
+    getStationItems(data, "THURSDAY"),
+    DUMMY_THURSDAY_ITEMS,
+  );
+  const fridayItems = withFallback(
+    getStationItems(data, "FRIDAY"),
+    DUMMY_FRIDAY_ITEMS,
+  );
+  const saturdayItems = withFallback(
+    getStationItems(data, "SATURDAY"),
+    DUMMY_SATURDAY_ITEMS,
+  );
+  const sundayItems = withFallback(
+    getStationItems(data, "SUNDAY"),
+    DUMMY_SUNDAY_ITEMS,
+  );
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-white">

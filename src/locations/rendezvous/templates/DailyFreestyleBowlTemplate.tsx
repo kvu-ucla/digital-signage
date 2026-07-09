@@ -1,22 +1,16 @@
 import type { ReactElement, ReactNode } from "react";
 import { MenuItem } from "@/menu/ModMenuList";
-import { getStationItems, formatScreenTitle } from "../helpers/rendezvous";
+import { getStationItems } from "../helpers/rendezvous";
 import {
-  DUMMY_EAST_BASE_ITEMS,
-  DUMMY_EAST_TOPPING_ITEMS,
-  DUMMY_EAST_ENTREE_ITEMS,
-  DUMMY_EAST_SAUCE_ITEMS,
+  DUMMY_BASE_ITEMS,
+  DUMMY_ENTREE_ITEMS,
+  DUMMY_TOPPING_ITEMS,
 } from "../helpers/dummyFreestyleData";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
-import {
-  LEGEND_CONFIG,
-  NAME_ONLY_CONFIG,
-  PRICED_ITEM_CONFIG,
-  ICON_ITEM_CONFIG,
-} from "../config";
+import { LEGEND_CONFIG, FREESTYLE_ITEM_CONFIG } from "../config";
 
-type EastFreestyleScreenProps = {
+type DailyFreestyleBowlScreenProps = {
   data: MergedMenuData;
   station: string;
 };
@@ -39,27 +33,22 @@ const withFallback = (
   fallback: ReadonlyArray<MenuItemData>,
 ): Array<MenuItemData> => (items.length > 0 ? items : [...fallback]);
 
-export default function EastFreestyleScreen({
+export default function DailyFreestyleBowlScreen({
   data,
   station,
-}: EastFreestyleScreenProps): ReactElement {
-  console.log("data:", data);
-  const title = formatScreenTitle(station);
+}: DailyFreestyleBowlScreenProps): ReactElement {
+  void station;
   const baseItems = withFallback(
     getStationItems(data, "BASE"),
-    DUMMY_EAST_BASE_ITEMS,
-  );
-  const toppingItems = withFallback(
-    getStationItems(data, "TOPPINGS"),
-    DUMMY_EAST_TOPPING_ITEMS,
+    DUMMY_BASE_ITEMS,
   );
   const entreeItems = withFallback(
     getStationItems(data, "ENTRÉES"),
-    DUMMY_EAST_ENTREE_ITEMS,
+    DUMMY_ENTREE_ITEMS,
   );
-  const sauceItems = withFallback(
-    getStationItems(data, "SAUCE"),
-    DUMMY_EAST_SAUCE_ITEMS,
+  const toppingItems = withFallback(
+    getStationItems(data, "TOPPINGS"),
+    DUMMY_TOPPING_ITEMS,
   );
 
   return (
@@ -69,44 +58,41 @@ export default function EastFreestyleScreen({
         style={{ fontFamily: "Tablet Gothic Condensed Bold" }}
       >
         <header className="absolute inset-x-0 top-0 h-[140px] bg-[#810031] px-[50px] text-left">
-          <h1 className="mt-4 text-[85px] uppercase text-white">{title}</h1>
+          <h1 className="mt-4 text-[85px] uppercase text-white">
+            Daily Freestyle Bowls
+          </h1>
         </header>
 
-        <main className="absolute bottom-[95px] left-[52px] right-[52px] top-[175px] grid grid-cols-[900px_1fr] gap-x-[80px]">
+        <main className="absolute bottom-[95px] left-[52px] right-[52px] top-[175px] grid grid-cols-3 gap-x-[60px]">
           <section className="flex flex-col">
-            <MenuSection title="Choose One Base" className="mb-[15px]">
+            <MenuSection title="Select 1 Base:" className="mb-[15px]">
               <MenuItemGrid
                 items={baseItems}
-                columns={2}
-                menuItemConfig={NAME_ONLY_CONFIG}
-              />
-            </MenuSection>
-
-            <MenuSection title="Choose Three Toppings" className="mb-[15px]">
-              <MenuItemGrid
-                items={toppingItems}
-                columns={2}
-                menuItemConfig={ICON_ITEM_CONFIG}
+                columns={1}
+                menuItemConfig={FREESTYLE_ITEM_CONFIG}
                 iconSize="30px"
               />
             </MenuSection>
           </section>
 
-          <section className="mb-[15px] flex flex-col">
-            <MenuSection title="Choose Two Entrées" className="mb-[15px]">
+          <section className="flex flex-col">
+            <MenuSection title="Select 2 Entrées:" className="mb-[15px]">
               <MenuItemGrid
                 items={entreeItems}
-                columns={2}
-                menuItemConfig={PRICED_ITEM_CONFIG}
-                iconSize="27px"
+                columns={1}
+                menuItemConfig={FREESTYLE_ITEM_CONFIG}
+                iconSize="30px"
               />
             </MenuSection>
+          </section>
 
-            <MenuSection title="Choose One Sauce" className="mb-[15px]">
+          <section className="flex flex-col">
+            <MenuSection title="Select 3 Toppings:" className="mb-[15px]">
               <MenuItemGrid
-                items={sauceItems}
+                items={toppingItems}
                 columns={2}
-                menuItemConfig={NAME_ONLY_CONFIG}
+                menuItemConfig={FREESTYLE_ITEM_CONFIG}
+                iconSize="30px"
               />
             </MenuSection>
           </section>
@@ -130,7 +116,7 @@ function MenuSection({
   return (
     <section className={className}>
       <div className="mb-[15px] border-b-2 border-[#810031] text-[45px]">
-        <h2 className="m-0 uppercase leading-none text-black">{title}</h2>
+        <h2 className="m-0 uppercase leading-none text-[#810031]">{title}</h2>
       </div>
 
       {children}
@@ -140,7 +126,7 @@ function MenuSection({
 
 function MenuItemGrid({
   items,
-  columns = 2,
+  columns = 1,
   menuItemConfig,
   iconSize = "25px",
 }: MenuItemGridProps): ReactElement {
@@ -148,18 +134,20 @@ function MenuItemGrid({
     <div
       className={
         columns === 2
-          ? "grid grid-cols-2 gap-x-[60px] gap-y-[8px]"
-          : "grid grid-cols-1 gap-y-[8px]"
+          ? "grid grid-cols-2 gap-x-[40px] gap-y-[14px]"
+          : "grid grid-cols-1 gap-y-[14px]"
       }
     >
-      {items.map((item, index): ReactElement => (
-        <MenuItem
-          key={`${item.recipeNumber}-${item.name}-${index}`}
-          item={item}
-          size={iconSize}
-          menuItemConfig={menuItemConfig}
-        />
-      ))}
+      {items.map(
+        (item, index): ReactElement => (
+          <MenuItem
+            key={`${item.recipeNumber}-${item.name}-${index}`}
+            item={item}
+            size={iconSize}
+            menuItemConfig={menuItemConfig}
+          />
+        ),
+      )}
     </div>
   );
 }

@@ -1,6 +1,14 @@
 import type { ReactElement, ReactNode } from "react";
 import { MenuItem } from "@/menu/ModMenuList";
 import { getStationItems } from "../helpers/rendezvous";
+import {
+  DUMMY_WEST_STYLE_ITEMS,
+  DUMMY_WEST_FILLING_ITEMS,
+  DUMMY_WEST_BASE_ITEMS,
+  DUMMY_WEST_TOPPING_ITEMS,
+  DUMMY_WEST_EXTRA_ITEMS,
+  DUMMY_WEST_DRINK_ITEMS,
+} from "../helpers/dummyFreestyleData";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
 import {
@@ -35,18 +43,41 @@ type CompactPriceListProps = {
   iconSize?: string;
 };
 
+const withFallback = (
+  items: Array<MenuItemData>,
+  fallback: ReadonlyArray<MenuItemData>,
+): Array<MenuItemData> => (items.length > 0 ? items : [...fallback]);
+
 export default function WestBYOScreen({
   data,
 }: WestBYOScreenProps): ReactElement {
   // removed station due to build errors; may need to add back later
   console.log("data:", data);
   const title = "BUILD YOUR OWN ENTRÉE";
-  const styleItems = getStationItems(data, "STYLE");
-  const fillingItems = getStationItems(data, "FILLING");
-  const baseItems = getStationItems(data, "BASE");
-  const toppingItems = getStationItems(data, "TOPPINGS");
-  const extraItems = getStationItems(data, "EXTRAS");
-  const drinkItems = getStationItems(data, "DRINKS");
+  const styleItems = withFallback(
+    getStationItems(data, "STYLE"),
+    DUMMY_WEST_STYLE_ITEMS,
+  );
+  const fillingItems = withFallback(
+    getStationItems(data, "FILLING"),
+    DUMMY_WEST_FILLING_ITEMS,
+  );
+  const baseItems = withFallback(
+    getStationItems(data, "BASE"),
+    DUMMY_WEST_BASE_ITEMS,
+  );
+  const toppingItems = withFallback(
+    getStationItems(data, "TOPPINGS"),
+    DUMMY_WEST_TOPPING_ITEMS,
+  );
+  const extraItems = withFallback(
+    getStationItems(data, "EXTRAS"),
+    DUMMY_WEST_EXTRA_ITEMS,
+  );
+  const drinkItems = withFallback(
+    getStationItems(data, "DRINKS"),
+    DUMMY_WEST_DRINK_ITEMS,
+  );
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-white">

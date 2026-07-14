@@ -52,7 +52,7 @@ export function filterRegionsWithPlaceholders(
 
   return expectedRegions.map((position) => {
     const existing = regionIndex.get(position);
-    if (existing && existing.name?.trim() ) return existing;
+    if (existing && existing.name.trim() ) return existing;
 
     return { 
       name: "",

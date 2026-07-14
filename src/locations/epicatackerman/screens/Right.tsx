@@ -5,7 +5,7 @@ import { filterRegionsWithPlaceholders } from "../epicatackerman";
 
 export default function LeftScreen({ data }: { data: MergedMenuData }) {
     
-    const config = PAGE_CONFIG["left"];
+    const config = PAGE_CONFIG["right"];
     if (!config) return null;
 
     const filteredData = {

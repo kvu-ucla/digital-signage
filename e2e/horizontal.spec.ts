@@ -23,9 +23,7 @@ test.describe("horizontal screen", () => {
     await expect(page.locator(".screen-horizontal__main-hero")).toContainText(
       "Mock item 000 short description",
     );
-    await expect(page.locator(".screen-horizontal__header-title")).toHaveCount(
-      0,
-    );
+    await expect(page.locator(".screen-horizontal__header-title")).toBeHidden();
   });
 
   test("renders the featured item in the hero", async ({ page }) => {

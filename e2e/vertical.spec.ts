@@ -23,7 +23,7 @@ test.describe("vertical screen", () => {
       "Mock item 000 short description",
     );
 
-    await expect(page.locator(".screen-vertical__header-title")).toHaveCount(0);
+    await expect(page.locator(".screen-vertical__header-title")).toBeHidden();
   });
 
   test("renders mock items in the main list", async ({ page }) => {

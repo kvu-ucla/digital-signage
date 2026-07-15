@@ -1,13 +1,22 @@
-import type { MergedMenuData } from "@/lib/types";
-// import { MenuItemList } from "@/menu/ModMenuList";
+import type { MergedMenuData, MenuItemData } from "@/lib/types";
 import { DietaryIcon } from "@/menu/DietaryIcon";
-import { LEGEND_CONFIG, type EpicAtAckermanLegendConfig, keyContains } from "./config";
-
-// uses rockwell font
+import { MenuItemList } from "@/menu/ModMenuList";
+import { groupByRegion, type RegionStation } from "@/lib/regions";
+import {
+  LEGEND_CONFIG,
+  MENU_ITEM_CONFIG,
+  keyContains,
+  type EpicAtAckermanLegendConfig,
+} from "../config";
 
 type EpicAtAckermanTemplateProps = {
   data: MergedMenuData;
 };
+
+// Region positions that render a dedicated column instead of a station menu:
+// position 1 is the dietary legend, position 9 is the payment/deal info.
+const LEGEND_POSITION = 1;
+const PAYMENT_POSITION = 9;
 
 export default function HorizontalTemplate({ data }: EpicAtAckermanTemplateProps) {
     if (data.stationsWithRegions.length === 0) {
@@ -18,85 +27,59 @@ export default function HorizontalTemplate({ data }: EpicAtAckermanTemplateProps
         );
     }
 
-    const regionMap = new Map<
-        number,
-        Array<{
-        name: string;
-        items: (typeof data.stationsWithRegions)[number]["items"];
-        order: number;
-        }>
-    >();
-
-    for (const station of data.stationsWithRegions) {
-    const position = station.regionPosition;
-    const order = station.regionOrder;
-
-    if (!regionMap.has(position)) {
-      regionMap.set(position, []);
-    }
-
-    regionMap.get(position)?.push({
-      name: station.name,
-      items: [...station.items],
-      order,
-    });
-  }
-
-    for (const [, stations] of regionMap) {
-        stations.sort((a, b) => a.order - b.order);
-    }
-
-  const sortedRegions = [...regionMap.entries()].sort(([a], [b]) => a - b);
-  const rightPageColumnGroups = [
-    [7, 8],
-    [9, 10, 11],
-    [12],
-  ] as const;
+  const sortedRegions = groupByRegion(data.stationsWithRegions);
 
   return (
-    <div className="flex h-[1080px] w-[1920px] flex-col overflow-hidden bg-white">
-      
-        <header className="flex h-[142px] items-center justify-between">
-            <div className="flex h-[142px] w-[1920px] items-center justify-center bg-[#143051]">
-                {/* Image */}
-            </div>
-        </header>
+    <div className="flex h-[1080px] w-[1920px] flex-col overflow-hidden bg-white subpixel-antialiased [font-family:var(--font-display)]">
+      <header className="h-[142px] w-[1920px] shrink-0">
+        <img
+          src={`${import.meta.env.BASE_URL}images/Banner.png`}
+          alt="Epicuria at Ackerman"
+          className="h-full w-full object-cover"
+        />
+      </header>
 
-        <main className="relative grid flex-1 h-[938px] w-[1920px] grid-cols-3 bg-[#FDFAF1]">
-            {sortedRegions.some(([position]) => position === 1) ? (
-              <LegendColumn config={LEGEND_CONFIG} />
-            ) : null}
+      <main className="relative grid flex-1 h-[938px] w-[1920px] grid-cols-3 bg-[#FDFAF1]">
+        {sortedRegions.map(([position, stations]) => {
+          if (position === LEGEND_POSITION) {
+            return <LegendColumn key={position} config={LEGEND_CONFIG} />;
+          }
+          if (position === PAYMENT_POSITION) {
+            return <PaymentColumn key={position} />;
+          }
+          return <MenuColumn key={position} stations={stations} />;
+        })}
+      </main>
+    </div>
+  );
+}
 
-            {sortedRegions.some(([position]) => position >= 7 && position <= 11) ? (
-              rightPageColumnGroups
-                .filter((group) => group.some((position) => position < 12))
-                .map((group) => (
-                  <div key={group.join("-")} className="flex flex-col">
-                    {group.map((position) => {
-                      if (position === 12) return null;
+/** Epic's Figma shows prices as "$10.95", but the feed provides bare numbers.
+ *  Prefix "$" when it's missing; leave any already-prefixed price untouched. */
+const withDollarPrice = (item: MenuItemData): MenuItemData =>
+  item.price && !item.price.trim().startsWith("$")
+    ? { ...item, price: `$${item.price.trim()}` }
+    : item;
 
-                      const region = sortedRegions.find(([regionPosition]) => regionPosition === position);
-
-                      return (
-                        <div key={position} className="flex flex-col gap-[36px] px-[30px] py-[36px] text-[24px] text-[#252525]">
-                          {region ? `position: ${position}` : `missing: ${position}`}
-                        </div>
-                      );
-                    })}
-                  </div>
-                ))
-            ) : (
-              sortedRegions.map(([position]) => {
-                if (position === 1 || position === 12) return null;
-
-                return <div className="flex flex-col gap-[36px] px-[30px] py-[36px] text-[24px] text-[#252525]" key={position}>position: {position}</div>;
-              })
+function MenuColumn({ stations }: { stations: Array<RegionStation> }) {
+  return (
+    <div className="flex flex-col gap-[36px] p-[36px]">
+      {stations.map(({ name, items }) =>
+        name.trim() ? (
+          <div key={name} className="flex flex-col gap-[24px]">
+            <h2 className="m-0 text-[40px] font-bold uppercase leading-none text-[#1E355E]">
+              {name}
+            </h2>
+            {items.length > 0 && (
+              <MenuItemList
+                items={items.map(withDollarPrice)}
+                size="26px"
+                menuItemConfig={MENU_ITEM_CONFIG}
+              />
             )}
-
-            {sortedRegions.some(([position]) => position === 12) ? (
-              <PaymentColumn />
-            ) : null}
-        </main>
+          </div>
+        ) : null,
+      )}
     </div>
   );
 }

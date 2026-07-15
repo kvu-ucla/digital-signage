@@ -6,18 +6,18 @@ export const PAGE_CONFIG: Record<
 > = {
   "left": { regions: [1, 2, 3], type: "horizontal" },  
   "center": { regions: [4, 5, 6], type: "horizontal" },  
-  "right": { regions: [7, 8, 9, 10, 11, 12], type: "horizontal" },
+  "right": { regions: [7, 8, 9], type: "horizontal" },
 };
 
 export const MENU_ITEM_CONFIG: MenuItemConfig = {
   gap: "8px",
-  divClassName: "",
+  divClassName: "flex flex-col gap-[8px] w-full",
   itemClassName:
-    "max-w-[80%] break-words text-[24px] uppercase leading-none text-[#252525]",
-  dietaryClassName: "mt-0.5 mb-4 flex flex-wrap gap-[5px] leading-none",
-  priceClassName: "ml-auto shrink-0 whitespace-nowrap text-[24px] leading-none text-[#252525]",
+    "flex-1 min-w-0 break-words text-[26px] capitalize font-bold leading-[1.2] text-[#252525]",
+  dietaryClassName: "flex flex-wrap gap-[8px] leading-none",
+  priceClassName: "ml-auto shrink-0 whitespace-nowrap text-[26px] font-bold leading-[1.2] text-[#252525]",
   pricedivClassName: "flex w-full items-start gap-[4px]",
-  summaryClassName: "mt-2 text-[24px] leading-tight text-[#252525]",
+  summaryClassName: "text-[26px] leading-[1.3] text-[#252525]",
 };
 
 export type EpicAtAckermanLegendConfig = {

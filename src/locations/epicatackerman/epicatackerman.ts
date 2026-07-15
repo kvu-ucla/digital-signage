@@ -1,64 +1,28 @@
-import type {
-  MenuItemData,
-  StationConfig,
-  StationWithRegion,
-  MergedMenuData,
-} from "@/lib/types";
+import type { StationWithRegion } from "@/lib/types";
 
-export type EpicAtAckermanDisplayId = "Left" | "Center" | "Right";
-
-export const regionToPage: Record<EpicAtAckermanDisplayId, StationConfig> = {
-  Left: { "1": [], "2": [], "3": [] },
-  Center: { "4": [], "5": [], "6": [] },
-  Right: { "7": [], "8": [], "9": [], "10": [], "11": [], "12": [] },
-}
-
-const normalize = (value: string): string => value.toLowerCase().trim();
-
-export const getStationItems = (
-  data: MergedMenuData,
-  stationName: string,
-): Array<MenuItemData> => {
-  const normalizedStationName = normalize(stationName);
-
-  const matchingStation = Object.entries(data.stations).find(
-    ([name]): boolean => normalize(name) === normalizedStationName,
-  );
-
-  return matchingStation ? [...matchingStation[1]] : [];
-};
-
-export function fillConfig(data: MergedMenuData): Array<StationWithRegion> {
-  return data.stationsWithRegions.map((station) => {
-    const rawItems = [...(data.stations[normalize(station.name)] ?? station.items)];
-
-    let items: Array<MenuItemData>;
-
-    items = rawItems.sort((a, b) => a.name.localeCompare(normalize(b.name)));
-
-    return { ...station, items };
-  });
-}
-
+/**
+ * For a page's expected region positions, return *every* station in each region
+ * — a region can hold multiple sections (e.g. "Beverage Selections" and
+ * "Beer & Wine" both live on region 8), and all should render in that column —
+ * substituting an empty placeholder for any region the feed hasn't filled, so
+ * the grid keeps its column slots.
+ */
 export function filterRegionsWithPlaceholders(
   expectedRegions: ReadonlyArray<number>,
   stationsWithRegions: ReadonlyArray<StationWithRegion>,
 ): ReadonlyArray<StationWithRegion> {
-  const regionIndex = new Map<number, StationWithRegion>();
+  const byRegion = new Map<number, Array<StationWithRegion>>();
 
   for (const station of stationsWithRegions) {
-    regionIndex.set(station.regionPosition, station);
+    const group = byRegion.get(station.regionPosition);
+    if (group) group.push(station);
+    else byRegion.set(station.regionPosition, [station]);
   }
 
-  return expectedRegions.map((position) => {
-    const existing = regionIndex.get(position);
-    if (existing && existing.name.trim() ) return existing;
+  return expectedRegions.flatMap((position) => {
+    const stations = byRegion.get(position)?.filter((s) => s.name.trim());
+    if (stations && stations.length > 0) return stations;
 
-    return { 
-      name: "",
-      items: [],
-      regionPosition: position,
-      regionOrder: 0,
-    };
+    return [{ name: "", items: [], regionPosition: position, regionOrder: 0 }];
   });
 }

@@ -3,8 +3,8 @@ import { HorizontalScreen } from "../template";
 import { PAGE_CONFIG } from "../config";
 import { filterRegionsWithPlaceholders } from "../epicatackerman";
 
-export default function Center({ data }: ScreenProps) {
-  const config = PAGE_CONFIG["center"];
+export default function Left({ data }: ScreenProps) {
+  const config = PAGE_CONFIG["left"];
   if (!config) return null;
 
   const filteredData = {

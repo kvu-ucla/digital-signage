@@ -66,6 +66,7 @@ export const LOCATIONS: Record<string, LocationConfig> = {
   },
   epicatackerman: {
     displayName: "Epicuria at Ackerman",
+    gid: "2027043595",
     xmlUrl: "https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/EpicatAckerman",
     stylesheet: "example-location.css",
     screens: {

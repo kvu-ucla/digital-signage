@@ -42,7 +42,7 @@ export const LOCATIONS: Record<string, LocationConfig> = {
     displayName: "Rendezvous",
     gid: "1622975910",
     xmlUrl:
-      "https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/Cafe1919",
+      "https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/Rendezvous",
     stylesheet: "example-location.css",
     screens: {
       "West-byo": {

@@ -8,6 +8,13 @@ export const LOCATIONS: Record<string, LocationConfig> = {
       "https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/BruinPlate",
     stylesheet: "bruinplate.css",
   },
+  denevedining: {
+    displayName: "De Neve Dining",
+    gid: "1858868942",
+    xmlUrl:
+      "https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/DeNeveDining",
+    stylesheet: "deneve.css",
+  },
   cafe1919: {
     displayName: "Cafe 1919",
     gid: "677512158",
@@ -37,7 +44,6 @@ export const LOCATIONS: Record<string, LocationConfig> = {
       },
     },
   },
-
   rendezvous: {
     displayName: "Rendezvous",
     gid: "1622975910",
@@ -51,12 +57,6 @@ export const LOCATIONS: Record<string, LocationConfig> = {
         requiresStation: false,
       },
     },
-  },
-  "example-entrance": {
-    displayName: "Example Entrance",
-    xmlUrl: "https://REPLACE_WITH_YOUR_JAMIX_XML_URL",
-    gid: "REPLACE_WITH_YOUR_GOOGLE_SHEET_GID",
-    stylesheet: "example-location.css",
   },
   covelepicuria: {
     displayName: "Epicuria at Covel",

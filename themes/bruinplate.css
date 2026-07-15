@@ -1,0 +1,140 @@
+:root {
+  --font-display: 'Klinic Slab', Georgia, serif;
+
+  --bp-primary:    #005289;
+  --bp-accent:     #cc9f44;
+  --bp-bg:         #f8f4e8;
+  --bp-green:      #778837;
+  --bp-orange:     #c87b28;
+  --bp-blue-light: #5d94bb;
+  --bp-gold:       #d69b2d;
+  --bp-teal:       #005989;
+}
+
+/* ── Horizontal screen ── */
+
+html:not(.is-takeover) .screen-horizontal {
+  background-color: var(--bp-bg);
+}
+
+html:not(.is-takeover) .screen-horizontal__header {
+  background: var(--bp-primary);
+  border-bottom: 9px solid var(--bp-accent);
+}
+
+.screen-horizontal__header-logo {
+  background-image: url('/icons/bruinplate-logo-sm.svg');
+  background-repeat: no-repeat;
+  background-position: center right 20px;
+  background-size: 180px 180px;
+}
+
+.screen-horizontal__header-title {
+  color: white;
+}
+
+html:not(.is-takeover) .screen-horizontal__header-certificate-placeholder {
+  background: var(--bp-green);
+}
+
+html:not(.is-takeover) .screen-horizontal__graphic {
+  background: var(--bp-orange);
+}
+
+html:not(.is-takeover) .screen-horizontal__footer-inner {
+  border-top: 1px solid var(--bp-primary);
+}
+
+html:not(.is-takeover) .screen-horizontal__side {
+  background: var(--bp-bg);
+}
+
+html:not(.is-takeover) .screen-horizontal__side-inner {
+  border-left: 4px dotted var(--bp-primary);
+}
+
+html.is-takeover .screen-horizontal__header-logo {
+  visibility: hidden;
+}
+
+html.is-takeover .screen-horizontal__header-certificate {
+  visibility: hidden;
+}
+
+html.is-takeover .screen-horizontal__graphic img {
+  display: none;
+}
+
+/* ── Vertical screen ── */
+
+html:not(.is-takeover) .screen-vertical {
+  background-color: var(--bp-bg);
+}
+
+html:not(.is-takeover) .screen-vertical__header {
+  background: var(--bp-primary);
+  border-bottom: 9px solid var(--bp-accent);
+}
+
+.screen-vertical__header-logo {
+  background-image: url('/images/bruin-plate-logo.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 190px 190px;
+}
+
+.screen-vertical__header-title {
+  color: white;
+}
+
+html:not(.is-takeover) .screen-vertical__header-certificate-placeholder {
+  background: var(--bp-green);
+}
+
+html:not(.is-takeover) .screen-vertical__graphic {
+  background: var(--bp-orange);
+}
+
+html:not(.is-takeover) .screen-vertical__footer-inner {
+  border-top: 1px solid var(--bp-primary);
+}
+
+html.is-takeover .screen-vertical__header-logo {
+  visibility: hidden;
+}
+
+html.is-takeover .screen-vertical__header-certificate {
+  visibility: hidden;
+}
+
+/* ── Entrance screen ── */
+
+html:not(.is-takeover) .screen-entrance {
+  background-color: var(--bp-bg);
+}
+
+html:not(.is-takeover) .screen-entrance__bar {
+  background-color: var(--bp-blue-light);
+  border-bottom-color: var(--bp-gold);
+}
+
+.screen-entrance__bar-title {
+  color: white;
+}
+
+html:not(.is-takeover) .screen-entrance__bar-cell--divider::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 706px;
+  border-right: 4px dotted var(--bp-primary);
+}
+
+html:not(.is-takeover) .screen-entrance__footer-rule {
+  background-color: var(--bp-teal);
+}
+
+html.is-takeover .screen-entrance > header {
+  visibility: hidden;
+}

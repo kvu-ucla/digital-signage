@@ -9,10 +9,10 @@ import {
   DUMMY_FRIDAY_ITEMS,
   DUMMY_SATURDAY_ITEMS,
   DUMMY_SUNDAY_ITEMS,
-} from "../helpers/dummyFreestyleData";
+} from "../helpers/dummyLunchSpecialsData";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
-import { LEGEND_CONFIG, NAME_ONLY_CONFIG } from "../config";
+import { LEGEND_CONFIG, COMPACT_PRICE_CONFIG } from "../config";
 
 type DailyLunchSpecialsScreenProps = {
   data: MergedMenuData;
@@ -87,7 +87,7 @@ export default function DailyLunchSpecialsScreen({
               <MenuItemGrid
                 items={mondayItems}
                 columns={2}
-                menuItemConfig={NAME_ONLY_CONFIG}
+                menuItemConfig={COMPACT_PRICE_CONFIG}
               />
             </MenuSection>
 
@@ -95,7 +95,7 @@ export default function DailyLunchSpecialsScreen({
               <MenuItemGrid
                 items={tuesdayItems}
                 columns={2}
-                menuItemConfig={NAME_ONLY_CONFIG}
+                menuItemConfig={COMPACT_PRICE_CONFIG}
               />
             </MenuSection>
 
@@ -103,7 +103,7 @@ export default function DailyLunchSpecialsScreen({
               <MenuItemGrid
                 items={wednesdayItems}
                 columns={2}
-                menuItemConfig={NAME_ONLY_CONFIG}
+                menuItemConfig={COMPACT_PRICE_CONFIG}
               />
             </MenuSection>
             
@@ -111,7 +111,7 @@ export default function DailyLunchSpecialsScreen({
               <MenuItemGrid
                 items={thursdayItems}
                 columns={2}
-                menuItemConfig={NAME_ONLY_CONFIG}
+                menuItemConfig={COMPACT_PRICE_CONFIG}
               />
             </MenuSection>
           </section>
@@ -121,7 +121,7 @@ export default function DailyLunchSpecialsScreen({
               <MenuItemGrid
                 items={fridayItems}
                 columns={2}
-                menuItemConfig={NAME_ONLY_CONFIG}
+                menuItemConfig={COMPACT_PRICE_CONFIG}
               />
             </MenuSection>
 
@@ -129,7 +129,7 @@ export default function DailyLunchSpecialsScreen({
               <MenuItemGrid
                 items={saturdayItems}
                 columns={2}
-                menuItemConfig={NAME_ONLY_CONFIG}
+                menuItemConfig={COMPACT_PRICE_CONFIG}
               />
             </MenuSection>
 
@@ -137,7 +137,7 @@ export default function DailyLunchSpecialsScreen({
               <MenuItemGrid
                 items={sundayItems}
                 columns={2}
-                menuItemConfig={NAME_ONLY_CONFIG}
+                menuItemConfig={COMPACT_PRICE_CONFIG}
               />
             </MenuSection>
           </section>

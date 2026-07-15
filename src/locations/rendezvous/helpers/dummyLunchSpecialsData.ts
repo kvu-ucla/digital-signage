@@ -14,88 +14,53 @@ const makeItem = (
   mealType: "lunch",
 });
 
-export const DUMMY_BASE_ITEMS: ReadonlyArray<MenuItemData> = [
-  makeItem("B1", "Brown Rice", ["Vegan", "Low-Carbon-Footprint"]),
-  makeItem("B2", "Chow Mein Noodles", [
-    "Wheat",
-    "Gluten",
-    "Soy",
-    "Vegan",
-    "Low-Carbon-Footprint",
-  ]),
-  makeItem("B3", "Sticky Rice", ["Vegan", "Low-Carbon-Footprint"]),
-  makeItem("B4", "Young Chow Vegetable Fried Rice", [
-    "Soy",
-    "Eggs",
-    "Vegetarian",
-    "Low-Carbon-Footprint",
-  ]),
+export const DUMMY_MONDAY_ITEMS: ReadonlyArray<MenuItemData> = [
+  makeItem("M1", "Spaghetti Bolognese", ["Wheat", "Gluten", "Dairy"], "$8.50"),
+  makeItem("M2", "Garlic Bread", ["Wheat", "Gluten", "Dairy", "Vegan"], "$3.50"),
+  makeItem("M3", "Caesar Salad", ["Eggs", "Dairy", "Fish"], "$6.00"),
+  makeItem("M4", "Minestrone Soup", ["Vegan", "Low-Carbon-Footprint"], "$4.50"),
 ];
 
-export const DUMMY_ENTREE_ITEMS: ReadonlyArray<MenuItemData> = [
-  makeItem("E1", "BBQ Roast Pork", [
-    "Peanut",
-    "Soy",
-    "Wheat",
-    "Alcohol",
-  ]),
-  makeItem("E2", "Beef & Broccoli", [
-    "Peanut",
-    "Soy",
-    "Wheat",
-    "High-Carbon-Footprint",
-  ]),
-  makeItem("E3", "Chinese Broccoli", ["Peanut", "Gluten", "Soy", "Sesame"]),
-  makeItem("E4", "Eggplant & Tofu w/ Spicy Garlic Sauce", [
-    "Peanut",
-    "Soy",
-    "Vegan",
-    "Low-Carbon-Footprint",
-  ]),
-  makeItem("E5", "Fish w/ Black Bean Sauce", [
-    "Soy",
-    "Wheat",
-    "Fish",
-    "Alcohol",
-  ]),
-  makeItem("E6", "Green Bean Stir Fry", [
-    "Peanut",
-    "Gluten",
-    "Soy",
-    "Vegan",
-  ]),
-  makeItem("E7", "Orange Chicken", ["Peanut", "Wheat", "Soy"]),
+export const DUMMY_TUESDAY_ITEMS: ReadonlyArray<MenuItemData> = [
+  makeItem("Tu1", "Chicken Tikka Masala", ["Dairy", "High-Carbon-Footprint"], "$9.00"),
+  makeItem("Tu2", "Basmati Rice", ["Vegan", "Low-Carbon-Footprint"], "$2.50"),
+  makeItem("Tu3", "Naan Bread", ["Wheat", "Gluten", "Dairy"], "$3.00"),
+  makeItem("Tu4", "Mango Lassi", ["Dairy"], "$4.00"),
 ];
 
-export const DUMMY_TOPPING_ITEMS: ReadonlyArray<MenuItemData> = [
-  makeItem("T1", "Edamame", ["Soy", "Vegan", "Low-Carbon-Footprint"]),
-  makeItem("T2", "Kimchi", ["Fish", "Low-Carbon-Footprint"]),
-  makeItem("T3", "Marinated Soy Sprouts", [
-    "Soy",
-    "Vegan",
-    "Low-Carbon-Footprint",
-  ]),
-  makeItem("T4", "Salted Cucumber", ["Vegan", "Low-Carbon-Footprint"]),
-  makeItem("T5", "Seasoned Blanched Spinach", ["Vegan", "Low-Carbon-Footprint"]),
-  makeItem("T6", "Seaweed Salad", [
-    "Sesame",
-    "Gluten",
-    "Soy",
-    "Vegan",
-    "Low-Carbon-Footprint",
-  ]),
-  makeItem("T7", "Vietnamese Pickled Daikon", [
-    "Vegan",
-    "Low-Carbon-Footprint",
-  ]),
-  makeItem("T8", "Vietnamese Pickled Vegetables", [
-    "Vegan",
-    "Low-Carbon-Footprint",
-  ]),
-  makeItem("T9", "Vietnamese Shredded Green Papaya Salad", [
-    "Vegan",
-    "Low-Carbon-Footprint",
-  ]),
+export const DUMMY_WEDNESDAY_ITEMS: ReadonlyArray<MenuItemData> = [
+  makeItem("W1", "Fish & Chips", ["Fish", "Wheat", "Gluten", "Eggs"], "$9.50"),
+  makeItem("W2", "Coleslaw", ["Vegan", "Low-Carbon-Footprint"], "$3.00"),
+  makeItem("W3", "Mushy Peas", ["Vegan", "Low-Carbon-Footprint"], "$2.50"),
+  makeItem("W4", "Tartar Sauce", ["Eggs"], "$1.00"),
+];
+
+export const DUMMY_THURSDAY_ITEMS: ReadonlyArray<MenuItemData> = [
+  makeItem("Th1", "Pad Thai", ["Peanut", "Soy", "Wheat", "Gluten"], "$8.50"),
+  makeItem("Th2", "Spring Rolls", ["Soy", "Wheat", "Gluten", "Vegan"], "$4.00"),
+  makeItem("Th3", "Tom Yum Soup", ["Fish", "Shellfish"], "$5.50"),
+  makeItem("Th4", "Sticky Rice", ["Vegan", "Low-Carbon-Footprint"], "$2.50"),
+];
+
+export const DUMMY_FRIDAY_ITEMS: ReadonlyArray<MenuItemData> = [
+  makeItem("F1", "Margherita Pizza", ["Wheat", "Gluten", "Dairy"], "$7.50"),
+  makeItem("F2", "Pepperoni Pizza", ["Wheat", "Gluten", "Dairy"], "$8.00"),
+  makeItem("F3", "Garden Salad", ["Vegan", "Low-Carbon-Footprint"], "$5.50"),
+  makeItem("F4", "Tiramisu", ["Dairy", "Eggs", "Wheat", "Gluten"], "$4.50"),
+];
+
+export const DUMMY_SATURDAY_ITEMS: ReadonlyArray<MenuItemData> = [
+  makeItem("Sa1", "Beef Burrito", ["Dairy", "High-Carbon-Footprint"], "$8.50"),
+  makeItem("Sa2", "Chicken Quesadilla", ["Dairy", "Wheat", "Gluten"], "$7.50"),
+  makeItem("Sa3", "Guacamole", ["Vegan", "Low-Carbon-Footprint"], "$3.00"),
+  makeItem("Sa4", "Churros", ["Wheat", "Gluten", "Dairy"], "$4.00"),
+];
+
+export const DUMMY_SUNDAY_ITEMS: ReadonlyArray<MenuItemData> = [
+  makeItem("Su1", "Roast Turkey", ["High-Carbon-Footprint"], "$10.00"),
+  makeItem("Su2", "Mashed Potatoes", ["Dairy", "Vegan"], "$3.50"),
+  makeItem("Su3", "Stuffing", ["Wheat", "Gluten", "Vegan"], "$3.00"),
+  makeItem("Su4", "Cranberry Sauce", ["Vegan", "Low-Carbon-Footprint"], "$2.00"),
 ];
 
 export const DUMMY_EAST_BASE_ITEMS: ReadonlyArray<MenuItemData> = [

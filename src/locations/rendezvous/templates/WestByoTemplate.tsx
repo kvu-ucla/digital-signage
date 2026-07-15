@@ -55,7 +55,7 @@ export default function WestBYOScreen({
   console.log("data:", data);
   const title = "BUILD YOUR OWN ENTRÉE";
   const styleItems = withFallback(
-    getStationItems(data, "STYLE"),
+    getStationItems(data, "LATIN BUILD YOUR OWN"),
     DUMMY_WEST_STYLE_ITEMS,
   );
   const fillingItems = withFallback(
@@ -67,11 +67,11 @@ export default function WestBYOScreen({
     DUMMY_WEST_BASE_ITEMS,
   );
   const toppingItems = withFallback(
-    getStationItems(data, "TOPPINGS"),
+    getStationItems(data, "LATIN TOPPINGS BAR"),
     DUMMY_WEST_TOPPING_ITEMS,
   );
   const extraItems = withFallback(
-    getStationItems(data, "EXTRAS"),
+    getStationItems(data, "SALSA BAR"),
     DUMMY_WEST_EXTRA_ITEMS,
   );
   const drinkItems = withFallback(

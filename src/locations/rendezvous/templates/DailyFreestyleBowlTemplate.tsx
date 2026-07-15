@@ -39,15 +39,15 @@ export default function DailyFreestyleBowlScreen({
 }: DailyFreestyleBowlScreenProps): ReactElement {
   void station;
   const baseItems = withFallback(
-    getStationItems(data, "BASE"),
+    getStationItems(data, "Base"),
     DUMMY_BASE_ITEMS,
   );
   const entreeItems = withFallback(
-    getStationItems(data, "ENTRÉES"),
+    getStationItems(data, "Entrée"),
     DUMMY_ENTREE_ITEMS,
   );
   const toppingItems = withFallback(
-    getStationItems(data, "TOPPINGS"),
+    getStationItems(data, "ASIAN TOPPING"),
     DUMMY_TOPPING_ITEMS,
   );
 
@@ -115,7 +115,7 @@ function MenuSection({
 }: MenuSectionProps): ReactElement {
   return (
     <section className={className}>
-      <div className="mb-[15px] border-b-2 border-[#810031] text-[45px]">
+      <div className="mb-[15px] text-[45px]">
         <h2 className="m-0 uppercase leading-none text-[#810031]">{title}</h2>
       </div>
 

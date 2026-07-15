@@ -1,0 +1,9 @@
+/* Example location theme — copy this file and replace values for each new location */
+:root {
+  --font-display: 'Klinic Slab', Georgia, serif;
+  --color-primary: #005289;
+  --color-accent: #005289;
+  --color-bg: #F8F4E8;
+  --color-text-primary: #252525;
+  --color-divider: rgba(68, 122, 169, 0.3);
+}

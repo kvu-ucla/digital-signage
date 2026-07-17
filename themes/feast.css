@@ -1,0 +1,30 @@
+
+:root {
+    --font-display: 'Josefin Sans', sans-serif;
+    --color-primary: #D64123;
+    --color-accent: #E36F1E;
+    --color-bg: #FFFFFF;
+    --color-text-primary: #000000;
+}
+
+/* ── Horizontal screen ── */
+
+html:not(.is-takeover) .screen-horizontal {
+  background-color: var(--color-bg);
+}
+
+html:not(.is-takeover) .screen-horizontal__header {
+  background: var(--color-text-primary);
+}
+
+.screen-horizontal__header-logo {
+  background-image: url('/dining/icons/feast-Logo-05-Orange-Black.svg');
+  background-repeat: no-repeat;
+  background-position: center right 20px;
+  background-size: 189px 162px;
+}
+
+.screen-horizontal__header-title {
+  color: white;
+  font-size: 124.5px;
+}

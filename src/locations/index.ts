@@ -86,4 +86,9 @@ export const LOCATIONS: Record<string, LocationConfig> = {
       },
     },
   },
+  feast: {
+    displayName: "Feast",
+    xmlUrl: "https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/FeastatRieber",
+    stylesheet: "feast.css",
+  }
 };

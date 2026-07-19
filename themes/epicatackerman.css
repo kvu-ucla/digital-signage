@@ -1,0 +1,11 @@
+/* Epicuria at Ackerman theme.
+   The horizontal template styles its columns inline (Tailwind + hex), so these
+   variables document the palette and drive anything reading var(--*). */
+:root {
+  --font-display: 'Klinic Slab', Georgia, serif;
+  --color-primary: #143051;
+  --color-accent: #1e355e;
+  --color-bg: #fdfaf1;
+  --color-text-primary: #252525;
+  --color-divider: rgba(30, 53, 94, 0.3);
+}

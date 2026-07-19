@@ -8,6 +8,7 @@ import {
   DUMMY_EAST_SAUCE_ITEMS,
 } from "../helpers/dummyFreestyleData";
 import { DietaryLegend } from "@/menu/DietaryLegend";
+import icon from '@/images/Rendezvous Logo - East White.svg'
 import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
 import {
   LEGEND_CONFIG,
@@ -44,21 +45,21 @@ export default function EastFreestyleScreen({
   station,
 }: EastFreestyleScreenProps): ReactElement {
   console.log("data:", data);
-  const title = formatScreenTitle(station);
+  const title = getStationItems(data, "ASIAN DAILY SPECIAL")[0]?.name ?? formatScreenTitle(station);
   const baseItems = withFallback(
-    getStationItems(data, "BASE"),
+    getStationItems(data, "Base"),
     DUMMY_EAST_BASE_ITEMS,
   );
   const toppingItems = withFallback(
-    getStationItems(data, "TOPPINGS"),
+    getStationItems(data, "ASIAN TOPPING"),
     DUMMY_EAST_TOPPING_ITEMS,
   );
   const entreeItems = withFallback(
-    getStationItems(data, "ENTRÉES"),
+    getStationItems(data, "ENTRÉE"),
     DUMMY_EAST_ENTREE_ITEMS,
   );
   const sauceItems = withFallback(
-    getStationItems(data, "SAUCE"),
+    getStationItems(data, "ASIAN SAUCE"),
     DUMMY_EAST_SAUCE_ITEMS,
   );
 
@@ -68,8 +69,13 @@ export default function EastFreestyleScreen({
         className="relative h-[1080px] w-[1920px] overflow-hidden bg-[#F9E9D0]"
         style={{ fontFamily: "Tablet Gothic Condensed Bold" }}
       >
-        <header className="absolute inset-x-0 top-0 h-[140px] bg-[#810031] px-[50px] text-left">
-          <h1 className="mt-4 text-[85px] uppercase text-white">{title}</h1>
+        <header className="absolute inset-x-0 top-0 flex h-[140px] items-center justify-between bg-[#810031] px-[50px]">
+          <h1 className="text-[85px] uppercase text-white pt-[14px]">{title}</h1>
+          <img
+            src={icon}
+            alt="Rendezvous East Logo"
+            className="h-[80px]"
+          />
         </header>
 
         <main className="absolute bottom-[95px] left-[52px] right-[52px] top-[175px] grid grid-cols-[900px_1fr] gap-x-[80px]">

@@ -78,7 +78,7 @@ export default function DailyLunchSpecialsScreen({
         style={{ fontFamily: "Tablet Gothic Condensed Bold" }}
       >
         <header className="absolute inset-x-0 top-0 h-[140px] bg-[#295541] px-[50px] text-right">
-          <h1 className="mt-4 text-[85px] uppercase text-white">{title}</h1>
+          <h1 className="mt-4 text-[85px] uppercase text-white pt-[14px]">{title}</h1>
         </header>
 
         <main className="absolute bottom-[95px] left-[52px] right-[52px] top-[175px] grid grid-cols-[900px_1fr] gap-x-[80px]">

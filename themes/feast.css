@@ -17,6 +17,8 @@ html:not(.is-takeover) .screen-horizontal__header {
   background: var(--color-text-primary);
 }
 
+
+
 .screen-horizontal__header-logo {
   background-image: url('/dining/icons/feast-Logo-07-Orange-White.svg');
   background-repeat: no-repeat;
@@ -27,9 +29,9 @@ html:not(.is-takeover) .screen-horizontal__header {
 .screen-horizontal__header-title {
   color: white;
   font-size: 124.5px;
+  text-transform: uppercase;
+  font-weight: lighter;
 }
-
-
 
 html:not(.is-takeover) .screen-horizontal__side-inner {
   border-left: 2px solid var(--color-primary);

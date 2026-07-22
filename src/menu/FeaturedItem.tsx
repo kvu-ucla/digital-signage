@@ -7,7 +7,7 @@ type FeaturedItemProps = {
 
 export const FeaturedItem = ({ item }: FeaturedItemProps) => (
   <div className="flex flex-col items-center gap-[42px] w-full">
-    <h2 className="text-[85px] text-[#3c3c3c] font-bold not-italic leading-none tracking-[0.425px] text-center m-0 [font-family:var(--font-display)] [text-box:trim-both_cap_alphabetic]">
+    <h2 className="text-[120px] text-[#98002e] font-bold not-italic leading-none tracking-[0.425px] text-center m-0 [font-family:var(--font-display)] [text-box:trim-both_cap_alphabetic]">
       {item.name}
     </h2>
     {item.dietaryLabels.length > 0 && (
@@ -23,7 +23,7 @@ export const FeaturedItem = ({ item }: FeaturedItemProps) => (
       </div>
     )}
     {item.description && (
-      <p className="text-[46px] text-[#3c3c3c] font-normal text-center m-0 leading-none [font-family:var(--font-display)] [text-box:trim-both_cap_alphabetic]">
+      <p className="text-[55px] text-[#3c3c3c] font-normal text-center m-0 leading-none [font-family:var(--font-display)] [text-box:trim-both_cap_alphabetic]">
         {item.description}
       </p>
     )}

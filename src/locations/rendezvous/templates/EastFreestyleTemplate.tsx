@@ -84,7 +84,7 @@ export default function EastFreestyleScreen({
               <MenuItemGrid
                 items={baseItems}
                 columns={2}
-                menuItemConfig={NAME_ONLY_CONFIG}
+                menuItemConfig={ICON_ITEM_CONFIG}
               />
             </MenuSection>
 
@@ -103,7 +103,7 @@ export default function EastFreestyleScreen({
               <MenuItemGrid
                 items={entreeItems}
                 columns={2}
-                menuItemConfig={PRICED_ITEM_CONFIG}
+                menuItemConfig={ICON_ITEM_CONFIG}
                 iconSize="27px"
               />
             </MenuSection>
@@ -112,7 +112,7 @@ export default function EastFreestyleScreen({
               <MenuItemGrid
                 items={sauceItems}
                 columns={2}
-                menuItemConfig={NAME_ONLY_CONFIG}
+                menuItemConfig={ICON_ITEM_CONFIG}
               />
             </MenuSection>
           </section>
@@ -134,7 +134,7 @@ function MenuSection({
 }: MenuSectionProps): ReactElement {
   return (
     <section className={className}>
-      <div className="mb-[15px] border-b-2 border-[#810031] text-[45px]">
+      <div className="mb-[15px] border-b-2 border-[#98002e] text-[45px]">
         <h2 className="m-0 uppercase leading-none text-black">{title}</h2>
       </div>
 
@@ -149,14 +149,38 @@ function MenuItemGrid({
   menuItemConfig,
   iconSize = "25px",
 }: MenuItemGridProps): ReactElement {
+  if (columns === 2) {
+    const leftColumn = items.filter((_, i) => i % 2 === 0);
+    const rightColumn = items.filter((_, i) => i % 2 === 1);
+
+    return (
+      <div className="flex gap-x-[60px]">
+        <div className="flex flex-1 flex-col gap-y-[8px]">
+          {leftColumn.map((item, index): ReactElement => (
+            <MenuItem
+              key={`${item.recipeNumber}-${item.name}-${index}`}
+              item={item}
+              size={iconSize}
+              menuItemConfig={menuItemConfig}
+            />
+          ))}
+        </div>
+        <div className="flex flex-1 flex-col gap-y-[8px]">
+          {rightColumn.map((item, index): ReactElement => (
+            <MenuItem
+              key={`${item.recipeNumber}-${item.name}-${index}`}
+              item={item}
+              size={iconSize}
+              menuItemConfig={menuItemConfig}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={
-        columns === 2
-          ? "grid grid-cols-2 gap-x-[60px] gap-y-[8px]"
-          : "grid grid-cols-1 gap-y-[8px]"
-      }
-    >
+    <div className="flex flex-col gap-y-[8px]">
       {items.map((item, index): ReactElement => (
         <MenuItem
           key={`${item.recipeNumber}-${item.name}-${index}`}

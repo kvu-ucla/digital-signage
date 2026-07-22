@@ -48,11 +48,11 @@ export default function FeatureScreen({
           />
         </header>
 
-        <main className="absolute bottom-[95px] left-[125px] right-[125px] top-[177px] flex items-center justify-center">
+        <main className="absolute bottom-[95px] left-[250px] right-[250px] top-[177px] flex items-center justify-center">
           {featuredItem ? (
             <FeaturedItem item={featuredItem} />
           ) : (
-            <p className="text-[46px] text-[#3c3c3c] font-normal text-center m-0 leading-none [font-family:var(--font-display)]">
+            <p className="text-[80px] text-[#3c3c3c] font-normal text-center m-0 leading-none [font-family:var(--font-display)]">
               No items available
             </p>
           )}

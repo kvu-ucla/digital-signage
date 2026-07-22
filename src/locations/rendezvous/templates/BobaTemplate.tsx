@@ -44,7 +44,7 @@ export default function BobaTemplate({
               <div className="h-[50%] w-[25%]" />
 
               <div className="flex flex-1 flex-col pr-[120px] pt-[25px]">
-                <div className="flex items-center justify-between pb-[10px] border-b-2 border-[#810031] mb-[20px]">
+                <div className="flex items-center justify-between pb-[10px] border-b-2 border-[#98002e] mb-[20px]">
                   <span className="text-[45px] uppercase text-black">Boba Flavors</span>
                   <span className="text-[45px] uppercase text-black">22 oz.</span>
                 </div>
@@ -53,7 +53,7 @@ export default function BobaTemplate({
                     {leftColumn.map((item) => (
                       <p
                         key={item.recipeNumber}
-                        className="m-0 text-[45px] uppercase leading-tight text-[#810031]"
+                        className="m-0 text-[45px] uppercase leading-tight text-[#98002e]"
                       >
                         {item.name}
                       </p>
@@ -63,7 +63,7 @@ export default function BobaTemplate({
                     {rightColumn.map((item) => (
                       <p
                         key={item.recipeNumber}
-                        className="m-0 text-[45px] uppercase leading-tight text-[#810031]"
+                        className="m-0 text-[45px] uppercase leading-tight text-[#98002e]"
                       >
                         {item.name}
                       </p>

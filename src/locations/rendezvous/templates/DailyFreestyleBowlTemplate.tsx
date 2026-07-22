@@ -121,7 +121,7 @@ function MenuSection({
   return (
     <section className={className}>
       <div className="mb-[15px] text-[45px]">
-        <h2 className="m-0 uppercase leading-none text-[#810031]">{title}</h2>
+        <h2 className="m-0 uppercase leading-none text-[#98002e]">{title}</h2>
       </div>
 
       {children}

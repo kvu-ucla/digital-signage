@@ -16,7 +16,7 @@ export const LEGEND_CONFIG: LegendConfig = {
 export const NAME_ONLY_CONFIG: MenuItemConfig = {
   divClassName: "",
   pricedivClassName: "",
-  itemClassName: "m-0 text-[32px] uppercase leading-tight text-[#810031]",
+  itemClassName: "m-0 text-[32px] uppercase leading-tight text-[#98002e]",
   priceClassName: "hidden",
   summaryClassName: "hidden",
   dietaryClassName: "hidden",
@@ -29,7 +29,7 @@ export const PRICED_ITEM_CONFIG: MenuItemConfig = {
   itemClassName:
     "m-0 max-w-[270px] text-[32px] uppercase leading-[0.95] text-[#810031]",
   priceClassName:
-    "ml-auto shrink-0 whitespace-nowrap text-[32px] leading-none text-[#810031]",
+    "ml-auto shrink-0 whitespace-nowrap text-[32px] leading-none text-[#98002e]",
   summaryClassName: "m-0 mt-[3px] text-[20px] leading-tight text-[#810031]",
   dietaryClassName: "mt-[4px] flex items-center",
   gap: "5px",
@@ -38,7 +38,7 @@ export const PRICED_ITEM_CONFIG: MenuItemConfig = {
 export const ICON_ITEM_CONFIG: MenuItemConfig = {
   divClassName: "",
   pricedivClassName: "flex items-start gap-3",
-  itemClassName: "m-0 text-[30px] uppercase leading-[0.95] text-[#810031]",
+  itemClassName: "m-0 text-[32px] uppercase leading-[0.95] text-[#810031]",
   priceClassName:
     "ml-auto shrink-0 whitespace-nowrap text-[30px] leading-none text-[#810031]",
   summaryClassName: "m-0 mt-[3px] text-[19px] leading-tight text-[#810031]",

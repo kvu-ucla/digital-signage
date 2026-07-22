@@ -12,8 +12,6 @@ import icon from '@/images/Rendezvous Logo - East White.svg'
 import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
 import {
   LEGEND_CONFIG,
-  NAME_ONLY_CONFIG,
-  PRICED_ITEM_CONFIG,
   ICON_ITEM_CONFIG,
 } from "../config";
 

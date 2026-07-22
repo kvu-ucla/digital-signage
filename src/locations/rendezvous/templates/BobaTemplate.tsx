@@ -21,11 +21,16 @@ export default function BobaTemplate({
   return (
     <div className="flex min-h-screen items-center justify-center bg-white">
       <div
-        className="relative h-[1080px] w-[1920px] overflow-hidden bg-[#F9E9D0]"
+        className="relative h-[1080px] w-[1920px] overflow-hidden"
         style={{ fontFamily: "Tablet Gothic Condensed Bold" }}
       >
-        <header className="absolute inset-x-0 top-0 flex h-[140px] items-center justify-between bg-[#810031] px-[50px]">
-          <h1 className="text-[85px] uppercase text-white pt-[14px]">Boba Drinks</h1>
+        <img
+          src="backgrounds/rd-boba.jpg"
+          alt=""
+          className="pointer-events-none absolute inset-0 h-full w-full object-fill"
+        />
+        <header className="absolute inset-x-0 top-0 flex h-[177px] items-center justify-between px-[50px]">
+          <h1 className="text-[85px] uppercase text-white pt-[24px]">Boba Drinks</h1>
           <img
             src={icon}
             alt="Rendezvous East Logo"
@@ -36,9 +41,9 @@ export default function BobaTemplate({
         <main className="absolute bottom-[95px] left-[52px] right-[52px] top-[175px] flex items-start gap-x-[60px] pt-[40px] px-[50px]">
           {drinks.length > 0 ? (
             <>
-              <div className="h-[50%] w-[25%] shrink-0 border-4 border-solid border-[#810031]" />
+              <div className="h-[50%] w-[25%]" />
 
-              <div className="flex flex-1 flex-col">
+              <div className="flex flex-1 flex-col pr-[120px] pt-[25px]">
                 <div className="flex items-center justify-between pb-[10px] border-b-2 border-[#810031] mb-[20px]">
                   <span className="text-[45px] uppercase text-black">Boba Flavors</span>
                   <span className="text-[45px] uppercase text-black">22 oz.</span>

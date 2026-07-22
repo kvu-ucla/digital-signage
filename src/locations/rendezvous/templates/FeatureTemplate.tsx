@@ -37,8 +37,8 @@ export default function FeatureScreen({
           } as React.CSSProperties
         }
       >
-        <header className="absolute inset-x-0 top-0 flex h-[140px] items-center justify-between bg-[#810031] px-[50px]">
-          <h1 className="text-[85px] uppercase text-white pt-[14px]">
+        <header className="absolute inset-x-0 top-0 flex h-[177px] items-center justify-between bg-[#98002e] px-[50px]">
+          <h1 className="text-[85px] uppercase text-white pt-[24px]">
             {displayTitle}
           </h1>
           <img
@@ -48,7 +48,7 @@ export default function FeatureScreen({
           />
         </header>
 
-        <main className="absolute bottom-[95px] left-[52px] right-[52px] top-[175px] flex items-center justify-center">
+        <main className="absolute bottom-[95px] left-[125px] right-[125px] top-[177px] flex items-center justify-center">
           {featuredItem ? (
             <FeaturedItem item={featuredItem} />
           ) : (
@@ -58,7 +58,7 @@ export default function FeatureScreen({
           )}
         </main>
 
-        <div className="absolute bottom-[0px] left-0 right-0 shrink-0">
+        <div className="absolute bottom-[20px] left-0 right-0 shrink-0">
           <div className="ml-auto mr-auto mt-1 flex w-[85%] items-center justify-center">
             <DietaryLegend config={LEGEND_CONFIG} />
           </div>

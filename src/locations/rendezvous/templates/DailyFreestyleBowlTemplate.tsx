@@ -58,8 +58,8 @@ export default function DailyFreestyleBowlScreen({
         className="relative h-[1080px] w-[1920px] overflow-hidden bg-[#F9E9D0]"
         style={{ fontFamily: "Tablet Gothic Condensed Bold" }}
       >
-        <header className="absolute inset-x-0 top-0 flex h-[140px] items-center justify-between bg-[#810031] px-[50px]">
-          <h1 className="text-[85px] uppercase text-white pt-[14px]">
+        <header className="absolute inset-x-0 top-0 flex h-[177px] items-center justify-between bg-[#98002e] px-[50px]">
+          <h1 className="text-[85px] uppercase text-white pt-[24px]">
             Daily Freestyle Bowls
           </h1>
           <img
@@ -102,13 +102,12 @@ export default function DailyFreestyleBowlScreen({
               />
             </MenuSection>
           </section>
-
-          <div className="absolute bottom-[0px] left-0 right-0 shrink-0">
+        </main>
+        <div className="absolute bottom-[0px] left-0 right-0 shrink-0">
             <div className="ml-auto mr-auto mt-1 flex w-[85%] items-center justify-center">
               <DietaryLegend config={LEGEND_CONFIG} />
             </div>
           </div>
-        </main>
       </div>
     </div>
   );

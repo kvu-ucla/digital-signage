@@ -69,8 +69,8 @@ export default function EastFreestyleScreen({
         className="relative h-[1080px] w-[1920px] overflow-hidden bg-[#F9E9D0]"
         style={{ fontFamily: "Tablet Gothic Condensed Bold" }}
       >
-        <header className="absolute inset-x-0 top-0 flex h-[140px] items-center justify-between bg-[#810031] px-[50px]">
-          <h1 className="text-[85px] uppercase text-white pt-[14px]">{title}</h1>
+        <header className="absolute inset-x-0 top-0 flex h-[177px] items-center justify-between bg-[#98002e] px-[50px]">
+          <h1 className="text-[85px] uppercase text-white pt-[24px]">{title}</h1>
           <img
             src={icon}
             alt="Rendezvous East Logo"
@@ -78,7 +78,7 @@ export default function EastFreestyleScreen({
           />
         </header>
 
-        <main className="absolute bottom-[95px] left-[52px] right-[52px] top-[175px] grid grid-cols-[900px_1fr] gap-x-[80px]">
+        <main className="absolute bottom-[95px] left-[52px] right-[52px] top-[227px] grid grid-cols-[900px_1fr] gap-x-[80px]">
           <section className="flex flex-col">
             <MenuSection title="Choose One Base" className="mb-[15px]">
               <MenuItemGrid
@@ -116,13 +116,12 @@ export default function EastFreestyleScreen({
               />
             </MenuSection>
           </section>
-
-          <div className="absolute bottom-[0px] left-0 right-0 shrink-0">
+        </main>
+        <div className="absolute bottom-[20px] left-0 right-0 shrink-0">
             <div className="ml-auto mr-auto mt-1 flex w-[85%] items-center justify-center">
               <DietaryLegend config={LEGEND_CONFIG} />
             </div>
           </div>
-        </main>
       </div>
     </div>
   );

@@ -10,7 +10,8 @@ type MenuItemProps = {
   className?: string;
 };
 
-export const MenuItem = ({
+export const 
+    MenuItem = ({
   item,
   iconSize = "25px",
   gap = "8px",

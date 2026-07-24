@@ -1,13 +1,10 @@
 import type { ReactNode } from "react";
-import type {
-  MergedMenuData,
-  LegendConfig,
-  StationWithRegion,
-} from "@/lib/types";
+import type { MergedMenuData, LegendConfig } from "@/lib/types";
 import { MenuItemList } from "@/menu/MenuItemList";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import { CyclingColumn } from "@/components/CyclingColumns";
 import { getDisplayMode } from "@/lib/queryParams";
+import { groupByRegion } from "@/lib/regions";
 import "./EntranceScreen.css";
 
 export type EntranceScreenProps = {
@@ -93,26 +90,3 @@ export const EntranceScreen = ({
     </div>
   );
 };
-
-type RegionStation = {
-  name: string;
-  items: StationWithRegion["items"];
-  order: number;
-};
-
-function groupByRegion(
-  stations: MergedMenuData["stationsWithRegions"],
-): Array<[number, Array<RegionStation>]> {
-  const map = new Map<number, Array<RegionStation>>();
-
-  for (const { regionPosition, regionOrder, name, items } of stations) {
-    if (!map.has(regionPosition)) map.set(regionPosition, []);
-    map.get(regionPosition)?.push({ name, items, order: regionOrder });
-  }
-
-  for (const group of map.values()) {
-    group.sort((a, b) => a.order - b.order);
-  }
-
-  return [...map.entries()].sort(([a], [b]) => a - b);
-}

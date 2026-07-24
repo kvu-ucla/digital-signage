@@ -56,3 +56,15 @@ export const COMPACT_PRICE_CONFIG: MenuItemConfig = {
   dietaryClassName: "mt-[4px] flex items-center",
   gap: "5px",
 };
+
+export const FREESTYLE_ITEM_CONFIG: MenuItemConfig = {
+  divClassName: "mb-[4px]",
+  pricedivClassName: "",
+  itemClassName: "m-0 text-[30px] leading-tight text-[#1a1a1a]",
+  priceClassName: "hidden",
+  summaryClassName: "hidden",
+  dietaryClassName: "mt-[6px] flex items-center",
+  gap: "4px",
+};
+
+

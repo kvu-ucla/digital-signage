@@ -50,6 +50,17 @@ export const LOCATIONS: Record<string, LocationConfig> = {
         type: "horizontal",
         requiresStation: false,
       },
+      "daily-lunch-specials": {
+        menus: ["lunch"],
+        type: "horizontal",
+        requiresStation: false,
+      },
+      "east-freestyle": {
+        menus: ["lunch"],
+        type: "horizontal",
+        requiresStation: true,
+        stations: ["japanese-freestyle-bowl", "vietnamese-freestyle-bowl", "chinese-freestyle-bowl"],
+      },
     },
   },
   "example-entrance": {

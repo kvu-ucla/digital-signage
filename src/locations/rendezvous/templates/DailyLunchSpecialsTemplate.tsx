@@ -2,24 +2,19 @@ import type { ReactElement, ReactNode } from "react";
 import { MenuItem } from "@/menu/ModMenuList";
 import { getStationItems } from "../helpers/rendezvous";
 import {
-  DUMMY_WEST_STYLE_ITEMS,
-  DUMMY_WEST_FILLING_ITEMS,
-  DUMMY_WEST_BASE_ITEMS,
-  DUMMY_WEST_TOPPING_ITEMS,
-  DUMMY_WEST_EXTRA_ITEMS,
-  DUMMY_WEST_DRINK_ITEMS,
-} from "../helpers/dummyFreestyleData";
+  DUMMY_MONDAY_ITEMS,
+  DUMMY_TUESDAY_ITEMS,
+  DUMMY_WEDNESDAY_ITEMS,
+  DUMMY_THURSDAY_ITEMS,
+  DUMMY_FRIDAY_ITEMS,
+  DUMMY_SATURDAY_ITEMS,
+  DUMMY_SUNDAY_ITEMS,
+} from "../helpers/dummyLunchSpecialsData";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
-import {
-  LEGEND_CONFIG,
-  NAME_ONLY_CONFIG,
-  PRICED_ITEM_CONFIG,
-  ICON_ITEM_CONFIG,
-  COMPACT_PRICE_CONFIG,
-} from "../config";
+import { LEGEND_CONFIG, COMPACT_PRICE_CONFIG } from "../config";
 
-type WestBYOScreenProps = {
+type DailyLunchSpecialsScreenProps = {
   data: MergedMenuData;
   station: string;
 };
@@ -37,46 +32,43 @@ type MenuItemGridProps = {
   iconSize?: string;
 };
 
-type CompactPriceListProps = {
-  items: Array<MenuItemData>;
-  menuItemConfig: MenuItemConfig;
-  iconSize?: string;
-};
-
 const withFallback = (
   items: Array<MenuItemData>,
   fallback: ReadonlyArray<MenuItemData>,
 ): Array<MenuItemData> => (items.length > 0 ? items : [...fallback]);
 
-export default function WestBYOScreen({
+export default function DailyLunchSpecialsScreen({
   data,
-}: WestBYOScreenProps): ReactElement {
-  // removed station due to build errors; may need to add back later
+}: DailyLunchSpecialsScreenProps): ReactElement {
   console.log("data:", data);
-  const title = "BUILD YOUR OWN ENTRÉE";
-  const styleItems = withFallback(
-    getStationItems(data, "LATIN BUILD YOUR OWN"),
-    DUMMY_WEST_STYLE_ITEMS,
+  const title = "DAILY LUNCH SPECIALS";
+  const mondayItems = withFallback(
+    getStationItems(data, "MONDAY"),
+    DUMMY_MONDAY_ITEMS,
   );
-  const fillingItems = withFallback(
-    getStationItems(data, "FILLING"),
-    DUMMY_WEST_FILLING_ITEMS,
+  const tuesdayItems = withFallback(
+    getStationItems(data, "TUESDAY"),
+    DUMMY_TUESDAY_ITEMS,
   );
-  const baseItems = withFallback(
-    getStationItems(data, "BASE"),
-    DUMMY_WEST_BASE_ITEMS,
+  const wednesdayItems = withFallback(
+    getStationItems(data, "WEDNESDAY"),
+    DUMMY_WEDNESDAY_ITEMS,
   );
-  const toppingItems = withFallback(
-    getStationItems(data, "LATIN TOPPINGS BAR"),
-    DUMMY_WEST_TOPPING_ITEMS,
+  const thursdayItems = withFallback(
+    getStationItems(data, "THURSDAY"),
+    DUMMY_THURSDAY_ITEMS,
   );
-  const extraItems = withFallback(
-    getStationItems(data, "SALSA BAR"),
-    DUMMY_WEST_EXTRA_ITEMS,
+  const fridayItems = withFallback(
+    getStationItems(data, "FRIDAY"),
+    DUMMY_FRIDAY_ITEMS,
   );
-  const drinkItems = withFallback(
-    getStationItems(data, "DRINKS"),
-    DUMMY_WEST_DRINK_ITEMS,
+  const saturdayItems = withFallback(
+    getStationItems(data, "SATURDAY"),
+    DUMMY_SATURDAY_ITEMS,
+  );
+  const sundayItems = withFallback(
+    getStationItems(data, "SUNDAY"),
+    DUMMY_SUNDAY_ITEMS,
   );
 
   return (
@@ -91,60 +83,63 @@ export default function WestBYOScreen({
 
         <main className="absolute bottom-[95px] left-[52px] right-[52px] top-[175px] grid grid-cols-[900px_1fr] gap-x-[80px]">
           <section className="flex flex-col">
-            <MenuSection title="Choose Style" className="mb-[15px]">
+            <MenuSection title="Monday" className="mb-[15px]">
               <MenuItemGrid
-                items={styleItems}
+                items={mondayItems}
                 columns={2}
-                menuItemConfig={NAME_ONLY_CONFIG}
+                menuItemConfig={COMPACT_PRICE_CONFIG}
               />
             </MenuSection>
 
-            <MenuSection title="Choose One Filling">
+            <MenuSection title="Tuesday" className="mb-[15px]">
               <MenuItemGrid
-                items={fillingItems}
+                items={tuesdayItems}
                 columns={2}
-                menuItemConfig={PRICED_ITEM_CONFIG}
-                iconSize="27px"
+                menuItemConfig={COMPACT_PRICE_CONFIG}
               />
             </MenuSection>
 
-            <MenuSection title="Choose Two Base" className="mb-[15px]">
+            <MenuSection title="Wednesday" className="mb-[15px]">
               <MenuItemGrid
-                items={baseItems}
+                items={wednesdayItems}
                 columns={2}
-                menuItemConfig={ICON_ITEM_CONFIG}
-                iconSize="30px"
+                menuItemConfig={COMPACT_PRICE_CONFIG}
+              />
+            </MenuSection>
+            
+            <MenuSection title="Thursday" className="mb-[15px]">
+              <MenuItemGrid
+                items={thursdayItems}
+                columns={2}
+                menuItemConfig={COMPACT_PRICE_CONFIG}
               />
             </MenuSection>
           </section>
 
           <section className="mb-[15px] flex flex-col">
-            <MenuSection title="Choose Toppings">
+            <MenuSection title="Friday" className="mb-[15px]">
               <MenuItemGrid
-                items={toppingItems}
+                items={fridayItems}
                 columns={2}
-                menuItemConfig={ICON_ITEM_CONFIG}
-                iconSize="30px"
+                menuItemConfig={COMPACT_PRICE_CONFIG}
               />
             </MenuSection>
 
-            <div className="mt-[15px] grid grid-cols-[420px_1fr] gap-x-[35px]">
-              <MenuSection title="Extras">
-                <CompactPriceList
-                  items={extraItems}
-                  menuItemConfig={COMPACT_PRICE_CONFIG}
-                  iconSize="27px"
-                />
-              </MenuSection>
+            <MenuSection title="SATURDAY" className="mb-[15px]">
+              <MenuItemGrid
+                items={saturdayItems}
+                columns={2}
+                menuItemConfig={COMPACT_PRICE_CONFIG}
+              />
+            </MenuSection>
 
-              <MenuSection title="Drinks" className="mb-[15px]">
-                <CompactPriceList
-                  items={drinkItems}
-                  menuItemConfig={COMPACT_PRICE_CONFIG}
-                  iconSize="27px"
-                />
-              </MenuSection>
-            </div>
+            <MenuSection title="SUNDAY" className="mb-[15px]">
+              <MenuItemGrid
+                items={sundayItems}
+                columns={2}
+                menuItemConfig={COMPACT_PRICE_CONFIG}
+              />
+            </MenuSection>
           </section>
 
           <div className="absolute bottom-[0px] left-0 right-0 shrink-0">
@@ -188,25 +183,6 @@ function MenuItemGrid({
           : "grid grid-cols-1 gap-y-[8px]"
       }
     >
-      {items.map((item, index): ReactElement => (
-        <MenuItem
-          key={`${item.recipeNumber}-${item.name}-${index}`}
-          item={item}
-          size={iconSize}
-          menuItemConfig={menuItemConfig}
-        />
-      ))}
-    </div>
-  );
-}
-
-function CompactPriceList({
-  items,
-  menuItemConfig,
-  iconSize = "25px",
-}: CompactPriceListProps): ReactElement {
-  return (
-    <div className="space-y-[8px]">
       {items.map((item, index): ReactElement => (
         <MenuItem
           key={`${item.recipeNumber}-${item.name}-${index}`}

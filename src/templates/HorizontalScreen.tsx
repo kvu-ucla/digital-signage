@@ -62,9 +62,12 @@ export const HorizontalScreen = ({
     <div className="screen-horizontal">
       <header className="screen-horizontal__header">
         <div className="screen-horizontal__header-logo" />
-        {!isMinimal && (
-          <h1 className="screen-horizontal__header-title">{stationTitle}</h1>
-        )}
+        <h1
+          className="screen-horizontal__header-title"
+          style={isMinimal ? { visibility: "hidden" } : undefined}
+        >
+          {stationTitle}
+        </h1>
         <div className="screen-horizontal__header-certificate">
           <div className="screen-horizontal__header-certificate-placeholder" />
         </div>

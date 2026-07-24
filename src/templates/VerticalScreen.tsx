@@ -66,9 +66,12 @@ export const VerticalScreen = ({
     <div className="screen-vertical">
       <header className="screen-vertical__header">
         <div className="screen-vertical__header-logo" />
-        {!isMinimal && (
-          <h1 className="screen-vertical__header-title">{stationTitle}</h1>
-        )}
+        <h1
+          className="screen-vertical__header-title"
+          style={isMinimal ? { visibility: "hidden" } : undefined}
+        >
+          {stationTitle}
+        </h1>
         <div className="screen-vertical__header-certificate">
           <div className="screen-vertical__header-certificate-placeholder" />
         </div>

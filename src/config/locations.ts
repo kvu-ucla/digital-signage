@@ -61,6 +61,11 @@ export const LOCATIONS: Record<string, LocationConfig> = {
         requiresStation: true,
         stations: ["japanese-freestyle-bowl", "vietnamese-freestyle-bowl", "chinese-freestyle-bowl"],
       },
+      boba: {
+        menus: ["all day"],
+        type: "horizontal",
+        requiresStation: false,
+      },
     },
   },
   "example-entrance": {

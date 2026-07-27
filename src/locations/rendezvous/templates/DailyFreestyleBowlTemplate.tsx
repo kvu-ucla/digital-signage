@@ -7,6 +7,7 @@ import {
   DUMMY_TOPPING_ITEMS,
 } from "../helpers/dummyFreestyleData";
 import { DietaryLegend } from "@/menu/DietaryLegend";
+import icon from '@/images/Rendezvous Logo - East White.svg'
 import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
 import { LEGEND_CONFIG, FREESTYLE_ITEM_CONFIG } from "../config";
 
@@ -57,10 +58,15 @@ export default function DailyFreestyleBowlScreen({
         className="relative h-[1080px] w-[1920px] overflow-hidden bg-[#F9E9D0]"
         style={{ fontFamily: "Tablet Gothic Condensed Bold" }}
       >
-        <header className="absolute inset-x-0 top-0 h-[140px] bg-[#810031] px-[50px] text-left">
-          <h1 className="mt-4 text-[85px] uppercase text-white">
+        <header className="absolute inset-x-0 top-0 flex h-[177px] items-center justify-between bg-[#98002e] px-[50px]">
+          <h1 className="text-[85px] uppercase text-white pt-[24px]">
             Daily Freestyle Bowls
           </h1>
+          <img
+            src={icon}
+            alt="Rendezvous East Logo"
+            className="h-[80px]"
+          />
         </header>
 
         <main className="absolute bottom-[95px] left-[52px] right-[52px] top-[175px] grid grid-cols-3 gap-x-[60px]">
@@ -96,13 +102,12 @@ export default function DailyFreestyleBowlScreen({
               />
             </MenuSection>
           </section>
-
-          <div className="absolute bottom-[0px] left-0 right-0 shrink-0">
+        </main>
+        <div className="absolute bottom-[0px] left-0 right-0 shrink-0">
             <div className="ml-auto mr-auto mt-1 flex w-[85%] items-center justify-center">
               <DietaryLegend config={LEGEND_CONFIG} />
             </div>
           </div>
-        </main>
       </div>
     </div>
   );
@@ -116,7 +121,7 @@ function MenuSection({
   return (
     <section className={className}>
       <div className="mb-[15px] text-[45px]">
-        <h2 className="m-0 uppercase leading-none text-[#810031]">{title}</h2>
+        <h2 className="m-0 uppercase leading-none text-[#98002e]">{title}</h2>
       </div>
 
       {children}

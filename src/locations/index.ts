@@ -65,7 +65,7 @@ export const LOCATIONS: Record<string, LocationConfig> = {
     gid: "1777114522",
     stylesheet: "covelepicuria.css",
   },
-  epicatackerman: {
+    epicatackerman: {
     displayName: "Epicuria at Ackerman",
     gid: "2027043595",
     xmlUrl:

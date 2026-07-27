@@ -1,5 +1,5 @@
 import type { MergedMenuData } from "../../../lib/types";
-import DailyFreestyleBowlScreen from "../templates/DailyFreestyleBowlTemplate";
+import FeatureScreen from "../templates/FeatureTemplate";
 
 type RendezvousDisplayProps = {
   data: MergedMenuData;
@@ -11,6 +11,12 @@ export const RendezvousDisplay = ({
   data,
   station,
 }: RendezvousDisplayProps) => {
-
-  return <DailyFreestyleBowlScreen data={data} station={station} />;
+  return (
+    <FeatureScreen
+      data={data}
+      station={station}
+      stationName="SUSHI BOWLS"
+      title="Daily Sushi Bowls"
+    />
+  );
 };

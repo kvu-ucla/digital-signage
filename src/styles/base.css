@@ -75,6 +75,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Josefin Sans";
+  src: url("/fonts/JosefinSansStd-Light.otf");
+  font-weight: lighter;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* CSS custom property defaults — overridden by location theme stylesheets */
 :root {
   --font-display: sans-serif;

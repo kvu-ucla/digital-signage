@@ -8,7 +8,7 @@ import { useVisibleCount } from "@/hooks/useVisibleCount";
 import { getDisplayMode } from "@/lib/queryParams";
 import "./HorizontalScreen.css";
 
-type HorizontalScreenProps = {
+export type HorizontalScreenProps = {
   data: MergedMenuData;
   station: string;
   legendConfig: LegendConfig;

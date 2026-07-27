@@ -27,6 +27,8 @@ html:not(.is-takeover) .screen-horizontal__header {
 .screen-horizontal__header-title {
   color: white;
   font-size: 124.5px;
+  text-transform: uppercase;
+  font-weight: lighter;
 }
 
 

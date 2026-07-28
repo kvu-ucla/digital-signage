@@ -2,10 +2,12 @@ import type { ScreenProps } from "@/lib/resolveScreen";
 import { VerticalScreen } from "../template";
 import { PAGE_CONFIG } from "../config";
 import { filterRegionsWithPlaceholders } from "../helpers/cafe1919";
+import { isMockMode, mockItems } from "@/lib/mockMode";
 
 export default function Page4({ data }: ScreenProps) {
   const config = PAGE_CONFIG["4"];
   if (!config) return null;
+
   const filteredData = {
     ...data,
     stationsWithRegions: filterRegionsWithPlaceholders(
@@ -13,5 +15,21 @@ export default function Page4({ data }: ScreenProps) {
       data.stationsWithRegions,
     ),
   };
-  return <VerticalScreen data={filteredData} />;
+
+  const finalData = isMockMode()
+    ? {
+        ...filteredData,
+        stationsWithRegions: filteredData.stationsWithRegions.map((s) =>
+          s.items.length === 0
+            ? {
+                ...s,
+                name: s.name || `Mock Station ${s.regionPosition}`,
+                items: mockItems(),
+              }
+            : s,
+        ),
+      }
+    : filteredData;
+
+  return <VerticalScreen data={finalData} />;
 }

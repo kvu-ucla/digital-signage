@@ -35,5 +35,21 @@ export default defineConfig({
         viewport: { width: 1920, height: 1080 },
       },
     },
+    {
+      name: "cafe1919",
+      testMatch: /cafe1919-pages\.spec\.ts$/,
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1920, height: 1080 },
+      },
+    },
+    {
+      name: "cafe1919-vertical",
+      testMatch: /cafe1919-page4\.spec\.ts$/,
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1080, height: 1920 },
+      },
+    },
   ],
 });

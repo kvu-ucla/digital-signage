@@ -86,11 +86,6 @@ for (const loc of LOCATIONS) {
     test("side list never renders description text (descriptionSize not passed)", async ({
       page,
     }) => {
-      // Confirmed via MenuItem.tsx: description only renders when
-      // `item.description && descriptionSize` are both truthy. The side list
-      // call omits descriptionSize, so this should never appear — guards
-      // against someone adding it and colliding with the side list's
-      // lack of any other unique per-item identifier.
       const visibleList = page.locator(
         ".screen-horizontal__side-inner:not(.screen-horizontal__side-inner--measure)",
       );

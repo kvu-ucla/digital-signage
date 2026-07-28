@@ -25,7 +25,7 @@ export const MOCK_ITEM: MenuItemData = {
   mealType: "lunch",
 };
 
-const mockItems = (): Array<MenuItemData> =>
+export const mockItems = (): Array<MenuItemData> =>
   Array.from({ length: 10 }, (_, i) => ({
     ...MOCK_ITEM,
     recipeNumber: `mock-${i.toString().padStart(3, "0")}`,

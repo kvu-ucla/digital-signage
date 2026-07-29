@@ -5,6 +5,7 @@ import { fetchXml, fetchCsv } from "@/lib/fetchMenu";
 import { parseXml } from "@/lib/parseXML";
 import { parseCsv } from "@/lib/parseCSV";
 import { mergeData } from "@/lib/mergeData";
+import { readCache, writeCache } from "@/lib/persistentCache";
 import type { MergedMenuData, MenuItemData } from "@/lib/types";
 
 type UseMenuOptions = {
@@ -32,8 +33,18 @@ export const useMenu = ({
     queryKey: ["menu-xml", location],
     queryFn: async () => {
       const xmlText = await fetchXml(config.xmlUrl);
+      writeCache(`xml:${location}`, xmlText);
       return parseXml({ xmlText });
     },
+    // Seed from the last successful fetch so page reloads (e.g. PlaceOS
+    // playlist rotations) paint immediately instead of showing the loading
+    // screen. initialDataUpdatedAt: 0 marks the seed stale, so a background
+    // refetch still fires on mount.
+    initialData: () => {
+      const cached = readCache(`xml:${location}`);
+      return cached ? parseXml({ xmlText: cached }) : undefined;
+    },
+    initialDataUpdatedAt: 0,
     refetchInterval: 5 * 60_000,
     retry: 2,
     enabled: true,
@@ -45,9 +56,15 @@ export const useMenu = ({
       if (!config.gid)
         throw new Error(`No gid configured for location: ${location}`);
       const csvText = await fetchCsv(config.gid);
+      writeCache(`sheet:${location}`, csvText);
       const parsed = parseCsv(csvText);
       return parsed;
     },
+    initialData: () => {
+      const cached = readCache(`sheet:${location}`);
+      return cached ? parseCsv(cached) : undefined;
+    },
+    initialDataUpdatedAt: 0,
     enabled: !!config.gid,
     staleTime: 0, // Always fetch fresh data on mount
     refetchInterval: 3 * 60_000, // Refetch every 3 minutes

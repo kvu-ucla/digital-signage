@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchTimetable, parseMealTimeSchedule, getCurrentMealPeriods } from '@/lib/fetchTimetable';
+import { LOCATIONS } from '@/locations';
 
 type UseMealPeriodResult = {
   mealPeriod: string | null;
@@ -47,7 +48,8 @@ export function useMealPeriod(
     return { mealPeriod: null, isLoading };
   }
 
-  const period = findLocationInTimetable(locationKey, data);
+  const timetableKey = LOCATIONS[locationKey]?.timetableName ?? locationKey;
+  const period = findLocationInTimetable(timetableKey, data);
 
   console.log('[useMealPeriod]', {
     location: locationKey,

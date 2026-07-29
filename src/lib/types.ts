@@ -69,6 +69,9 @@ export type LocationConfig = {
   xmlUrl: string;
   gid?: string;
   stylesheet?: string;
+  /** Row name in the hours timetable sheet when it differs from the
+   *  location key (e.g. key "feast" → sheet row "FeastatRieber"). */
+  timetableName?: string;
   screens?: Record<
     string,
     {

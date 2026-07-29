@@ -8,6 +8,7 @@ export default function Horizontal({ data, station }: ScreenProps) {
       data={data}
       station={station}
       legendConfig={HORIZONTAL_LEGEND_CONFIG}
+      showCertificate
     />
   );
 }

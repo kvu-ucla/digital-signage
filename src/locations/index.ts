@@ -90,6 +90,23 @@ export const LOCATIONS: Record<string, LocationConfig> = {
     displayName: "Feast",
     xmlUrl: "https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/FeastatRieber",
     stylesheet: "feast.css",
-    gid: "1384832536"
-  }
+    gid: "1384832536",
+    timetableName: "FeastatRieber",
+  },
+  thedrey: {
+    displayName: "The Drey",
+    gid: "1751470329",
+    xmlUrl: "https://ucla-xml-cdn.integrations.jamix.com/BoardInterface/TheDrey",
+    stylesheet: "thedrey.css",
+    screens: {
+      Page1: {
+        type: "horizontal",
+        requiresStation: false,
+      },
+      Page2: {
+        type: "horizontal",
+        requiresStation: false,
+      },
+    },
+  },
 };

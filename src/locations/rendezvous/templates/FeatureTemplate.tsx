@@ -50,7 +50,12 @@ export default function FeatureScreen({
 
         <main className="absolute bottom-[95px] left-[250px] right-[250px] top-[177px] flex items-center justify-center">
           {featuredItem ? (
-            <FeaturedItem item={featuredItem} />
+            <FeaturedItem
+              item={featuredItem}
+              titleColor="#98002e"
+              titleSize="120px"
+              descriptionSize="55px"
+            />
           ) : (
             <p className="text-[80px] text-[#3c3c3c] font-normal text-center m-0 leading-none [font-family:var(--font-display)]">
               No items available

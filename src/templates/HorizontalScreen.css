@@ -3,6 +3,9 @@
 .screen-horizontal {
   display: grid;
   grid-template-rows: auto 1fr;
+  /* minmax(0, 1fr) keeps wide hero content (long featured descriptions)
+     from expanding the implicit column track beyond the viewport */
+  grid-template-columns: minmax(0, 1fr);
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -87,6 +90,10 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  /* fill exactly the space the fixed graphic/side columns leave — never
+     grow to the featured item's preferred (unwrapped) text width */
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .screen-horizontal__main-hero {

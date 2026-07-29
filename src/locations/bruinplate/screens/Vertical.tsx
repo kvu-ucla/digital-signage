@@ -8,6 +8,7 @@ export default function Vertical({ data, station }: ScreenProps) {
       data={data}
       station={station}
       legendConfig={VERTICAL_LEGEND_CONFIG}
+      showCertificate
     />
   );
 }

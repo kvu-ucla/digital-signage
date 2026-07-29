@@ -11,12 +11,16 @@ type VerticalScreenProps = {
   data: MergedMenuData;
   station: string;
   legendConfig: LegendConfig;
+  /** Reserve the header certificate block (e.g. Bruin Plate's award).
+   *  Off by default so long station titles get the full header width. */
+  showCertificate?: boolean;
 };
 
 export const VerticalScreen = ({
   data,
   station,
   legendConfig,
+  showCertificate = false,
 }: VerticalScreenProps) => {
   const { isMinimal } = getDisplayMode();
   const stationKey = station.toLowerCase().trim().replace(/\s+/g, " ");
@@ -72,9 +76,11 @@ export const VerticalScreen = ({
         >
           {stationTitle}
         </h1>
-        <div className="screen-vertical__header-certificate">
-          <div className="screen-vertical__header-certificate-placeholder" />
-        </div>
+        {showCertificate && (
+          <div className="screen-vertical__header-certificate">
+            <div className="screen-vertical__header-certificate-placeholder" />
+          </div>
+        )}
       </header>
 
       <div className="screen-vertical__body">

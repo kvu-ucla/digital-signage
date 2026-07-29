@@ -88,13 +88,16 @@ export const useMenu = ({
         stations: filteredStations,
       };
     } else if (menuType) {
-      // Filter by meal type for dining halls
+      // Filter by meal type for dining halls. Items tagged "all day" are
+      // available during every meal period (e.g. The Drey's entire feed).
       const normalizedMenuType = menuType.toLowerCase().trim();
       const filteredStations: Record<string, ReadonlyArray<MenuItemData>> = {};
 
       for (const [stationName, items] of Object.entries(data.stations)) {
         const filteredItems = items.filter(
-          (item) => item.mealType === normalizedMenuType,
+          (item) =>
+            item.mealType === normalizedMenuType ||
+            item.mealType === "all day",
         );
         if (filteredItems.length > 0) {
           filteredStations[stationName] = filteredItems;

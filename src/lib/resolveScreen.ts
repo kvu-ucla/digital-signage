@@ -23,6 +23,18 @@ const screenModules = import.meta.glob<ScreenModule>(
 
 console.log("Loaded screen modules:", Object.keys(screenModules));
 
+// Query params are lowercased before reaching the resolver, so a camelCase
+// screen name like "EastFreestyle" flattens to "eastfreestyle" and can't be
+// re-split into PascalCase. Matching module paths case-insensitively lets any
+// casing of the on-disk filename resolve.
+const screenModulesByLowerPath: Record<string, ScreenModule> =
+  Object.fromEntries(
+    Object.entries(screenModules).map(([path, module]) => [
+      path.toLowerCase(),
+      module,
+    ]),
+  );
+
 const toPascalCase = (value: string): string =>
   value
     .split(/[\s-_]+/)
@@ -54,7 +66,7 @@ export const resolveScreen = (
   const candidates = getCandidates(location, screenType, station);
 
   for (const path of candidates) {
-    const module = screenModules[path];
+    const module = screenModulesByLowerPath[path.toLowerCase()];
     if (!module) continue;
 
     if (module.default) return module.default;

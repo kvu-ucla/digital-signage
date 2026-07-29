@@ -91,7 +91,6 @@ export default function EastFreestyleScreen({
                 items={toppingItems}
                 columns={2}
                 menuItemConfig={ICON_ITEM_CONFIG}
-                iconSize="30px"
               />
             </MenuSection>
           </section>
@@ -102,7 +101,6 @@ export default function EastFreestyleScreen({
                 items={entreeItems}
                 columns={2}
                 menuItemConfig={ICON_ITEM_CONFIG}
-                iconSize="27px"
               />
             </MenuSection>
 

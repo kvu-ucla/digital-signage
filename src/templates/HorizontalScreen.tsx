@@ -12,12 +12,16 @@ export type HorizontalScreenProps = {
   data: MergedMenuData;
   station: string;
   legendConfig: LegendConfig;
+  /** Reserve the 570px header certificate block (e.g. Bruin Plate's award).
+   *  Off by default so long station titles get the full header width. */
+  showCertificate?: boolean;
 };
 
 export const HorizontalScreen = ({
   data,
   station,
   legendConfig,
+  showCertificate = false,
 }: HorizontalScreenProps) => {
   const { isMinimal } = getDisplayMode();
   const stationKey = station.toLowerCase().trim().replace(/\s+/g, " ");
@@ -68,9 +72,11 @@ export const HorizontalScreen = ({
         >
           {stationTitle}
         </h1>
-        <div className="screen-horizontal__header-certificate">
-          <div className="screen-horizontal__header-certificate-placeholder" />
-        </div>
+        {showCertificate && (
+          <div className="screen-horizontal__header-certificate">
+            <div className="screen-horizontal__header-certificate-placeholder" />
+          </div>
+        )}
       </header>
 
       <div className="screen-horizontal__body">

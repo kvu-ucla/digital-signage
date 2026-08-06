@@ -47,7 +47,13 @@ export function useAutoRefresh({
           // Wait 30 seconds to ensure all new files are fully deployed
           setTimeout(() => {
             console.log("[AutoRefresh] Reloading to version:", version);
-            window.location.reload();
+            // The server sends no Cache-Control on index.html, so a plain
+            // reload() can be answered with a stale cached copy (heuristic
+            // caching). Stamping the version into the URL makes it a new
+            // cache key for every layer — browser, SSO proxy, CDN.
+            const url = new URL(window.location.href);
+            url.searchParams.set("v", version);
+            window.location.replace(url.toString());
           }, 30000);
         }
       } catch {

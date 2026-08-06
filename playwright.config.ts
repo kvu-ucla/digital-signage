@@ -35,5 +35,13 @@ export default defineConfig({
         viewport: { width: 1920, height: 1080 },
       },
     },
+    {
+      name: "autorefresh",
+      testMatch: /autorefresh\.spec\.ts/,
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1080, height: 1920 },
+      },
+    },
   ],
 });

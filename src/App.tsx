@@ -16,6 +16,7 @@ import {
 } from "@/lib/resolveScreen";
 import { isMockMode, applyMockData } from "@/lib/mockMode";
 import { normalizeParam, getMenuType } from "@/lib/queryParams";
+import { ScaledStage } from "@/components/ScaledStage";
 
 const queryClient = new QueryClient();
 
@@ -45,8 +46,8 @@ const ErrorMessage = ({ children }: ErrorMessageProps) => {
         gap: "0.75rem",
         width: "100vw",
         height: "100vh",
-        background: "var(--color-bg, #000)",
-        color: "var(--color-text-primary, #fff)",
+        background: "var(--color-bg, #fff)",
+        color: "var(--color-text-primary, #1a1a1a)",
         fontFamily: "var(--font-display, sans-serif)",
         fontSize: "1.25rem",
         textAlign: "center",
@@ -159,14 +160,16 @@ const ScreenLoader = ({
   }
 
   return (
-    <ResolvedScreen
-      Screen={Screen}
-      data={isMockMode() ? applyMockData(data) : data}
-      location={location}
-      screenType={screenType}
-      station={station ?? ""}
-      menuType={menuType}
-    />
+    <ScaledStage>
+      <ResolvedScreen
+        Screen={Screen}
+        data={isMockMode() ? applyMockData(data) : data}
+        location={location}
+        screenType={screenType}
+        station={station ?? ""}
+        menuType={menuType}
+      />
+    </ScaledStage>
   );
 };
 

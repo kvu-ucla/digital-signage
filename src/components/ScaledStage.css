@@ -1,0 +1,25 @@
+/* Fills the panel; centers the fixed-size canvas and clips any letterbox
+   overflow. The bars (when the panel aspect ratio doesn't match the canvas)
+   show this background. */
+.scaled-stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+}
+
+html.is-takeover .scaled-stage {
+  background: transparent;
+}
+
+/* Rendered at the design resolution, then scaled around its center. Its
+   layout box stays design-sized so the flex parent keeps it centered. */
+.scaled-stage__canvas {
+  flex: none;
+  transform-origin: center center;
+}

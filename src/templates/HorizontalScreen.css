@@ -6,8 +6,8 @@
   /* minmax(0, 1fr) keeps wide hero content (long featured descriptions)
      from expanding the implicit column track beyond the viewport */
   grid-template-columns: minmax(0, 1fr);
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 

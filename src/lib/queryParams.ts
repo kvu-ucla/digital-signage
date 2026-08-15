@@ -5,7 +5,9 @@ export function normalizeParam(value: string | null): string | null {
 
 export function getMenuType(): string | null {
   const params = new URLSearchParams(window.location.search);
-  const menuParam = normalizeParam(params.get("menu"));
+  const rawParam = normalizeParam(params.get("menu"));
+  // Older sign URLs use "late night"; the feed's meal type is "latenight".
+  const menuParam = rawParam === "late night" ? "latenight" : rawParam;
 
   // Valid meal types: breakfast, lunch, dinner, latenight, all day
   const validMealTypes = ["breakfast", "lunch", "dinner", "latenight", "all day"];

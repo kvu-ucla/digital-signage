@@ -1,9 +1,8 @@
 import type { ReactElement } from "react";
 import { getStationItems, formatScreenTitle } from "../helpers/rendezvous";
 import { FeaturedItem } from "@/menu/FeaturedItem";
-import { DietaryLegend } from "@/menu/DietaryLegend";
+import { LegendFooter } from "./LegendFooter";
 import type { MergedMenuData } from "@/lib/types";
-import { LEGEND_CONFIG } from "../config";
 import icon from '@/images/Rendezvous Logo - East White.svg'
 
 type FeatureScreenProps = {
@@ -27,7 +26,7 @@ export default function FeatureScreen({
   const featuredItem = getStationItems(data, stationName)[0] ?? null;
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white">
+    <div className="flex h-full w-full items-center justify-center bg-white">
       <div
         className="relative h-[1080px] w-[1920px] overflow-hidden bg-[#F9E9D0]"
         style={
@@ -63,11 +62,7 @@ export default function FeatureScreen({
           )}
         </main>
 
-        <div className="absolute bottom-[20px] left-0 right-0 shrink-0">
-          <div className="ml-auto mr-auto mt-1 flex w-[85%] items-center justify-center">
-            <DietaryLegend config={LEGEND_CONFIG} />
-          </div>
-        </div>
+        <LegendFooter />
       </div>
     </div>
   );

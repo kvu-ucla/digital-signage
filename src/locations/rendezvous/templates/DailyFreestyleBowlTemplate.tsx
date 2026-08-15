@@ -1,15 +1,15 @@
 import type { ReactElement, ReactNode } from "react";
 import { MenuItem } from "@/menu/ModMenuList";
-import { getStationItems } from "../helpers/rendezvous";
+import { getStationItems, withFallback } from "../helpers/rendezvous";
 import {
   DUMMY_BASE_ITEMS,
   DUMMY_ENTREE_ITEMS,
   DUMMY_TOPPING_ITEMS,
 } from "../helpers/dummyFreestyleData";
-import { DietaryLegend } from "@/menu/DietaryLegend";
+import { LegendFooter } from "./LegendFooter";
 import icon from '@/images/Rendezvous Logo - East White.svg'
 import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
-import { LEGEND_CONFIG, FREESTYLE_ITEM_CONFIG } from "../config";
+import { FREESTYLE_ITEM_CONFIG } from "../config";
 
 type DailyFreestyleBowlScreenProps = {
   data: MergedMenuData;
@@ -28,11 +28,6 @@ type MenuItemGridProps = {
   menuItemConfig: MenuItemConfig;
   iconSize?: string;
 };
-
-const withFallback = (
-  items: Array<MenuItemData>,
-  fallback: ReadonlyArray<MenuItemData>,
-): Array<MenuItemData> => (items.length > 0 ? items : [...fallback]);
 
 export default function DailyFreestyleBowlScreen({
   data,
@@ -53,7 +48,7 @@ export default function DailyFreestyleBowlScreen({
   );
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white">
+    <div className="flex h-full w-full items-center justify-center bg-white">
       <div
         className="relative h-[1080px] w-[1920px] overflow-hidden bg-[#F9E9D0]"
         style={{ fontFamily: "Tablet Gothic Condensed Bold" }}
@@ -103,11 +98,7 @@ export default function DailyFreestyleBowlScreen({
             </MenuSection>
           </section>
         </main>
-        <div className="absolute bottom-[0px] left-0 right-0 shrink-0">
-            <div className="ml-auto mr-auto mt-1 flex w-[85%] items-center justify-center">
-              <DietaryLegend config={LEGEND_CONFIG} />
-            </div>
-          </div>
+        <LegendFooter />
       </div>
     </div>
   );

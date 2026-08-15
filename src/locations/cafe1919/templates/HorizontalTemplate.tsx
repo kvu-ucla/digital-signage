@@ -46,10 +46,10 @@ export default function HorizontalTemplate({ data }: Cafe1919TemplateProps) {
   const sortedRegions = [...regionMap.entries()].sort(([a], [b]) => a - b);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white">
+    <div className="flex h-full w-full items-center justify-center bg-white">
       <div className="relative h-[1080px] w-[1920px] overflow-hidden">
         <img
-          src="backgrounds/c1919-bg.png"
+          src={`${import.meta.env.BASE_URL}backgrounds/c1919-bg.png`}
           alt=""
           className="pointer-events-none absolute inset-0 h-full w-full object-fill"
         />

@@ -1,4 +1,5 @@
 import type { MenuItemData, MergedMenuData } from "../../../lib/types";
+import { isMockMode } from "@/lib/mockMode";
 
 const normalize = (value: string): string => value.toLowerCase().trim();
 
@@ -20,3 +21,11 @@ export const formatScreenTitle = (station: string): string => {
 
   return station.replaceAll("-", " ").replaceAll("_", " ").replaceAll("+", " ");
 };
+
+/** Dummy data is a formatting aid only — it renders solely in mock mode
+ *  (?mock=true). Live boards show the real feed, even when it's empty. */
+export const withFallback = (
+  items: Array<MenuItemData>,
+  fallback: ReadonlyArray<MenuItemData>,
+): Array<MenuItemData> =>
+  items.length > 0 || !isMockMode() ? items : [...fallback];

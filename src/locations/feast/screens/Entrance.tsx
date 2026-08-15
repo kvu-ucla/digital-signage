@@ -1,6 +1,7 @@
 import type { ScreenProps } from "@/lib/resolveScreen";
 import { EntranceScreen } from "@/templates/EntranceScreen";
 import { ENTRANCE_LEGEND_CONFIG } from "../config";
+import { isMockMode } from "@/lib/mockMode";
 import type { MergedMenuData } from "@/lib/types";
 
 const header = (
@@ -125,9 +126,10 @@ function ensureMockData(data: MergedMenuData): MergedMenuData {
   };
 }
 
-// Makes sure that if there is missing data, dummy data gets filled in
+// Dummy data is a formatting aid only — it renders solely in mock mode
+// (?mock=true). Live boards show the real feed, even when it's empty.
 export default function Entrance({ data }: ScreenProps) {
-  const fullData = ensureMockData(data);
+  const fullData = isMockMode() ? ensureMockData(data) : data;
   return (
     <EntranceScreen data={fullData} header={header} legendConfig={ENTRANCE_LEGEND_CONFIG} />
   );

@@ -11,7 +11,7 @@ export default function Cafe1919VerticalTemplate({
   data,
 }: Cafe1919TemplateProps) {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white">
+    <div className="flex h-full w-full items-center justify-center bg-white">
       <div className="relative h-[1920px] w-[1080px] overflow-hidden bg-[#ede0d7]">
         <MenuColumn
           stations={data.stationsWithRegions.flatMap((station) =>

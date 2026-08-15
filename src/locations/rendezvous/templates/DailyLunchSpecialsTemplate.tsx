@@ -1,6 +1,6 @@
 import type { ReactElement, ReactNode } from "react";
 import { MenuItem } from "@/menu/ModMenuList";
-import { getStationItems } from "../helpers/rendezvous";
+import { getStationItems, withFallback } from "../helpers/rendezvous";
 import {
   DUMMY_MONDAY_ITEMS,
   DUMMY_TUESDAY_ITEMS,
@@ -10,9 +10,9 @@ import {
   DUMMY_SATURDAY_ITEMS,
   DUMMY_SUNDAY_ITEMS,
 } from "../helpers/dummyLunchSpecialsData";
-import { DietaryLegend } from "@/menu/DietaryLegend";
+import { LegendFooter } from "./LegendFooter";
 import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
-import { LEGEND_CONFIG, COMPACT_PRICE_CONFIG } from "../config";
+import { COMPACT_PRICE_CONFIG } from "../config";
 
 type DailyLunchSpecialsScreenProps = {
   data: MergedMenuData;
@@ -31,11 +31,6 @@ type MenuItemGridProps = {
   menuItemConfig: MenuItemConfig;
   iconSize?: string;
 };
-
-const withFallback = (
-  items: Array<MenuItemData>,
-  fallback: ReadonlyArray<MenuItemData>,
-): Array<MenuItemData> => (items.length > 0 ? items : [...fallback]);
 
 export default function DailyLunchSpecialsScreen({
   data,
@@ -72,7 +67,7 @@ export default function DailyLunchSpecialsScreen({
   );
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white">
+    <div className="flex h-full w-full items-center justify-center bg-white">
       <div
         className="relative h-[1080px] w-[1920px] overflow-hidden bg-[#F9E9D0]"
         style={{ fontFamily: "Tablet Gothic Condensed Bold" }}
@@ -141,13 +136,9 @@ export default function DailyLunchSpecialsScreen({
               />
             </MenuSection>
           </section>
-
-          <div className="absolute bottom-[0px] left-0 right-0 shrink-0">
-            <div className="ml-auto mr-auto mt-1 flex w-[85%] items-center justify-center">
-              <DietaryLegend config={LEGEND_CONFIG} />
-            </div>
-          </div>
         </main>
+
+        <LegendFooter />
       </div>
     </div>
   );

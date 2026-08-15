@@ -116,7 +116,10 @@ const ScreenLoader = ({
     menuType,
   );
 
-  // When there's no manual override and no meal period, pass null to show nothing
+  // Without a manual override, follow the timetable: an active period
+  // filters the menu, null (confirmed closed) shows the closed state, and
+  // undefined (no timetable row / timetable unreachable) shows the full
+  // unfiltered menu rather than blanking the board.
   const effectiveMenuType = menuType !== null ? menuType : mealPeriod;
 
   const { data, isLoading, error } = useMenu({

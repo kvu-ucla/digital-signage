@@ -4,14 +4,19 @@ import { readCache, writeCache } from '@/lib/persistentCache';
 import { LOCATIONS } from '@/locations';
 
 type UseMealPeriodResult = {
-  mealPeriod: string | null;
+  /** Active period name; null when the timetable confirms the location is
+   *  closed; undefined when the answer is unknown (no timetable row for this
+   *  location, or the timetable itself is unavailable). Unknown must not be
+   *  treated as closed — downstream it means "show the full menu", so a
+   *  missing row or a sheet outage never blanks a live board. */
+  mealPeriod: string | null | undefined;
   isLoading: boolean;
 };
 
 function findLocationInTimetable(
     locationKey: string,
     timetableMap: Record<string, string | null>
-): string | null {
+): string | null | undefined {
   const normalizedKey = locationKey.toLowerCase().replace(/\s+/g, '');
 
   for (const [timetableName, period] of Object.entries(timetableMap)) {
@@ -21,7 +26,7 @@ function findLocationInTimetable(
     }
   }
 
-  return null;
+  return undefined;
 }
 
 export function useMealPeriod(
@@ -55,8 +60,13 @@ export function useMealPeriod(
     return { mealPeriod: manualOverride, isLoading: false };
   }
 
-  if (isLoading || !data) {
+  if (isLoading) {
     return { mealPeriod: null, isLoading };
+  }
+
+  // Timetable unavailable (fetch failed, no cache): unknown, not closed.
+  if (!data) {
+    return { mealPeriod: undefined, isLoading: false };
   }
 
   const timetableKey = LOCATIONS[locationKey]?.timetableName ?? locationKey;

@@ -1,19 +1,16 @@
 import type { ReactElement, ReactNode } from "react";
 import { MenuItem } from "@/menu/ModMenuList";
-import { getStationItems, formatScreenTitle } from "../helpers/rendezvous";
+import { getStationItems, formatScreenTitle, withFallback } from "../helpers/rendezvous";
 import {
   DUMMY_EAST_BASE_ITEMS,
   DUMMY_EAST_TOPPING_ITEMS,
   DUMMY_EAST_ENTREE_ITEMS,
   DUMMY_EAST_SAUCE_ITEMS,
 } from "../helpers/dummyFreestyleData";
-import { DietaryLegend } from "@/menu/DietaryLegend";
+import { LegendFooter } from "./LegendFooter";
 import icon from '@/images/Rendezvous Logo - East White.svg'
 import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
-import {
-  LEGEND_CONFIG,
-  ICON_ITEM_CONFIG,
-} from "../config";
+import { ICON_ITEM_CONFIG } from "../config";
 
 type EastFreestyleScreenProps = {
   data: MergedMenuData;
@@ -32,11 +29,6 @@ type MenuItemGridProps = {
   menuItemConfig: MenuItemConfig;
   iconSize?: string;
 };
-
-const withFallback = (
-  items: Array<MenuItemData>,
-  fallback: ReadonlyArray<MenuItemData>,
-): Array<MenuItemData> => (items.length > 0 ? items : [...fallback]);
 
 export default function EastFreestyleScreen({
   data,
@@ -62,7 +54,7 @@ export default function EastFreestyleScreen({
   );
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white">
+    <div className="flex h-full w-full items-center justify-center bg-white">
       <div
         className="relative h-[1080px] w-[1920px] overflow-hidden bg-[#F9E9D0]"
         style={{ fontFamily: "Tablet Gothic Condensed Bold" }}
@@ -113,11 +105,7 @@ export default function EastFreestyleScreen({
             </MenuSection>
           </section>
         </main>
-        <div className="absolute bottom-[20px] left-0 right-0 shrink-0">
-            <div className="ml-auto mr-auto mt-1 flex w-[85%] items-center justify-center">
-              <DietaryLegend config={LEGEND_CONFIG} />
-            </div>
-          </div>
+        <LegendFooter />
       </div>
     </div>
   );

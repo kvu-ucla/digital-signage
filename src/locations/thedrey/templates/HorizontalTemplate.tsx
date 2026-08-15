@@ -1,9 +1,8 @@
 import type { MergedMenuData, MenuItemData } from "@/lib/types";
 import { MenuItemList } from "@/menu/ModMenuList";
-import { DietaryIcon } from "@/menu/DietaryIcon";
+import { DietaryLegend } from "@/menu/DietaryLegend";
 import { groupByRegion, type RegionStation } from "@/lib/regions";
-import { DIETARY_LABELS } from "@/lib/dietaryLabels";
-import { BEVERAGES, MENU_ITEM_CONFIG } from "../config";
+import { BEVERAGES, LEGEND_CONFIG, MENU_ITEM_CONFIG } from "../config";
 import { displayTitleForStation } from "../helpers/thedrey";
 
 type TheDreyTemplateProps = {
@@ -30,7 +29,7 @@ export default function HorizontalTemplate({
   const regions = new Map(groupByRegion(data.stationsWithRegions));
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white">
+    <div className="flex h-full w-full items-center justify-center bg-white">
       <div className="relative h-[1080px] w-[1920px] overflow-hidden [font-family:var(--drey-font)]">
         <img
           src={`${import.meta.env.BASE_URL}backgrounds/drey-bg.jpg`}
@@ -133,16 +132,7 @@ function BeverageSection() {
 function DreyLegend() {
   return (
     <div className="absolute bottom-[16px] left-[40px] w-[1840px]">
-      <div className="flex flex-wrap items-center justify-center gap-x-[16px] gap-y-[8px]">
-        {DIETARY_LABELS.map(({ key, label }) => (
-          <span key={key} className="flex items-center gap-[5px]">
-            <DietaryIcon dietaryLabel={key} mode="light" size="20px" />
-            <span className="whitespace-nowrap text-[18px] text-[#32302b]">
-              {label}
-            </span>
-          </span>
-        ))}
-      </div>
+      <DietaryLegend config={LEGEND_CONFIG} />
     </div>
   );
 }

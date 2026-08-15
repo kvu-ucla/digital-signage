@@ -37,21 +37,18 @@ export function filterRegionsWithPlaceholders(
   expectedRegions: ReadonlyArray<number>,
   stationsWithRegions: ReadonlyArray<StationWithRegion>,
 ): ReadonlyArray<StationWithRegion> {
-  const regionIndex = new Map<number, StationWithRegion>();
+  const byRegion = new Map<number, Array<StationWithRegion>>();
   for (const station of stationsWithRegions) {
-    regionIndex.set(station.regionPosition, station);
+    const group = byRegion.get(station.regionPosition);
+    if (group) group.push(station);
+    else byRegion.set(station.regionPosition, [station]);
   }
 
-  return expectedRegions.map((position) => {
-    const existing = regionIndex.get(position);
-    if (existing) return existing;
+  return expectedRegions.flatMap((position) => {
+    const stations = byRegion.get(position)?.filter((s) => s.name.trim());
+    if (stations && stations.length > 0) return stations;
 
-    return {
-      name: "",
-      items: [],
-      regionPosition: position,
-      regionOrder: 0,
-    };
+    return [{ name: "", items: [], regionPosition: position, regionOrder: 0 }];
   });
 }
 

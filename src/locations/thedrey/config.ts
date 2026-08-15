@@ -1,4 +1,18 @@
-import type { MenuItemConfig } from "@/lib/types";
+import type { LegendConfig, MenuItemConfig } from "@/lib/types";
+
+/** Values transcribed from the retired hand-rolled DreyLegend so the shared
+ *  DietaryLegend renders the same 20px light icons / 18px labels. */
+export const LEGEND_CONFIG: LegendConfig = {
+  labelColor: "#32302b",
+  mode: "light",
+  font: "var(--drey-font)",
+  itemFontSize: "18px",
+  itemFontWeight: 400,
+  gap: "5px",
+  gapItems: "16px",
+  rowGap: "8px",
+  imgSize: "20px",
+};
 
 export const MENU_ITEM_CONFIG: MenuItemConfig = {
   gap: "5px",

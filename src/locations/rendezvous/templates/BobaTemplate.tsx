@@ -19,7 +19,7 @@ export default function BobaTemplate({
   const rightColumn = drinks.filter((_, i) => i % 2 === 1);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white">
+    <div className="flex h-full w-full items-center justify-center bg-white">
       <div
         className="relative h-[1080px] w-[1920px] overflow-hidden"
         style={{ fontFamily: "Tablet Gothic Condensed Bold" }}

@@ -133,7 +133,7 @@ for (const loc of LOCATIONS) {
       page,
     }) => {
       await page.route(
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vTNxVJcODFyEeIwg5YnfblBE8xSQbSMYkCtvyT67aUnEUnhqiuRJ5oMUCK0sT7p39z5ddkva8-Pbzog/pub**",
+        "https://docs.google.com/spreadsheets/**/pub**",
         (route) =>
           route.fulfill({
             status: 200,

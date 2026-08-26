@@ -1,0 +1,16 @@
+:root {
+  --font-display: 'Arial Narrow', Arial, sans-serif;
+  --font-weight: bold;
+  --font-stretch: condensed;
+
+  --cafe-primary: #d83f22;
+  --cafe-accent: #c6a88e;
+  --cafe-bg: #ffffff;
+  --cafe-text: #451c00;
+  --cafe-text-secondary: #5c452b;
+}
+
+html:not(.is-takeover) .screen-vertical {
+  background-color: #ede0d7;
+}
+

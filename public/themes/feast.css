@@ -1,0 +1,80 @@
+
+:root {
+    --font-display: 'Josefin Sans', sans-serif;
+    --color-primary: #D64123;
+    --color-accent: #E36F1E;
+    --color-bg: #FFFFFF;
+    --color-text-primary: #000000;
+}
+
+/* ── Horizontal screen ── */
+
+html:not(.is-takeover) .screen-horizontal {
+  background-color: var(--color-bg);
+}
+
+html:not(.is-takeover) .screen-horizontal__header {
+  background: var(--color-text-primary);
+}
+
+.screen-horizontal__header-logo {
+  background-image: url('/dining/icons/feast-Logo-07-Orange-White.svg');
+  background-repeat: no-repeat;
+  background-position: center right 10px;
+  background-size: 189px 162px;
+}
+
+.screen-horizontal__header-title {
+  color: white;
+  font-size: 124.5px;
+  text-transform: uppercase;
+  font-weight: lighter;
+}
+
+
+
+html:not(.is-takeover) .screen-horizontal__side-inner {
+  border-left: 2px solid var(--color-primary);
+}
+
+html:not(.is-takeover) .screen-horizontal__side {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+html:not(.is-takeover) .screen-entrance {
+  background-color: var(--color-bg);
+}
+
+html:not(.is-takeover) .screen-entrance__bar {
+  background-color: var(--color-primary);
+  border-bottom-color: var(--color-accent);
+}
+
+.screen-entrance__bar-title {
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+html:not(.is-takeover) .screen-entrance__bar-cell--divider::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 706px;
+  border-right: 2px solid var(--color-primary);
+}
+
+html:not(.is-takeover) .screen-entrance__footer-rule {
+  background-color: var(--color-accent);
+}
+
+html:not(.is-takeover) .screen-entrance__footer-legend {
+  width: 95%;
+}
+
+html.is-takeover .screen-entrance > header {
+  visibility: hidden;
+}

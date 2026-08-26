@@ -1,14 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 import { LOCATIONS } from "@/locations";
 import { fetchXml, fetchCsv } from "@/lib/fetchMenu";
 import { parseXml } from "@/lib/parseXML";
 import { parseCsv } from "@/lib/parseCSV";
 import { mergeData } from "@/lib/mergeData";
-import type { MergedMenuData } from "@/lib/types";
+import { readCache, writeCache } from "@/lib/persistentCache";
+import type { MergedMenuData, MenuItemData } from "@/lib/types";
 
 type UseMenuOptions = {
   location: string;
-  menuType?: string;
+  menuType?: string | null;
 };
 
 type UseMenuResult = {
@@ -26,15 +28,23 @@ export const useMenu = ({
   if (!config) {
     throw new Error(`Invalid location: ${location}`);
   }
-  
-  const normalizedMenuType = menuType?.toLowerCase().trim();
 
   const xmlQuery = useQuery({
-    queryKey: ["menu-xml", location, normalizedMenuType],
+    queryKey: ["menu-xml", location],
     queryFn: async () => {
       const xmlText = await fetchXml(config.xmlUrl);
-      return parseXml({ xmlText, menuTypeFilter: normalizedMenuType });
+      writeCache(`xml:${location}`, xmlText);
+      return parseXml({ xmlText });
     },
+    // Seed from the last successful fetch so page reloads (e.g. PlaceOS
+    // playlist rotations) paint immediately instead of showing the loading
+    // screen. initialDataUpdatedAt: 0 marks the seed stale, so a background
+    // refetch still fires on mount.
+    initialData: () => {
+      const cached = readCache(`xml:${location}`);
+      return cached ? parseXml({ xmlText: cached }) : undefined;
+    },
+    initialDataUpdatedAt: 0,
     refetchInterval: 5 * 60_000,
     retry: 2,
     enabled: true,
@@ -46,19 +56,82 @@ export const useMenu = ({
       if (!config.gid)
         throw new Error(`No gid configured for location: ${location}`);
       const csvText = await fetchCsv(config.gid);
+      writeCache(`sheet:${location}`, csvText);
       const parsed = parseCsv(csvText);
       return parsed;
     },
+    initialData: () => {
+      const cached = readCache(`sheet:${location}`);
+      return cached ? parseCsv(cached) : undefined;
+    },
+    initialDataUpdatedAt: 0,
     enabled: !!config.gid,
+    staleTime: 0, // Always fetch fresh data on mount
+    refetchInterval: 3 * 60_000, // Refetch every 3 minutes
     retry: 1,
   });
 
-  const mergedData: MergedMenuData | null =
-    xmlQuery.data && sheetQuery.data
-      ? mergeData(xmlQuery.data, sheetQuery.data)
-      : xmlQuery.data
-        ? mergeData(xmlQuery.data, null)
-        : null;
+  const mergedData = useMemo<MergedMenuData | null>(() => {
+    let data = xmlQuery.data;
+
+    if (!data) return null;
+
+    // If menuType is explicitly null (location closed), return empty data
+    if (menuType === null) {
+      return {
+        ...data,
+        stations: {},
+        stationsWithRegions: [],
+      };
+    }
+
+    // Skip filtering for "all day" (used for boutique dining)
+    if (menuType === "all day") {
+      const normalizedMenuType = "all day";
+      const filteredStations: Record<string, ReadonlyArray<MenuItemData>> = {};
+
+      for (const [stationName, items] of Object.entries(data.stations)) {
+        // For "all day", include items tagged as "all day" OR items with no meal type
+        const filteredItems = items.filter(
+          (item) => !item.mealType || item.mealType === normalizedMenuType,
+        );
+        if (filteredItems.length > 0) {
+          filteredStations[stationName] = filteredItems;
+        }
+      }
+
+      data = {
+        ...data,
+        stations: filteredStations,
+      };
+    } else if (menuType) {
+      // Filter by meal type for dining halls. Items tagged "all day" are
+      // available during every meal period (e.g. The Drey's entire feed).
+      const normalizedMenuType = menuType.toLowerCase().trim();
+      const filteredStations: Record<string, ReadonlyArray<MenuItemData>> = {};
+
+      for (const [stationName, items] of Object.entries(data.stations)) {
+        const filteredItems = items.filter(
+          (item) =>
+            item.mealType === normalizedMenuType ||
+            item.mealType === "all day",
+        );
+        if (filteredItems.length > 0) {
+          filteredStations[stationName] = filteredItems;
+        }
+      }
+
+      data = {
+        ...data,
+        stations: filteredStations,
+      };
+    }
+
+    if (sheetQuery.data) {
+      return mergeData(data, sheetQuery.data);
+    }
+    return mergeData(data, null);
+  }, [xmlQuery.data, sheetQuery.data, menuType]);
 
   return {
     data: mergedData,

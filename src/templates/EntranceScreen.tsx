@@ -3,6 +3,8 @@ import type { MergedMenuData, LegendConfig } from "@/lib/types";
 import { MenuItemList } from "@/menu/MenuItemList";
 import { DietaryLegend } from "@/menu/DietaryLegend";
 import { CyclingColumn } from "@/components/CyclingColumns";
+import { getDisplayMode } from "@/lib/queryParams";
+import { groupByRegion } from "@/lib/regions";
 import "./EntranceScreen.css";
 
 export type EntranceScreenProps = {
@@ -11,8 +13,12 @@ export type EntranceScreenProps = {
   header?: ReactNode;
 };
 
-export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenProps) => {
-
+export const EntranceScreen = ({
+  data,
+  legendConfig,
+  header,
+}: EntranceScreenProps) => {
+  const { isMinimal } = getDisplayMode();
   if (data.stationsWithRegions.length === 0) {
     return (
       <div className="screen">
@@ -21,28 +27,17 @@ export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenPro
     );
   }
 
-  const regionMap = new Map<number, Array<{ name: string; items: typeof data.stationsWithRegions[number]["items"]; order: number }>>();
-
-  for (const station of data.stationsWithRegions) {
-    const position = station.regionPosition;
-    const order = station.regionOrder;
-    if (!regionMap.has(position)) regionMap.set(position, []);
-    regionMap.get(position)?.push({ name: station.name, items: station.items, order });
-  }
-
-  for (const [, stations] of regionMap) {
-    stations.sort((a, b) => a.order - b.order);
-  }
-
-  const sortedRegions = [...regionMap.entries()].sort(([a], [b]) => a - b);
+  const sortedRegions = groupByRegion(data.stationsWithRegions);
 
   return (
     <div className="screen-entrance">
       {header}
 
       <div
-        className="screen-entrance__bar"
-        style={{ gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))` }}
+        className={`screen-entrance__bar${isMinimal ? " invisible" : ""}`}
+        style={{
+          gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))`,
+        }}
       >
         {sortedRegions.map(([position, stations], index) => (
           <div
@@ -58,22 +53,32 @@ export const EntranceScreen = ({ data, legendConfig, header }: EntranceScreenPro
 
       <main
         className="screen-entrance__main"
-        style={{ gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))` }}
+        style={{
+          gridTemplateColumns: `repeat(${sortedRegions.length}, minmax(0, 1fr))`,
+        }}
       >
-        {sortedRegions.map(([position, stations]) => (
-          <section key={position} className="screen-entrance__region">
-            {stations.map(({ name, items }) => {
-              const itemNodes = items.map((item) => (
-                <MenuItemList key={item.recipeNumber} items={[item]} iconSize="30px" gap="10px" className="items-center text-center" />
-              ));
-              return (
-                <div key={name} className="screen-entrance__items">
-                  <CyclingColumn>{itemNodes}</CyclingColumn>
-                </div>
-              );
-            })}
-          </section>
-        ))}
+        {sortedRegions.map(([position, stations]) => {
+          // Combine all items from all stations in this region/column
+          const allItemNodes = stations.flatMap(({ items }) =>
+            items.map((item) => (
+              <MenuItemList
+                key={item.recipeNumber}
+                items={[item]}
+                iconSize="30px"
+                gap="10px"
+                className="items-center text-center"
+              />
+            ))
+          );
+
+          return (
+            <section key={position} className="screen-entrance__region">
+              <div className="screen-entrance__items">
+                <CyclingColumn>{allItemNodes}</CyclingColumn>
+              </div>
+            </section>
+          );
+        })}
       </main>
 
       <div className="screen-entrance__footer">

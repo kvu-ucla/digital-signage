@@ -25,7 +25,7 @@ const header = (
       <div className="h-[150px] w-[310px] bg-[#7a8d32]" />
     </div>
   </header>
-)
+);
 
 export default function Entrance({ data }: ScreenProps) {
   return (

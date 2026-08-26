@@ -17,7 +17,10 @@ export function fillConfig(
 
     let items: Array<MenuItemData>;
 
-    if (station.name.toUpperCase() === "DAILY SPECIALS" && displayId === "Sides") {
+    if (
+      station.name.toUpperCase() === "DAILY SPECIALS" &&
+      displayId === "Sides"
+    ) {
       const dayName = new Date()
         .toLocaleDateString("en-US", { weekday: "long" })
         .slice(0, 3);
@@ -27,6 +30,25 @@ export function fillConfig(
     }
 
     return { ...station, items };
+  });
+}
+
+export function filterRegionsWithPlaceholders(
+  expectedRegions: ReadonlyArray<number>,
+  stationsWithRegions: ReadonlyArray<StationWithRegion>,
+): ReadonlyArray<StationWithRegion> {
+  const byRegion = new Map<number, Array<StationWithRegion>>();
+  for (const station of stationsWithRegions) {
+    const group = byRegion.get(station.regionPosition);
+    if (group) group.push(station);
+    else byRegion.set(station.regionPosition, [station]);
+  }
+
+  return expectedRegions.flatMap((position) => {
+    const stations = byRegion.get(position)?.filter((s) => s.name.trim());
+    if (stations && stations.length > 0) return stations;
+
+    return [{ name: "", items: [], regionPosition: position, regionOrder: 0 }];
   });
 }
 

@@ -1,6 +1,3 @@
-import type { ScreenProps } from "@/lib/resolveScreen";
-import { Cafe1919Template } from "../template";
-
-export default function MainScreen({ data }: ScreenProps) {
-  return <Cafe1919Template data={data} />;
-}
+// Deployed signs and playlists predating the Page1-4 split still request
+// ?location=cafe1919&screen=main — keep that URL working.
+export { default } from "./Page1";

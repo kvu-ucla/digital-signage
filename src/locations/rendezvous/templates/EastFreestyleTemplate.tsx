@@ -1,0 +1,178 @@
+import type { ReactElement, ReactNode } from "react";
+import { MenuItem } from "@/menu/ModMenuList";
+import { getStationItems, formatScreenTitle, withFallback } from "../helpers/rendezvous";
+import {
+  DUMMY_EAST_BASE_ITEMS,
+  DUMMY_EAST_TOPPING_ITEMS,
+  DUMMY_EAST_ENTREE_ITEMS,
+  DUMMY_EAST_SAUCE_ITEMS,
+} from "../helpers/dummyFreestyleData";
+import { LegendFooter } from "./LegendFooter";
+import icon from '@/images/Rendezvous Logo - East White.svg'
+import type { MenuItemConfig, MenuItemData, MergedMenuData } from "@/lib/types";
+import { ICON_ITEM_CONFIG } from "../config";
+
+type EastFreestyleScreenProps = {
+  data: MergedMenuData;
+  station: string;
+};
+
+type MenuSectionProps = {
+  title: string;
+  children: ReactNode;
+  className?: string;
+};
+
+type MenuItemGridProps = {
+  items: Array<MenuItemData>;
+  columns?: 1 | 2;
+  menuItemConfig: MenuItemConfig;
+  iconSize?: string;
+};
+
+export default function EastFreestyleScreen({
+  data,
+  station,
+}: EastFreestyleScreenProps): ReactElement {
+  console.log("data:", data);
+  const title = getStationItems(data, "ASIAN DAILY SPECIAL")[0]?.name ?? formatScreenTitle(station);
+  const baseItems = withFallback(
+    getStationItems(data, "Base"),
+    DUMMY_EAST_BASE_ITEMS,
+  );
+  const toppingItems = withFallback(
+    getStationItems(data, "ASIAN TOPPING"),
+    DUMMY_EAST_TOPPING_ITEMS,
+  );
+  const entreeItems = withFallback(
+    getStationItems(data, "ENTRÉE"),
+    DUMMY_EAST_ENTREE_ITEMS,
+  );
+  const sauceItems = withFallback(
+    getStationItems(data, "ASIAN SAUCE"),
+    DUMMY_EAST_SAUCE_ITEMS,
+  );
+
+  return (
+    <div className="flex h-full w-full items-center justify-center bg-white">
+      <div
+        className="relative h-[1080px] w-[1920px] overflow-hidden bg-[#F9E9D0]"
+        style={{ fontFamily: "Tablet Gothic Condensed Bold" }}
+      >
+        <header className="absolute inset-x-0 top-0 flex h-[177px] items-center justify-between bg-[#98002e] px-[50px]">
+          <h1 className="text-[85px] uppercase text-white pt-[24px]">{title}</h1>
+          <img
+            src={icon}
+            alt="Rendezvous East Logo"
+            className="h-[80px]"
+          />
+        </header>
+
+        <main className="absolute bottom-[95px] left-[52px] right-[52px] top-[227px] grid grid-cols-[900px_1fr] gap-x-[80px]">
+          <section className="flex flex-col">
+            <MenuSection title="Choose One Base" className="mb-[15px]">
+              <MenuItemGrid
+                items={baseItems}
+                columns={2}
+                menuItemConfig={ICON_ITEM_CONFIG}
+              />
+            </MenuSection>
+
+            <MenuSection title="Choose Three Toppings" className="mb-[15px]">
+              <MenuItemGrid
+                items={toppingItems}
+                columns={2}
+                menuItemConfig={ICON_ITEM_CONFIG}
+              />
+            </MenuSection>
+          </section>
+
+          <section className="mb-[15px] flex flex-col">
+            <MenuSection title="Choose Two Entrées" className="mb-[15px]">
+              <MenuItemGrid
+                items={entreeItems}
+                columns={2}
+                menuItemConfig={ICON_ITEM_CONFIG}
+              />
+            </MenuSection>
+
+            <MenuSection title="Choose One Sauce" className="mb-[15px]">
+              <MenuItemGrid
+                items={sauceItems}
+                columns={2}
+                menuItemConfig={ICON_ITEM_CONFIG}
+              />
+            </MenuSection>
+          </section>
+        </main>
+        <LegendFooter />
+      </div>
+    </div>
+  );
+}
+
+function MenuSection({
+  title,
+  children,
+  className = "",
+}: MenuSectionProps): ReactElement {
+  return (
+    <section className={className}>
+      <div className="mb-[15px] border-b-2 border-[#98002e] text-[45px]">
+        <h2 className="m-0 uppercase leading-none text-black">{title}</h2>
+      </div>
+
+      {children}
+    </section>
+  );
+}
+
+function MenuItemGrid({
+  items,
+  columns = 2,
+  menuItemConfig,
+  iconSize = "25px",
+}: MenuItemGridProps): ReactElement {
+  if (columns === 2) {
+    const leftColumn = items.filter((_, i) => i % 2 === 0);
+    const rightColumn = items.filter((_, i) => i % 2 === 1);
+
+    return (
+      <div className="flex gap-x-[60px]">
+        <div className="flex flex-1 flex-col gap-y-[8px]">
+          {leftColumn.map((item, index): ReactElement => (
+            <MenuItem
+              key={`${item.recipeNumber}-${item.name}-${index}`}
+              item={item}
+              size={iconSize}
+              menuItemConfig={menuItemConfig}
+            />
+          ))}
+        </div>
+        <div className="flex flex-1 flex-col gap-y-[8px]">
+          {rightColumn.map((item, index): ReactElement => (
+            <MenuItem
+              key={`${item.recipeNumber}-${item.name}-${index}`}
+              item={item}
+              size={iconSize}
+              menuItemConfig={menuItemConfig}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-y-[8px]">
+      {items.map((item, index): ReactElement => (
+        <MenuItem
+          key={`${item.recipeNumber}-${item.name}-${index}`}
+          item={item}
+          size={iconSize}
+          menuItemConfig={menuItemConfig}
+        />
+      ))}
+    </div>
+  );
+}
